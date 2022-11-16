@@ -12,14 +12,14 @@
         <form action="" method="POST" id="thisform">
             @csrf
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
+            <div class="col-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-header">
                         <h4>POS</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>No Trans</label>
                                     <input type="text" class="form-control" name="no" id="no">
@@ -33,23 +33,13 @@
                                     <select class="form-control select2" name="code_cust" id="code_cust">
                                         <option disabled selected>--Select Customer--</option>
                                         @foreach($customers as $data => $customer)
-                                        <option>{{ $customer->code }}</option>
+                                        <option>{{ $customer->code." - ".$customer->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Note</label>
                                     <textarea class="form-control" style="height:50px" name="note"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Discount(%)</label>
-                                    <input type="text" class="form-control" id="disc" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>Tax</label>
-                                    <input type="text" class="form-control" id="tax" value="0">
                                 </div>
                             </div>
                         </div>
@@ -82,6 +72,10 @@
                                     <input type="text" class="form-control" id="satuan" disabled>
                                 </div>
                                 <div class="form-group">
+                                    <label>Discount(%)</label>
+                                    <input type="text" class="form-control" id="disc" value="0">
+                                </div>
+                                <div class="form-group">
                                     <a href="" id="addItem">
                                         <i class="fa fa-plus" style="font-size:18pt"></i>
                                     </a>
@@ -99,6 +93,10 @@
                                 <div class="form-group">
                                     <label>Note</label>
                                     <textarea class="form-control" style="height:50px" id="note"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tax</label>
+                                    <input type="text" class="form-control" id="tax" value="0">
                                 </div>
                             </div>
                         </div>
