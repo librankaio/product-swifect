@@ -197,7 +197,10 @@
             var counter = 1;
             $(document).on("click", "#addItem", function(e) {
                 e.preventDefault();
-                // alert("test")
+                if($('#quantity').val() == 0){
+                    alert('Quantity tidak boleh 0');
+                    return false;
+                }
                 no = $("#no").val();
                 kode = $("#kode").val();
                 nama = $("#nama").val();

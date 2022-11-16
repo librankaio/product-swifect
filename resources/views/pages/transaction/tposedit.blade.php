@@ -216,7 +216,10 @@
             // console.log(counter);
             $(document).on("click", "#addItem", function(e) {
                 e.preventDefault();
-                // alert("test")
+                if($('#quantity').val() == 0){
+                    alert('Quantity tidak boleh 0');
+                    return false;
+                }
                 no = $("#no").val();
                 kode = $("#kode").val();
                 nama = $("#nama").val();
@@ -249,16 +252,16 @@
                 counter++;
                 $("#kode").prop('selectedIndex', 0).trigger('change');
                 $("#nama").val('');
-                $("#hrgsatuan").val('');
+                $("#hrgsatuan").val(0);
                 $("#satuan").val('');
-                $("#quantity").val('');
+                $("#quantity").val(0);
                 $("#merk").val('');
                 $("#subtot").val('');
                 $("#note").val('');
             });
 
             $(document).on("click", ".delete", function(e) {
-                e.preventDefault();
+                e.preventDefault();                
                 counter_id = $(this).val();
 
                 var r = confirm("Delete Transaksi ?");
