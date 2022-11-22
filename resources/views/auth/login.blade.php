@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>TEST</title>
+    <title>SWIFECT INVENTORY</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -13,7 +13,7 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    {% block plugins_css %}{% endblock %}
+    {{-- {% block plugins_css %}{% endblock %} --}}
     <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
 
     <!-- Template CSS -->
@@ -23,7 +23,8 @@
 
 <body>
     <section class="section">
-        <form action="{{ route('mbrg') }}" method="GET">
+        <form action="{{ route('login') }}" method="POST">
+        @csrf
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
@@ -120,14 +121,14 @@
     <script src="../assets/js/stisla.js"></script>
 
     <!-- JS Libraies -->
-    {% block plugins_js %}{% endblock %}
+    {{-- {% block plugins_js %}{% endblock %} --}}
 
     <!-- Template JS File -->
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
 
     <!-- Page Specific JS File -->
-    {% block page_js %}{% endblock %}
+    {{-- {% block page_js %}{% endblock %} --}}
 </body>
 
 </html>

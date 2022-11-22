@@ -44,74 +44,77 @@ Route::get('/modal', function () {
 });
 //LOGIN
 Route::get('/', [ControllerLogin::class, 'index'])->name('login');
+Route::post('/', [ControllerLogin::class, 'postLogin'])->name('postlogin');
 // Route::get('/', [ControllerMasterDataBrg::class, 'index'])->name('home');
 
-//MITEM or Master data Item
-Route::get('/masterdatabarang', [ControllerMasterDataBrg::class, 'index'])->name('mbrg');
-Route::post('/masterdatabarangpost', [ControllerMasterDataBrg::class, 'post'])->name('mbrgpost');
-Route::get('/masterdatabarang/{mitem}/edit', [ControllerMasterDataBrg::class, 'getedit'])->name('mbrggetedit');
-Route::post('/masterdatabarang/{mitem}', [ControllerMasterDataBrg::class, 'update'])->name('mbrgupdt');
-Route::post('/masterdatabarang/delete/{mitem}', [ControllerMasterDataBrg::class, 'delete'])->name('mbrgdelete');
+Route::group(['middleware' => ['auth']], function () {
+    //MITEM or Master data Item
+    Route::get('/masterdatabarang', [ControllerMasterDataBrg::class, 'index'])->name('mbrg');
+    Route::post('/masterdatabarangpost', [ControllerMasterDataBrg::class, 'post'])->name('mbrgpost');
+    Route::get('/masterdatabarang/{mitem}/edit', [ControllerMasterDataBrg::class, 'getedit'])->name('mbrggetedit');
+    Route::post('/masterdatabarang/{mitem}', [ControllerMasterDataBrg::class, 'update'])->name('mbrgupdt');
+    Route::post('/masterdatabarang/delete/{mitem}', [ControllerMasterDataBrg::class, 'delete'])->name('mbrgdelete');
 
 
-Route::get('/mastercabang', [ControllerMasterCabang::class, 'index'])->name('mcabang');
-Route::get('/mastermerk', [ControllerMasterMerk::class, 'index'])->name('mmerk');
+    Route::get('/mastercabang', [ControllerMasterCabang::class, 'index'])->name('mcabang');
+    Route::get('/mastermerk', [ControllerMasterMerk::class, 'index'])->name('mmerk');
 
-//MUOM or Master Satuan
-Route::get('/mastersatuan', [ControllerMasterSatuan::class, 'index'])->name('msatuan');
-Route::post('/msatuanpost', [ControllerMasterSatuan::class, 'post'])->name('msatuanpost');
-Route::get('/mastersatuan/{muom}/edit', [ControllerMasterSatuan::class, 'getedit'])->name('msatuangetid');
-Route::post('/mastersatuan/{muom}', [ControllerMasterSatuan::class, 'update'])->name('msatuanupdt');
-Route::post('/mastersatuan/delete/{muom}', [ControllerMasterSatuan::class, 'delete'])->name('msatuandelete');
+    //MUOM or Master Satuan
+    Route::get('/mastersatuan', [ControllerMasterSatuan::class, 'index'])->name('msatuan');
+    Route::post('/msatuanpost', [ControllerMasterSatuan::class, 'post'])->name('msatuanpost');
+    Route::get('/mastersatuan/{muom}/edit', [ControllerMasterSatuan::class, 'getedit'])->name('msatuangetid');
+    Route::post('/mastersatuan/{muom}', [ControllerMasterSatuan::class, 'update'])->name('msatuanupdt');
+    Route::post('/mastersatuan/delete/{muom}', [ControllerMasterSatuan::class, 'delete'])->name('msatuandelete');
 
-//MGRP or Master Group
-Route::get('/mastergroup', [ControllerMasterGroup::class, 'index'])->name('mgrup');
-Route::post('/mastergrouppost', [ControllerMasterGroup::class, 'post'])->name('mgruppost');
-Route::get('/mastergroup/{mgrp}/edit', [ControllerMasterGroup::class, 'getedit'])->name('mgrupgetid');
-Route::post('/mastergroup/{mgrp}', [ControllerMasterGroup::class, 'update'])->name('mgrupupdt');
-Route::post('/mastergroup/delete/{mgrp}', [ControllerMasterGroup::class, 'delete'])->name('mgrupdelete');
+    //MGRP or Master Group
+    Route::get('/mastergroup', [ControllerMasterGroup::class, 'index'])->name('mgrup');
+    Route::post('/mastergrouppost', [ControllerMasterGroup::class, 'post'])->name('mgruppost');
+    Route::get('/mastergroup/{mgrp}/edit', [ControllerMasterGroup::class, 'getedit'])->name('mgrupgetid');
+    Route::post('/mastergroup/{mgrp}', [ControllerMasterGroup::class, 'update'])->name('mgrupupdt');
+    Route::post('/mastergroup/delete/{mgrp}', [ControllerMasterGroup::class, 'delete'])->name('mgrupdelete');
 
-//MBANK or Master Bank
-Route::get('/masterbank', [ControllerMasterBank::class, 'index'])->name('mbank');
-Route::post('/masterbankpost', [ControllerMasterBank::class, 'post'])->name('mbankpost');
-Route::get('/masterbank/{mbank}/edit', [ControllerMasterBank::class, 'getedit'])->name('mbankgetid');
-Route::post('/masterbank/{mbank}', [ControllerMasterBank::class, 'update'])->name('mbankupdt');
-Route::post('/masterbank/delete/{mbank}', [ControllerMasterBank::class, 'delete'])->name('mbankdelete');
+    //MBANK or Master Bank
+    Route::get('/masterbank', [ControllerMasterBank::class, 'index'])->name('mbank');
+    Route::post('/masterbankpost', [ControllerMasterBank::class, 'post'])->name('mbankpost');
+    Route::get('/masterbank/{mbank}/edit', [ControllerMasterBank::class, 'getedit'])->name('mbankgetid');
+    Route::post('/masterbank/{mbank}', [ControllerMasterBank::class, 'update'])->name('mbankupdt');
+    Route::post('/masterbank/delete/{mbank}', [ControllerMasterBank::class, 'delete'])->name('mbankdelete');
 
-//MCUST or Master Customer
-Route::get('/mastercust', [ControllerMasterCustomer::class, 'index'])->name('mcust');
-Route::post('/mastercustpost', [ControllerMasterCustomer::class, 'post'])->name('mcustpost');
-Route::get('/mastercust/{mcust}/edit', [ControllerMasterCustomer::class, 'getedit'])->name('mcustgetid');
-Route::post('/mastercust/{mcust}', [ControllerMasterCustomer::class, 'update'])->name('mcustupdt');
-Route::post('/mastercust/delete/{mcust}', [ControllerMasterCustomer::class, 'delete'])->name('mcustdelete');
+    //MCUST or Master Customer
+    Route::get('/mastercust', [ControllerMasterCustomer::class, 'index'])->name('mcust');
+    Route::post('/mastercustpost', [ControllerMasterCustomer::class, 'post'])->name('mcustpost');
+    Route::get('/mastercust/{mcust}/edit', [ControllerMasterCustomer::class, 'getedit'])->name('mcustgetid');
+    Route::post('/mastercust/{mcust}', [ControllerMasterCustomer::class, 'update'])->name('mcustupdt');
+    Route::post('/mastercust/delete/{mcust}', [ControllerMasterCustomer::class, 'delete'])->name('mcustdelete');
 
-//MSUPP or Master Supplier
-Route::get('/mastersupplier', [ControllerMasterSupp::class, 'index'])->name('msupp');
-Route::post('/mastersupplierpost', [ControllerMasterSupp::class, 'post'])->name('msupppost');
-Route::get('/mastersupplier/{msupp}/edit', [ControllerMasterSupp::class, 'getedit'])->name('msuppgetid');
-Route::post('/mastersupplier/{msupp}', [ControllerMasterSupp::class, 'update'])->name('msuppupdt');
-Route::post('/mastersupplier/delete/{msupp}', [ControllerMasterSupp::class, 'delete'])->name('msuppdelete');
+    //MSUPP or Master Supplier
+    Route::get('/mastersupplier', [ControllerMasterSupp::class, 'index'])->name('msupp');
+    Route::post('/mastersupplierpost', [ControllerMasterSupp::class, 'post'])->name('msupppost');
+    Route::get('/mastersupplier/{msupp}/edit', [ControllerMasterSupp::class, 'getedit'])->name('msuppgetid');
+    Route::post('/mastersupplier/{msupp}', [ControllerMasterSupp::class, 'update'])->name('msuppupdt');
+    Route::post('/mastersupplier/delete/{msupp}', [ControllerMasterSupp::class, 'delete'])->name('msuppdelete');
 
-//MWHSE or Master Location
-Route::get('/masterloct', [ControllerMasterLocation::class, 'index'])->name('mwhse');
-Route::post('/masterloctpost', [ControllerMasterLocation::class, 'post'])->name('mwhsepost');
-Route::get('/masterloct/{mwhse}/edit', [ControllerMasterLocation::class, 'getedit'])->name('mwhsegetedit');
-Route::post('/masterloct/{mwhse}', [ControllerMasterLocation::class, 'update'])->name('mwhseupdt');
-Route::post('/masterloct/delete/{mwhse}', [ControllerMasterLocation::class, 'delete'])->name('mwhsedelete');
+    //MWHSE or Master Location
+    Route::get('/masterloct', [ControllerMasterLocation::class, 'index'])->name('mwhse');
+    Route::post('/masterloctpost', [ControllerMasterLocation::class, 'post'])->name('mwhsepost');
+    Route::get('/masterloct/{mwhse}/edit', [ControllerMasterLocation::class, 'getedit'])->name('mwhsegetedit');
+    Route::post('/masterloct/{mwhse}', [ControllerMasterLocation::class, 'update'])->name('mwhseupdt');
+    Route::post('/masterloct/delete/{mwhse}', [ControllerMasterLocation::class, 'delete'])->name('mwhsedelete');
 
-//TPOS or Transaction POS
-Route::get('/transpos', [ControllerTransPos::class, 'index'])->name('tpos');
-Route::post('/transpospost', [ControllerTransPos::class, 'post'])->name('transpospost');
-Route::post('/getmitem', [ControllerTransPos::class, 'getMitem'])->name('getmitem');
-//TPOS LIST or Trans POS LIST
-Route::get('/transposlist', [ControllerTransPos::class, 'list'])->name('tposlist');
-Route::get('/transpos/{tposh}/edit', [ControllerTransPos::class, 'getedit'])->name('transposedit');
-Route::post('/transpos/{tposh}', [ControllerTransPos::class, 'update'])->name('transposupdate');
-Route::post('/transpos/delete/{tposh}', [ControllerTransPos::class, 'delete'])->name('tposdelete');
+    //TPOS or Transaction POS
+    Route::get('/transpos', [ControllerTransPos::class, 'index'])->name('tpos');
+    Route::post('/transpospost', [ControllerTransPos::class, 'post'])->name('transpospost');
+    Route::post('/getmitem', [ControllerTransPos::class, 'getMitem'])->name('getmitem');
+    //TPOS LIST or Trans POS LIST
+    Route::get('/transposlist', [ControllerTransPos::class, 'list'])->name('tposlist');
+    Route::get('/transpos/{tposh}/edit', [ControllerTransPos::class, 'getedit'])->name('transposedit');
+    Route::post('/transpos/{tposh}', [ControllerTransPos::class, 'update'])->name('transposupdate');
+    Route::post('/transpos/delete/{tposh}', [ControllerTransPos::class, 'delete'])->name('tposdelete');
 
 
-Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
-Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
-Route::get('/transbelibrglist', [ControllerTransPembelianBrg::class, 'list'])->name('tbelibrglist');
-Route::get('/transpengeluaranbrg', [ControllerTransPengeluaranBrg::class, 'index'])->name('tpengeluaranbrg');
-Route::get('/transpengeluaranbrglist', [ControllerTransPengeluaranBrg::class, 'list'])->name('tpengeluaranbrglist');
+    Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
+    Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
+    Route::get('/transbelibrglist', [ControllerTransPembelianBrg::class, 'list'])->name('tbelibrglist');
+    Route::get('/transpengeluaranbrg', [ControllerTransPengeluaranBrg::class, 'index'])->name('tpengeluaranbrg');
+    Route::get('/transpengeluaranbrglist', [ControllerTransPengeluaranBrg::class, 'list'])->name('tpengeluaranbrglist');
+});
