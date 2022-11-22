@@ -22,7 +22,7 @@ class ControllerTransPos extends Controller
     }
 
     public function post(Request $request){
-        // dd($request->all());
+        dd((float) str_replace(',', '', $request->price_total));
         // $dateconvert = Carbon::createFromFormat('Y-m-d', $request->dt)->format('Y-m-d');
         // dd($dateconvert);
 
@@ -30,9 +30,9 @@ class ControllerTransPos extends Controller
             'no' => $request->no,
             'tdt' => $request->dt,
             'code_mcust' => $request->code_cust,
-            'disc' => $request->price_disc,
-            'tax' => $request->price_tax,
-            'grdtotal' => $request->price_total,
+            'disc' => (float) str_replace(',', '', $request->price_disc),
+            'tax' => (float) str_replace(',', '', $request->price_tax),
+            'grdtotal' => (float) str_replace(',', '', $request->price_total),
             'note' => $request->note,
         ]);
         $idh_loop = Tposh::select('id')->whereNull('deleted_at')->where('no','=',$request->no)->get();
@@ -49,10 +49,10 @@ class ControllerTransPos extends Controller
                 'code_mitem' => $request->kode_d[$i],
                 'qty' => $request->quantity[$i],
                 'code_muom' => $request->satuan_d[$i],
-                'price' => $request->harga_d[$i],
-                'disc' => $request->disc_d[$i],
-                'tax' => $request->tax_d[$i],
-                'subtotal' => $request->subtot_d[$i],
+                'price' => (float) str_replace(',', '', $request->harga_d[$i]),
+                'disc' => (float) str_replace(',', '', $request->disc_d[$i]),
+                'tax' => (float) str_replace(',', '', $request->tax_d[$i]),
+                'subtotal' => (float) str_replace(',', '', $request->subtot_d[$i]),
                 'note' => $request->note_d[$i],
             ]);
             $count++;

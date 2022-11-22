@@ -15,15 +15,20 @@ class ControllerMasterCustomer extends Controller
     }
 
     public function post(Request $request){
-        Mcust::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-            'address' => $request->address,
-            'npwp' => $request->npwp,
-            'cp' => $request->cp,
-            'phone' => $request->phone,
-        ]);
-        return redirect()->back();
+        $checkexist = Mcust::select('id','code','name')->where('code','=', $request->kode)->first();
+        if($checkexist == null){
+            Mcust::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+                'address' => $request->address,
+                'npwp' => $request->npwp,
+                'cp' => $request->cp,
+                'phone' => $request->phone,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function getedit(Mcust $mcust){

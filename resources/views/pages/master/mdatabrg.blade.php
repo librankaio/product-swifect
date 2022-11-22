@@ -23,11 +23,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Kode</label>
-                                        <input type="text" name="kode" class="form-control">
+                                        <input type="text" name="kode" id="kode" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Lokasi</label>
-                                        <select class="form-control select2" name="lokasi">
+                                        <select class="form-control select2" name="lokasi" id="lokasi">
                                             <option disabled selected>--Select Lokasi--</option>
                                             @foreach($mwhses as $data => $mwhse)
                                             <option>{{ $mwhse->name }}</option>                                                
@@ -46,11 +46,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nama</label>
-                                        <input type="text" class="form-control" name="nama">
+                                        <input type="text" class="form-control" name="nama" id="nama">
                                     </div>
                                     <div class="form-group">
                                         <label>Satuan</label>
-                                        <select class="form-control select2" name="satuan">
+                                        <select class="form-control select2" name="satuan" id="satuan">
                                             <option disabled selected>--Select Satuan--</option>
                                             @foreach($muoms as $data => $muom)
                                             <option>{{ $muom->name }}</option>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Item Group</label>
-                                        <select class="form-control select2" name="itemgrp">
+                                        <select class="form-control select2" name="itemgrp" id="itemgrp">
                                             <option disabled selected>--Select Item Group--</option>
                                             @foreach($mgrps as $data => $mgrp)
                                             <option>{{ $mgrp->name }}</option>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mbrgpost') }}">Save</button>
+                                formaction="{{ route('mbrgpost') }}" id="confirm">Save</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -156,5 +156,30 @@
     function submitDel(id){
         $('#del-'+id).submit()
     }
+
+    $(document).on("click","#confirm",function(e){
+        // Validate ifnull
+        kode = $("#kode").val();
+        nama = $("#nama").val();
+        satuan = $("#satuan").prop('selectedIndex');
+        lokasi = $("#lokasi").prop('selectedIndex');
+        itemgrp = $("#itemgrp").prop('selectedIndex');
+        if (kode == ""){
+            alert("Kode Tidak boleh kosong!");
+            return false;
+        }else if (nama == 0){
+            alert("Nama Tidak boleh kosong!");
+            return false;
+        }else if (lokasi == 0){
+            alert("Please select Lokasi");
+            return false;
+        }else if (satuan == 0){
+            alert("Please select Satuan");
+            return false;
+        }else if (itemgrp == 0){
+            alert("Please select Item Group");
+            return false;
+        }
+    });
 </script>
 @endsection

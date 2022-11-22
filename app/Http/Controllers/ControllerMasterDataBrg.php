@@ -24,19 +24,24 @@ class ControllerMasterDataBrg extends Controller
         ]);
     }
 
-    public function post(Request $request){
-        // dd($request->all());
-        Mitem::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-            'code_muom' => $request->satuan,
-            'price' => $request->hrgbeli,
-            'price2' => $request->hrgjual,
-            'code_mgrp' => $request->itemgrp,
-            'code_mwhse' => $request->lokasi,
-            'note' => $request->note,
-        ]);
-        return redirect()->back();
+    public function post(Request $request){        
+        $checkexist = Mitem::select('id','code','name')->where('code','=', $request->kode)->first();
+        // dd($checkexist);
+        if($checkexist == null){
+            Mitem::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+                'code_muom' => $request->satuan,
+                'price' => $request->hrgbeli,
+                'price2' => $request->hrgjual,
+                'code_mgrp' => $request->itemgrp,
+                'code_mwhse' => $request->lokasi,
+                'note' => $request->note,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }        
     }
 
     public function getedit(Mitem $mitem){

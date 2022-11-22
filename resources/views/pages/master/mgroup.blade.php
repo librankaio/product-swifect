@@ -23,20 +23,20 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Group Code</label>
-                                        <input type="text" class="form-control" name="kode">
+                                        <input type="text" class="form-control" name="kode" id="kode">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Group Name</label>
-                                        <input type="text" class="form-control" name="nama">
+                                        <input type="text" class="form-control" name="nama" id="nama">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mgruppost') }}">Save</button>
+                                formaction="{{ route('mgruppost') }}" id="confirm">Save</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -62,8 +62,8 @@
                                     @php $counter++ @endphp
                                     <tr>
                                         <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $item->name }}</td>
                                         <td>{{ $item->code }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td><a href="/mastergroup/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
@@ -100,5 +100,17 @@
     function submitDel(id){
         $('#del-'+id).submit()
     }
+    $(document).on("click","#confirm",function(e){
+        // Validate ifnull
+        kode = $("#kode").val();
+        nama = $("#nama").val();
+        if (kode == ""){
+            alert("Kode Tidak boleh kosong!");
+            return false;
+        }else if (nama == 0){
+            alert("Nama Tidak boleh kosong!");
+            return false;
+        }
+    });
 </script>
 @endsection

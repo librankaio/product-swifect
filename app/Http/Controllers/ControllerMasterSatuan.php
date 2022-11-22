@@ -18,16 +18,16 @@ class ControllerMasterSatuan extends Controller
     }
 
     public function post(Request $request){
-        // dd($request->all());
-        // DB::table('muom')->insert([
-        //     'code' => $request->kode,
-        //     'name' => $request->nama
-        // ]);
-        Muom::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-        ]);
-        return redirect()->back();
+        $checkexist = Muom::select('id','code','name')->where('code','=', $request->kode)->first();
+        if($checkexist == null){
+            Muom::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function getedit(Muom $muom){

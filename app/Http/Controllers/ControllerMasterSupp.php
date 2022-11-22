@@ -15,15 +15,20 @@ class ControllerMasterSupp extends Controller
     }
 
     public function post(Request $request){
-        Msupp::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-            'address' => $request->address,
-            'npwp' => $request->npwp,
-            'cp' => $request->cp,
-            'phone' => $request->phone,
-        ]);
-        return redirect()->back();
+        $checkexist = Msupp::select('id','code','name')->where('code','=', $request->kode)->first();
+        if($checkexist == null){
+            Msupp::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+                'address' => $request->address,
+                'npwp' => $request->npwp,
+                'cp' => $request->cp,
+                'phone' => $request->phone,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function getedit(Msupp $msupp){

@@ -24,20 +24,20 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Satuan Code</label>
-                                        <input type="text" class="form-control" name="kode">
+                                        <input type="text" class="form-control" name="kode" id="kode">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Satuan Name</label>
-                                        <input type="text" class="form-control" name="nama">
+                                        <input type="text" class="form-control" name="nama" id="nama">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('msatuanpost') }}">Save</button>
+                                formaction="{{ route('msatuanpost') }}" id="confirm">Save</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -132,5 +132,17 @@
     function submitDel(id){
         $('#del-'+id).submit()
     }
+    $(document).on("click","#confirm",function(e){
+        // Validate ifnull
+        kode = $("#kode").val();
+        nama = $("#nama").val();
+        if (kode == ""){
+            alert("Kode Tidak boleh kosong!");
+            return false;
+        }else if (nama == 0){
+            alert("Nama Tidak boleh kosong!");
+            return false;
+        }
+    });
 </script>
 @endsection

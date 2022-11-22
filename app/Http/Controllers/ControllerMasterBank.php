@@ -15,12 +15,17 @@ class ControllerMasterBank extends Controller
     }
 
     public function post(Request $request){
-        Mbank::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-            'note' => $request->note,
-        ]);
-        return redirect()->back();
+        $checkexist = Mbank::select('id','code','name')->where('code','=', $request->kode)->first();
+        if($checkexist == null){
+            Mbank::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+                'note' => $request->note,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function getedit(Mbank $mbank){

@@ -23,11 +23,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Kode</label>
-                                        <input type="text" name="kode" class="form-control" value="{{ $mitem->code }}">
+                                        <input type="text" name="kode" id="kode" class="form-control" value="{{ $mitem->code }}">
                                     </div>
                                     <div class="form-group">
                                         <label>Lokasi</label>
-                                        <select class="form-control select2" name="lokasi">
+                                        <select class="form-control select2" name="lokasi" id="lokasi">
                                             <option selected>{{ $mitem->code_mwhse }}</option>
                                             @foreach($mwhses as $data => $mwhse)
                                             <option>{{ $mwhse->name }}</option>                                                
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Satuan</label>
-                                        <select class="form-control select2" name="satuan">
+                                        <select class="form-control select2" name="satuan" id="satuan">
                                             <option selected>{{ $mitem->code_muom }}</option>
                                             @foreach($muoms as $data => $muom)
                                             <option>{{ $muom->name }}</option>
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Item Group</label>
-                                        <select class="form-control select2" name="itemgrp">
+                                        <select class="form-control select2" name="itemgrp" id="itemgrp">
                                             <option selected>{{ $mitem->code_mgrp }}</option>
                                             @foreach($mgrps as $data => $mgrp)
                                             <option>{{ $mgrp->name }}</option>
@@ -101,6 +101,28 @@
 
     function submitDel(id){
         $('#del-'+id).submit()
+    }
+
+    kode = $("#kode").val();
+    nama = $("#nama").val();
+    satuan = $("#satuan").prop('selectedIndex');
+    lokasi = $("#lokasi").prop('selectedIndex');
+    itemgrp = $("#itemgrp").prop('selectedIndex');
+    if (kode == ""){
+        alert("Kode Tidak boleh kosong!");
+        return false;
+    }else if (nama == 0){
+        alert("Nama Tidak boleh kosong!");
+        return false;
+    }else if (lokasi == 0){
+        alert("Please select Lokasi");
+        return false;
+    }else if (satuan == 0){
+        alert("Please select Satuan");
+        return false;
+    }else if (itemgrp == 0){
+        alert("Please select Item Group");
+        return false;
     }
 </script>
 @endsection

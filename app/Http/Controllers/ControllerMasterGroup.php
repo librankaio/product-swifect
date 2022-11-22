@@ -15,11 +15,16 @@ class ControllerMasterGroup extends Controller
     }
 
     public function post(Request $request){
-        Mgrp::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-        ]);
-        return redirect()->back();
+        $checkexist = Mgrp::select('id','code','name')->where('code','=', $request->kode)->first();
+        if($checkexist == null){
+            Mgrp::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function getedit(Mgrp $mgrp){

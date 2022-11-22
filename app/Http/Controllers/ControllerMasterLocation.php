@@ -15,12 +15,17 @@ class ControllerMasterLocation extends Controller
     }
 
     public function post(Request $request){
-        Mwhse::create([
-            'code' => $request->kode,
-            'name' => $request->nama,
-            'location' => $request->lokasi,
-        ]);
-        return redirect()->back();
+        $checkexist = Mwhse::select('id','code','name')->where('code','=', $request->kode)->first();
+        if($checkexist == null){
+            Mwhse::create([
+                'code' => $request->kode,
+                'name' => $request->nama,
+                'location' => $request->lokasi,
+            ]);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function getedit(Mwhse $mwhse){

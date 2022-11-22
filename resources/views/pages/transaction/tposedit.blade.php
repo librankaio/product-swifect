@@ -201,9 +201,11 @@
                         // console.log(response);
                         for (i=0; i < response.length; i++) {
                             if(response[i].code == kode){
-                                $("#hrgsatuan").val(parseInt(response[i].price2))
+                                // $("#hrgsatuan").val(Number(response[i].price2).toFixed(2))
+                                hrg = Number(response[i].price2).toFixed();
                                 $("#satuan").val(response[i].code_muom)
-                                $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
+                                $("#subtot").val(thousands_separators(hrg * $('#quantity').val()));
+                                $("#hrgsatuan").val(thousands_separators(hrg));
                             }
                         }
                     }
@@ -232,18 +234,23 @@
                 tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><button title='Delete' class='delete btn btn-primary' value="+counter+"><i style='font-size:15pt;color:#fff;' class='fa fa-trash'></i></button></td></tr>";
                 
                 $("#datatable tbody").append(tablerow);
+                subtotparse = parseFloat(subtot.replace(/,/g, ''))
 
-                disc_input = parseFloat(subtot) * (parseFloat(discount) / 100);
-                tax_input = (parseFloat(subtot) - disc_input) * (parseFloat(tax) / 100);
-                total_input = (parseFloat(subtot) - parseFloat(disc_input)) + parseFloat(tax_input);
+                disc_input = subtotparse * (discount / 100);
+                tax_input = (subtotparse - disc_input) * (tax / 100);
+                total_input = (subtotparse - disc_input) + tax_input;
                 // console.log(tax_input);
-                total_tax = parseFloat($('#price_tax').val()) + parseFloat(tax_input);
-                total_disc = parseFloat($('#price_disc').val()) + parseFloat(disc_input);
-                total = parseFloat($('#price_total').val()) + parseFloat(total_input);
+                disc_old = parseFloat($("#price_disc").val().replace(/,/g, ''));
+                tax_old = parseFloat($("#price_tax").val().replace(/,/g, ''));
+                subtot_old = parseFloat($("#price_total").val().replace(/,/g, ''));
 
-                $('#price_tax').val(Number(total_tax).toFixed(2));
-                $('#price_disc').val(Number(total_disc).toFixed(2));
-                $('#price_total').val(Number(total).toFixed(2));
+                disc_new = disc_old + parseFloat(disc_input);
+                tax_new = tax_old + parseFloat(tax_input);
+                subtot_new = total_input + parseFloat(total_input);
+
+                $("#price_disc").val(thousands_separators(disc_new));
+                $("#price_tax").val(thousands_separators(tax_new));
+                $("#price_total").val(thousands_separators(subtot_new));
                 $('#tax').val(0);
                 $('#disc').val(0);
 
@@ -264,30 +271,28 @@
 
                 var r = confirm("Delete Transaksi ?");
                 if (r == true) {
-                    // console.log(counter_id);
+                    subtot = parseFloat($("#subtot_d_"+ counter_id).val().replace(/,/g, ''));
 
-                    subtot = parseInt($("#subtot_d_"+ counter_id).val());
-                    disc = parseInt(subtot) * ($("#disc_d_"+ counter_id).val() / 100);
-                    tax = (parseInt(subtot) - disc) * ($("#tax_d_"+ counter_id).val() / 100);
-                    // console.log(subtot, disc, tax);
-                    totaltax = parseFloat($("#price_tax").val()) - Number(tax).toFixed(2);
-                    parsetax = parseFloat(tax);
-                    totaldisc = parseFloat($("#price_disc").val()) - Number(disc).toFixed(2);
-                    totalwithdisc = Number(subtot).toFixed(2) - Number(disc).toFixed(2)
-                    total =  parseFloat($("#price_total").val()) - (totalwithdisc + parseFloat(Number(parsetax).toFixed(2)));
-                    // console.log(total_disc,total_tax,total);
+                    price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
+                    price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
+                    price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
+                    console.log(price_tax, price_disc, price_total);
 
+                    disc = subtot * (parseFloat($("#disc_d_"+ counter_id).val()) / 100);
+                    tax = (subtot - disc) * parseFloat(($("#tax_d_"+ counter_id).val()) / 100);
+                    console.log(subtot);
+                    console.log($("#tax_d_"+ counter_id).val());
+                    console.log(disc, tax);
+
+                    totaltax = price_tax - tax;
+                    totaldisc = price_disc - disc;
+                    totalwithdisc = (subtot) - disc;
+                    total =  price_total - (totalwithdisc + tax);
+
+                    $("#price_disc").val(thousands_separators(totaldisc));
+                    $("#price_tax").val(thousands_separators(totaltax));
+                    $("#price_total").val(thousands_separators(total));
                     $(this).closest('tr').remove();
-                    $('#price_tax').val(Number(totaltax).toFixed(2));
-                    $('#price_disc').val(Number(totaldisc).toFixed(2));
-                    $('#price_total').val(Number(total).toFixed(2));
-                    // if (parseFloat(total) || parseFloat(total_disc) || parseFloat(total_tax) == 0) {
-                    //     $('#price_tax').val(0);
-                    //     $('#price_disc').val(0);
-                    //     $('#price_total').val(0);
-                    // } else {
-                        
-                    // }
                 } else {
                     return false;
                 }
@@ -297,11 +302,17 @@
                 if($('#quantity').val() == ''){
                     $('#quantity').val(0);
                 }
-                var hrg = $("#hrgsatuan").val();
-                var qty = $("#quantity").val();
-                var total = parseInt(hrg) * parseInt(qty);
-                console.log(hrg);
-                $("#subtot").val(total);
+                $(this).val(thousands_separators($(this).val()));
+                hrgparse = $('#hrgsatuan').val();
+                if (/\D/g.test(hrgparse)){
+                // Filter non-digits from input value.
+                hrgparse = hrgparse.replace(/\D/g, '');
+                }
+                var hrg = Number(hrgparse).toFixed(2);
+                var qty = Number($("#quantity").val()).toFixed(2);
+                var total = Number(hrg) * Number(qty);
+                // console.log(hrg);                
+                $("#subtot").val(thousands_separators(total));
             });
 
             $(document).on("change", "#hrgsatuan", function(e) {
@@ -312,9 +323,15 @@
                 var qty = $("#quantity").val();
                 var total = parseInt(hrg) * parseInt(qty);
                 console.log(hrg);
-                $("#subtot").val(total);
+                $("#subtot").val(thousands_separators(total));
             });
 
+            $(document).on("click", "#hrgsatuan", function(e) {
+                if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+                }
+            });
             
         });
 
