@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Harga Beli(Rp.)</label>
-                                        <input type="text" class="form-control" name="hrgbeli">
+                                        <input type="text" class="form-control" name="hrgbeli" id="hrgbeli" value="0">
                                     </div>
                                     <div class="form-group">
                                         <label>Note</label>
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Harga Jual(Rp.)</label>
-                                        <input type="text" class="form-control" name="hrgjual">
+                                        <input type="text" class="form-control" name="hrgjual" id="hrgjual" value="0">
                                     </div>
                                     <div class="form-group">
                                         <label>Item Group</label>
@@ -111,8 +111,8 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->code_mwhse }}</td>
                                         <td>{{ $item->code_muom }}</td>
-                                        <td>{{ $item->price }}</td>
-                                        <td>{{ $item->price2 }}</td>
+                                        <td>{{ number_format($item->price, 3, '.', ',') }}</td>
+                                        <td>{{ number_format($item->price2, 3, '.', ',') }}</td>
                                         <td>{{ $item->note }}</td>
                                         <td>{{ $item->code_mgrp }}</td>
                                         <td><a href="/masterdatabarang/{{ $item->id }}/edit"
@@ -179,6 +179,48 @@
         }else if (itemgrp == 0){
             alert("Please select Item Group");
             return false;
+        }
+    });
+
+    // VALIDATE TRIGGER
+    $("#hrgbeli").keyup(function(e){
+        if (/\D/g.test(this.value)){
+            // Filter non-digits from input value.
+            this.value = this.value.replace(/\D/g, '');
+        }
+    });
+    $("#hrgjual").keyup(function(e){
+        if (/\D/g.test(this.value)){
+            // Filter non-digits from input value.
+            this.value = this.value.replace(/\D/g, '');
+        }
+    });
+
+    $(document).on("change", "#hrgbeli", function(e) {
+        if($('#hrgbeli').val() == ''){
+            $('#hrgbeli').val(0);
+        }
+        data = $(this).val();
+        $("#hrgbeli").val(thousands_separators(data));
+    });
+    $(document).on("change", "#hrgjual", function(e) {
+        if($('#hrgjual').val() == ''){
+            $('#hrgjual').val(0);
+        }
+        data = $(this).val();
+        $("#hrgjual").val(thousands_separators(data));
+    });
+
+    $(document).on("click", "#hrgbeli", function(e) {
+        if (/\D/g.test(this.value)){
+        // Filter non-digits from input value.
+        this.value = this.value.replace(/\D/g, '');
+        }
+    });
+    $(document).on("click", "#hrgjual", function(e) {
+        if (/\D/g.test(this.value)){
+        // Filter non-digits from input value.
+        this.value = this.value.replace(/\D/g, '');
         }
     });
 </script>

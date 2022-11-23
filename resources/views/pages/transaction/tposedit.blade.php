@@ -5,7 +5,7 @@
         <h1>Transaction</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
-            <div class="breadcrumb-item"><a class="text-muted">POS EDIT</a></div>
+            <div class="breadcrumb-item"><a class="text-muted">Point of Sales EDIT</a></div>
         </div>
     </div>
     <div class="section-body">
@@ -15,7 +15,7 @@
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4>POS EDIT</h4>
+                        <h4>Point of Sales EDIT</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -59,7 +59,7 @@
                                     <select class="form-control select2" id="kode">
                                         <option disabled selected>--Select Kode--</option>
                                         @foreach($items as $data => $item)
-                                        <option>{{ $item->code }}</option>
+                                        <option value="{{ $item->code }}">{{ $item->code."-".$item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -151,19 +151,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Discount</label>
-                                    <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tposh->disc, 2, '.', ',') }}" readonly>
+                                    <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tposh->disc, 3, '.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Tax</label>
-                                    <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tposh->tax, 2, '.', ',') }}" readonly>
+                                    <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tposh->tax, 3,'.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Total</label>
-                                    <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tposh->grdtotal, 2, '.', ',') }}" readonly>
+                                    <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tposh->grdtotal, 3, '.', ',') }}" readonly>
                                 </div>
                             </div>
                         </div>

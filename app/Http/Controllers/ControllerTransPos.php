@@ -22,44 +22,45 @@ class ControllerTransPos extends Controller
     }
 
     public function post(Request $request){
-        dd((float) str_replace(',', '', $request->price_total));
-        // $dateconvert = Carbon::createFromFormat('Y-m-d', $request->dt)->format('Y-m-d');
-        // dd($dateconvert);
-
-        Tposh::create([
-            'no' => $request->no,
-            'tdt' => $request->dt,
-            'code_mcust' => $request->code_cust,
-            'disc' => (float) str_replace(',', '', $request->price_disc),
-            'tax' => (float) str_replace(',', '', $request->price_tax),
-            'grdtotal' => (float) str_replace(',', '', $request->price_total),
-            'note' => $request->note,
-        ]);
-        $idh_loop = Tposh::select('id')->whereNull('deleted_at')->where('no','=',$request->no)->get();
-        for($j=0; $j<sizeof($idh_loop); $j++){
-            $idh = $idh_loop[$j]->id;
-        }
-
-        $countrows = sizeof($request->no_d);
-        $count=0;
-        for ($i=0;$i<sizeof($request->no_d);$i++){
-            Tposhd::create([
-                'idh' => $idh,
-                'no_tposh' => $request->no_d[$i],
-                'code_mitem' => $request->kode_d[$i],
-                'qty' => $request->quantity[$i],
-                'code_muom' => $request->satuan_d[$i],
-                'price' => (float) str_replace(',', '', $request->harga_d[$i]),
-                'disc' => (float) str_replace(',', '', $request->disc_d[$i]),
-                'tax' => (float) str_replace(',', '', $request->tax_d[$i]),
-                'subtotal' => (float) str_replace(',', '', $request->subtot_d[$i]),
-                'note' => $request->note_d[$i],
+        $checkexist = Tposh::select('id','no')->where('no','=', $request->no)->first();
+        if($checkexist == null){
+            Tposh::create([
+                'no' => $request->no,
+                'tdt' => $request->dt,
+                'code_mcust' => $request->code_cust,
+                'disc' => (float) str_replace(',', '', $request->price_disc),
+                'tax' => (float) str_replace(',', '', $request->price_tax),
+                'grdtotal' => (float) str_replace(',', '', $request->price_total),
+                'note' => $request->note,
             ]);
-            $count++;
-        }
-        if($count == $countrows){
+            $idh_loop = Tposh::select('id')->whereNull('deleted_at')->where('no','=',$request->no)->get();
+            for($j=0; $j<sizeof($idh_loop); $j++){
+                $idh = $idh_loop[$j]->id;
+            }
+    
+            $countrows = sizeof($request->no_d);
+            $count=0;
+            for ($i=0;$i<sizeof($request->no_d);$i++){
+                Tposhd::create([
+                    'idh' => $idh,
+                    'no_tposh' => $request->no_d[$i],
+                    'code_mitem' => $request->kode_d[$i],
+                    'qty' => $request->quantity[$i],
+                    'code_muom' => $request->satuan_d[$i],
+                    'price' => (float) str_replace(',', '', $request->harga_d[$i]),
+                    'disc' => (float) str_replace(',', '', $request->disc_d[$i]),
+                    'tax' => (float) str_replace(',', '', $request->tax_d[$i]),
+                    'subtotal' => (float) str_replace(',', '', $request->subtot_d[$i]),
+                    'note' => $request->note_d[$i],
+                ]);
+                $count++;
+            }
+            if($count == $countrows){
+                return redirect()->back();
+            }
+        }else{
             return redirect()->back();
-        }
+        }        
     }
 
     public function getMitem(Request $request){
