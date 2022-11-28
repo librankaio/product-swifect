@@ -10,7 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ControllerMasterDataBrg extends Controller
-{
+{   
+    public function home(){
+        return view('layouts.home');
+    }
+
     public function index(){
         $datas = Mitem::select('id','code','name','code_muom','price','price2','code_mgrp','code_mwhse','admin_id','note')->whereNull('deleted_at')->get();
         $muoms = Muom::select('id','code','name')->whereNull('deleted_at')->get();

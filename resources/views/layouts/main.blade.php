@@ -20,6 +20,10 @@
     <script src="{!! mix('js/app.js') !!}"></script>
     <link rel="stylesheet" href="{!! mix('css/app.css') !!}">
 
+    {{-- chartjs --}}
+    
+    {{-- end chartjs --}}
+
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('../assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('../assets/css/components.css') }}">
@@ -282,7 +286,7 @@
                 <div class="footer-left">
                     Swifect Copyright &copy; 2022 <div class="bullet"></div>
                     <span>Designed By Namex (Anak Me...)</span>
-                </div>
+                </div>                
                 <div class="footer-right">
                     v 01.0.0 BETA
                 </div>
@@ -299,15 +303,17 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    
     {{-- <script src="../assets/js/stisla.js"></script> --}}
     <script src="{{ asset('../assets/js/stisla.js') }}"></script>
     <script src="{{ asset('../assets/js/moneyformat.js') }}"></script>
 
     <!-- JS Libraies -->
-    {{-- {% block plugins_js %}{% endblock %} --}}
+    @yield('pluginjs')
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js"></script>
 
     {{-- Bottom Javascript --}}
     @yield('botscripts')

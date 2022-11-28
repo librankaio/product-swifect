@@ -69,6 +69,8 @@
                                         <td><a href="/transpos/{{ $tposh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        <td><a href="#"
+                                                class="btn btn-icon icon-left btn-outline-primary"><i class="fa fa-print"> Print</i></a></td>
                                         <td>
                                             <form action="/transpos/delete/{{ $tposh->id }}"
                                                 id="del-{{ $tposh->id }}" method="POST">

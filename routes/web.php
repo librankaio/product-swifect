@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/form', function () {
     return view('pages.form');
 });
+Route::get('/chart', function () {
+    return view('chartjs');
+});
 Route::get('/transaction', function () {
     return view('pages.transaction.tpengeluaranbrglist');
 });
@@ -48,6 +51,8 @@ Route::post('/', [ControllerLogin::class, 'postLogin'])->name('postlogin');
 // Route::get('/', [ControllerMasterDataBrg::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
+    //HOME
+    Route::get('/home', [ControllerMasterDataBrg::class, 'home'])->name('home');
     //MITEM or Master data Item
     Route::get('/masterdatabarang', [ControllerMasterDataBrg::class, 'index'])->name('mbrg');
     Route::post('/masterdatabarangpost', [ControllerMasterDataBrg::class, 'post'])->name('mbrgpost');

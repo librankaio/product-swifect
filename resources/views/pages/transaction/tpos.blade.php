@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label>No Trans</label>
                                     <input type="text" class="form-control" name="no" id="no">
-                                </div>
+                                </div>                                
                                 <div class="form-group">
                                     <label>Tanggal</label>
                                     <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d") }}">
@@ -36,6 +36,19 @@
                                         <option>{{ $customer->code." - ".$customer->name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Payment Method</label>
+                                    <select class="form-control select2" name="pay_method">
+                                        <option disabled selected>--Select Payment Method--</option>
+                                        <option>CASH</option>
+                                        <option>DEBIT</option>
+                                        <option>CREDIT</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nomer Lainnya</label>
+                                    <input type="text" class="form-control" name="nolain">
                                 </div>
                                 <div class="form-group">
                                     <label>Note</label>
@@ -184,8 +197,8 @@
                         for (i=0; i < response.length; i++) {
                             if(response[i].code == kode){
                                 // $("#hrgsatuan").val((Number(response[i].price2).toFixed(2)));
-                                hrg = Number(response[i].price2).toFixed();
-                                console.log(thousands_separators($('#hrgsatuan').val()));
+                                hrg = Number(response[i].price2);
+                                // console.log(thousands_separators($('#hrgsatuan').val()));
                                 $("#satuan").val(response[i].code_muom)
                                 // $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
                                 $("#subtot").val(thousands_separators(hrg * $('#quantity').val()));
@@ -217,7 +230,7 @@
                 note = $("#note").val();
                 tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td></tr>";
                 
-                subtotparse = parseFloat(subtot.replace(/,/g, ''))
+                subtotparse = parseFloat(subtot.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);
                 if(counter == 1){
                     disc = subtotparse * ($("#disc").val() / 100);
@@ -230,6 +243,7 @@
                     $('#disc').val(0);
                     $('#hrgsatuan').val(0);
                     $('#quantity').val(0);
+                    console.log("Disc : "+disc.toFixed(2), "Tax : "+tax, "Total : "+total);
                 }else{
                     disc_old = parseFloat($("#price_disc").val().replace(/,/g, ''));
                     tax_old = parseFloat($("#price_tax").val().replace(/,/g, ''));
@@ -246,6 +260,7 @@
                     $("#price_total").val(thousands_separators(subtot_new));
                     $('#tax').val(0);
                     $('#disc').val(0);
+                    console.log("Disc : "+disc_new, "Tax : "+tax_new, "Total : "+subtot_new);
                 }
                 counter++;
                 $("#kode").prop('selectedIndex', 0).trigger('change');
@@ -268,14 +283,14 @@
                     price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
                     price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
                     price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
-
                     disc = subtot * ($("#disc_d_"+ counter_id).val() / 100);
                     tax = (subtot - disc) * ($("#tax_d_"+ counter_id).val() / 100);
-                    
+                    console.log(price_tax, price_disc, price_total);
                     totaltax = price_tax - tax;
                     totaldisc = price_disc - disc;
                     totalwithdisc = (subtot) - disc;
                     total =  price_total - (totalwithdisc + tax);
+                    console.log("disc delete :"+totaldisc, "tax del : "+totaltax,"total del :" +total);
 
                     $("#price_disc").val(thousands_separators(totaldisc));
                     $("#price_tax").val(thousands_separators(totaltax));

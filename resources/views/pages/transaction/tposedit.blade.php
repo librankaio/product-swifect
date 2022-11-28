@@ -38,6 +38,19 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>Payment Method</label>
+                                    <select class="form-control select2" name="pay_method">
+                                        <option selected>{{ $tposh->pay_method }}</option>
+                                        <option>CASH</option>
+                                        <option>DEBIT</option>
+                                        <option>CREDIT</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nomer Lainnya</label>
+                                    <input type="text" class="form-control" name="nolain">
+                                </div>
+                                <div class="form-group">
                                     <label>Note</label>
                                     <textarea class="form-control" style="height:50px" name="note">{{ $tposh->note }}</textarea>
                                 </div>
@@ -278,8 +291,8 @@
                     price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
                     console.log(price_tax, price_disc, price_total);
 
-                    disc = subtot * (parseFloat($("#disc_d_"+ counter_id).val()) / 100);
-                    tax = (subtot - disc) * parseFloat(($("#tax_d_"+ counter_id).val()) / 100);
+                    disc = subtot * ($("#disc_d_"+ counter_id).val() / 100);
+                    tax = (subtot - disc) * ($("#tax_d_"+ counter_id).val() / 100);
                     console.log(subtot);
                     console.log($("#tax_d_"+ counter_id).val());
                     console.log(disc, tax);

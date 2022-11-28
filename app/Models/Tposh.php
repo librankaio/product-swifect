@@ -20,6 +20,7 @@ class Tposh extends Model
         'no',
         'tdt',
         'code_mcust',
+        'pay_method',
         'disc',
         'tax',
         'grdtotal',

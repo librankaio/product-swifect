@@ -28,6 +28,7 @@ class ControllerTransPos extends Controller
                 'no' => $request->no,
                 'tdt' => $request->dt,
                 'code_mcust' => $request->code_cust,
+                'pay_method' => $request->pay_method,
                 'disc' => (float) str_replace(',', '', $request->price_disc),
                 'tax' => (float) str_replace(',', '', $request->price_tax),
                 'grdtotal' => (float) str_replace(',', '', $request->price_total),
@@ -95,9 +96,10 @@ class ControllerTransPos extends Controller
             'no' => request('no'),
             'tdt' => request('dt'),
             'code_mcust' => request('code_cust'),
-            'disc' => request('price_disc'),
-            'tax' => request('price_tax'),
-            'grdtotal' => request('price_total'),
+            'pay_method' => request('pay_method'),
+            'disc' => (float) str_replace(',', '', request('price_disc')),
+            'tax' => (float) str_replace(',', '', request('price_tax')),
+            'grdtotal' => (float) str_replace(',', '', request('price_total')),
             'note' => request('note')
         ]);
         $count=0;
@@ -109,10 +111,10 @@ class ControllerTransPos extends Controller
                 'code_mitem' => request('kode_d')[$i],
                 'qty' => request('quantity')[$i],
                 'code_muom' => request('satuan_d')[$i],
-                'price' => request('harga_d')[$i],
-                'disc' => request('disc_d')[$i],
-                'tax' => request('tax_d')[$i],
-                'subtotal' => request('subtot_d')[$i],
+                'price' => (float) str_replace(',', '', request('harga_d')[$i]),
+                'disc' => (float) str_replace(',', '', request('disc_d')[$i]),
+                'tax' => (float) str_replace(',', '', request('tax_d')[$i]),
+                'subtotal' => (float) str_replace(',', '', request('subtot_d')[$i]),
                 'note' => request('note_d')[$i],
             ]);
             $count++;

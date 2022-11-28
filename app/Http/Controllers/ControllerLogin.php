@@ -24,7 +24,7 @@ class ControllerLogin extends Controller
             $request->session()->put('email', $email);
             $request->session()->put('comp_code', $comp_code);
                 
-            return redirect()->intended('/masterdatabarang');
+            return redirect()->intended('/home');
         }
         return redirect()->back();
     }
