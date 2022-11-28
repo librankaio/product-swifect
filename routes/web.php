@@ -52,7 +52,10 @@ Route::post('/', [ControllerLogin::class, 'postLogin'])->name('postlogin');
 
 Route::group(['middleware' => ['auth']], function () {
     //HOME
-    Route::get('/home', [ControllerMasterDataBrg::class, 'home'])->name('home');
+    Route::get('/home', function () {
+        return view('chartjs');
+    })->name('home');
+    // Route::get('/home', [ControllerMasterDataBrg::class, 'home'])->name('home');
     //MITEM or Master data Item
     Route::get('/masterdatabarang', [ControllerMasterDataBrg::class, 'index'])->name('mbrg');
     Route::post('/masterdatabarangpost', [ControllerMasterDataBrg::class, 'post'])->name('mbrgpost');
