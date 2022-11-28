@@ -9,4 +9,4 @@ require("datatables.net-bs4")
 // import './mychart.js';
 // import Chart from 'chart.js/auto';
 
-window.Chart = require('chart.js/auto').default;
+// window.Chart = require('chart.js/auto').default;
