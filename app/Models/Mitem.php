@@ -24,6 +24,7 @@ class Mitem extends Model
         'price2',
         'code_mgrp',
         'code_mwhse',
+        'img',
         'admin_id',
         'note',
     ];

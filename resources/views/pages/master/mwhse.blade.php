@@ -46,7 +46,9 @@
                     </form>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6">
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">

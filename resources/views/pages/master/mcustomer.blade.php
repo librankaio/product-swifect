@@ -35,7 +35,9 @@
                                         <label>NPWP</label>
                                         <input type="text" class="form-control" name="npwp">
                                     </div>
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Alamat</label>
@@ -59,8 +61,10 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">

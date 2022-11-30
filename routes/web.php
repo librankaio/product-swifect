@@ -119,10 +119,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/transpos/{tposh}', [ControllerTransPos::class, 'update'])->name('transposupdate');
     Route::post('/transpos/delete/{tposh}', [ControllerTransPos::class, 'delete'])->name('tposdelete');
 
-
-    Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
-    Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
+    //TBeli Barang
+    Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('transbelibrg');
     Route::get('/transbelibrglist', [ControllerTransPembelianBrg::class, 'list'])->name('tbelibrglist');
+    
+    // TBeli Barang
     Route::get('/transpengeluaranbrg', [ControllerTransPengeluaranBrg::class, 'index'])->name('tpengeluaranbrg');
     Route::get('/transpengeluaranbrglist', [ControllerTransPengeluaranBrg::class, 'list'])->name('tpengeluaranbrglist');
+
+    // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
+    // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
 });

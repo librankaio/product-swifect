@@ -8,6 +8,7 @@ use App\Models\Muom;
 use App\Models\Mwhse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ControllerMasterDataBrg extends Controller
 {   
@@ -28,10 +29,26 @@ class ControllerMasterDataBrg extends Controller
         ]);
     }
 
-    public function post(Request $request){        
+    public function post(Request $request){
+        // dd($request->file('upload')->hashname());        
         $checkexist = Mitem::select('id','code','name')->where('code','=', $request->kode)->first();
         // dd($checkexist);
         if($checkexist == null){
+            if($request->upload != null){
+                $request->file('upload')->store('images');
+                Mitem::create([
+                    'code' => $request->kode,
+                    'name' => $request->nama,
+                    'code_muom' => $request->satuan,
+                    'price' => (float) str_replace(',', '', $request->hrgbeli),
+                    'price2' => (float) str_replace(',', '', $request->hrgjual),
+                    'code_mgrp' => $request->itemgrp,
+                    'code_mwhse' => $request->lokasi,
+                    'img' => $request->file('upload')->hashname() ,
+                    'note' => $request->note,
+                ]);
+                return redirect()->back();
+            }
             Mitem::create([
                 'code' => $request->kode,
                 'name' => $request->nama,
@@ -61,18 +78,44 @@ class ControllerMasterDataBrg extends Controller
     }
 
     public function update(Mitem $mitem){
+        // dd(request()->all());
+        if(request('upload') != null){
+            $filename = request('hdnupload');
+            if(Storage::exists('images/'.$filename)){
+                Storage::delete('images/'.$filename);
+                // dd("success delete");
+                /*
+                Delete Multiple File like this way
+                    Storage::delete(['upload/test.png', 'upload/test2.png']);
+                */
+            }
+            request()->file('upload')->store('images');
+            Mitem::where('id', '=', $mitem->id)->update([
+                'code' => request('kode'),
+                'name' => request('nama'),
+                'code_muom' => request('satuan'),
+                'price' => (float) str_replace(',', '', request('hrgbeli')),
+                'price2' => (float) str_replace(',', '', request('hrgjual')),
+                'code_mgrp' => request('itemgrp'),
+                'img' => request()->file('upload')->hashname(),
+                'code_mwhse' => request('lokasi'),
+                'note' => request('note'),
+            ]);
+
+            return redirect()->route('mbrg');
+        }
         Mitem::where('id', '=', $mitem->id)->update([
             'code' => request('kode'),
             'name' => request('nama'),
             'code_muom' => request('satuan'),
-            'price' => request('hrgbeli'),
-            'price2' => request('hrgjual'),
+            'price' => (float) str_replace(',', '', request('hrgbeli')),
+            'price2' => (float) str_replace(',', '', request('hrgjual')),
             'code_mgrp' => request('itemgrp'),
             'code_mwhse' => request('lokasi'),
             'note' => request('note'),
         ]);
 
-        return redirect()->route('mbrg');
+        return redirect()->route('mbrg');        
     }
 
     public function delete(Mitem $mitem){

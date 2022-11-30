@@ -20,10 +20,10 @@
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-exchange-alt"></i>
             <span>Transaction</span></a>
         <ul class="dropdown-menu">
-            <li><a class="nav-link disabled" href="{{ route('tbelibrg') }}">Pembelian Barang</a></li>
-            <li><a class="nav-link disabled" href="{{ route('tbelibrglist') }}">Pembelian Barang List</a></li>
-            <li><a class="nav-link disabled" href="{{ route('tpengeluaranbrg') }}">Penjualan Barang</a></li>
-            <li><a class="nav-link disabled" href="{{ route('tpengeluaranbrglist') }}">Penjualan Barang List</a></li>
+            <li><a class="nav-link" href="{{ route('transbelibrg') }}">Pembelian Barang</a></li>
+            <li><a class="nav-link" href="{{ route('tbelibrglist') }}">Pembelian Barang List</a></li>
+            <li><a class="nav-link" href="{{ route('tpengeluaranbrg') }}">Penjualan Barang</a></li>
+            <li><a class="nav-link" href="{{ route('tpengeluaranbrglist') }}">Penjualan Barang List</a></li>
             <li><a class="nav-link" href="{{ route('tpos') }}">Point of Sales</a></li>
             <li><a class="nav-link" href="{{ route('tposlist') }}">Point of Sales List</a></li>
         </ul>
