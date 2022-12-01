@@ -29,21 +29,12 @@
                                     <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d") }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Customer</label>
+                                    <label>Supplier</label>
                                     <select class="form-control select2" name="code_cust" id="code_cust">
-                                        <option disabled selected>--Select Customer--</option>
-                                        @foreach($customers as $data => $customer)
-                                        <option>{{ $customer->code." - ".$customer->name }}</option>
+                                        <option disabled selected>--Select Supplier--</option>
+                                        @foreach($suppliers as $data => $supplier)
+                                        <option>{{ $supplier->code." - ".$supplier->name }}</option>
                                         @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Payment Method</label>
-                                    <select class="form-control select2" name="pay_method">
-                                        <option disabled selected>--Select Payment Method--</option>
-                                        <option>CASH</option>
-                                        <option>DEBIT</option>
-                                        <option>CREDIT</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

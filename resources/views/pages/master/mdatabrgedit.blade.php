@@ -76,6 +76,14 @@
                                             value="{{ number_format($mitem->price) }}">
                                     </div>
                                     <div class="form-group">
+                                        <label>Item Type</label>
+                                        <select class="form-control select2" name="itemtype" id="itemtype">
+                                            <option disabled selected>--Select Item Type--</option>
+                                            <option>BAHAN BAKU</option>                                                
+                                            <option>BARANG JADI</option>       
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Note</label>
                                         <textarea class="form-control" style="height:50px"
                                             name="note">{{ $mitem->note }}</textarea>
@@ -126,7 +134,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="input-group mb-3 px-2 py-1 bg-white shadow-sm" style="border:1px solid #ced4da; border-radius:5px;">
-                                <input type="text" class="form-control" id="hdnupload" name="hdnupload" value="{{ $mitem->img }}" readonly>
+                                <input type="text" class="form-control" id="hdnupload" name="hdnupload" value="{{ $mitem->img }}" readonly hidden>
                                 <input id="upload" name="upload" type="file" onchange="readURL(this);" class="form-control border-0 upload" value="{{ $mitem->img }}">
                                 {{-- <label id="upload-label" for="upload" class="font-weight-light text-muted upload-label">Choose
                                     file</label>

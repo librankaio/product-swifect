@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('topscripts')
+{{-- chartjs --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{{-- end chartjs --}}
+@stop
 @section('content')
 <section class="section">
     <div class="section-header">

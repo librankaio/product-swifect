@@ -22,6 +22,7 @@ class ControllerTransPos extends Controller
     }
 
     public function post(Request $request){
+        dd($request->all());
         $checkexist = Tposh::select('id','no')->where('no','=', $request->no)->first();
         if($checkexist == null){
             Tposh::create([
@@ -44,7 +45,7 @@ class ControllerTransPos extends Controller
             for ($i=0;$i<sizeof($request->no_d);$i++){
                 Tposhd::create([
                     'idh' => $idh,
-                    'no_tposh' => $request->no_d[$i],
+                    'no_tposh' => $request->no,
                     'code_mitem' => $request->kode_d[$i],
                     'qty' => $request->quantity[$i],
                     'code_muom' => $request->satuan_d[$i],

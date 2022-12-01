@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mcust;
 use App\Models\Mitem;
+use App\Models\Msupp;
 use App\Models\Tposh;
 use App\Models\Tposhd;
 use Illuminate\Http\Request;
@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 class ControllerTransPembelianBrg extends Controller
 {
     public function index(){
-        $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
+        $suppliers = Msupp::select('id','code','name')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         return view('pages.transaction.tbelibrg',[
-            'customers' => $customers,
+            'suppliers' => $suppliers,
             'items' => $items
         ]);
     }

@@ -22,8 +22,8 @@
         <ul class="dropdown-menu">
             <li><a class="nav-link" href="{{ route('transbelibrg') }}">Pembelian Barang</a></li>
             <li><a class="nav-link" href="{{ route('tbelibrglist') }}">Pembelian Barang List</a></li>
-            <li><a class="nav-link" href="{{ route('tpengeluaranbrg') }}">Penjualan Barang</a></li>
-            <li><a class="nav-link" href="{{ route('tpengeluaranbrglist') }}">Penjualan Barang List</a></li>
+            {{-- <li><a class="nav-link" href="{{ route('tpengeluaranbrg') }}">Penjualan Barang</a></li>
+            <li><a class="nav-link" href="{{ route('tpengeluaranbrglist') }}">Penjualan Barang List</a></li> --}}
             <li><a class="nav-link" href="{{ route('tpos') }}">Point of Sales</a></li>
             <li><a class="nav-link" href="{{ route('tposlist') }}">Point of Sales List</a></li>
         </ul>

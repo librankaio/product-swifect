@@ -75,6 +75,14 @@
                                         <input type="text" class="form-control" name="hrgbeli" id="hrgbeli" value="0">
                                     </div>
                                     <div class="form-group">
+                                        <label>Item Type</label>
+                                        <select class="form-control select2" name="itemtype" id="itemtype">
+                                            <option disabled selected>--Select Item Type--</option>
+                                            <option>BAHAN BAKU</option>                                                
+                                            <option>BARANG JADI</option>       
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Note</label>
                                         <textarea class="form-control" style="height:50px" name="note"></textarea>
                                     </div>
