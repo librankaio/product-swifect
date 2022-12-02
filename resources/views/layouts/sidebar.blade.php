@@ -26,6 +26,7 @@
             <li><a class="nav-link" href="{{ route('tpengeluaranbrglist') }}">Penjualan Barang List</a></li> --}}
             <li><a class="nav-link" href="{{ route('tpos') }}">Point of Sales</a></li>
             <li><a class="nav-link" href="{{ route('tposlist') }}">Point of Sales List</a></li>
+            <li><a class="nav-link" href="{{ route('tbayaroperasional') }}">Pembayaran Operasional</a></li>
         </ul>
     </li>
     <li class="menu-header">Reports</li>

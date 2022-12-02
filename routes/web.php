@@ -11,6 +11,7 @@ use App\Http\Controllers\ControllerMasterMerk;
 use App\Http\Controllers\ControllerMasterSatuan;
 use App\Http\Controllers\ControllerMasterSupp;
 use App\Http\Controllers\ControllerMasterUser;
+use App\Http\Controllers\ControllerTransBayarOps;
 use App\Http\Controllers\ControllerTransPembelianBrg;
 use App\Http\Controllers\ControllerTransPengeluaranBrg;
 use App\Http\Controllers\ControllerTransPos;
@@ -126,6 +127,9 @@ Route::group(['middleware' => ['auth']], function () {
     // TBeli Barang
     Route::get('/transpengeluaranbrg', [ControllerTransPengeluaranBrg::class, 'index'])->name('tpengeluaranbrg');
     Route::get('/transpengeluaranbrglist', [ControllerTransPengeluaranBrg::class, 'list'])->name('tpengeluaranbrglist');
+    
+    // TBayar Operasional
+    Route::get('/tbayaroperasional', [ControllerTransBayarOps::class, 'index'])->name('tbayaroperasional');
 
     // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
