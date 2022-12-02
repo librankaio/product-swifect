@@ -22,12 +22,12 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>No Trans</label>
-                                    <input type="text" class="form-control" name="no" id="no">
+                                    <input type="text" class="form-control" name="no" id="no" value="{{ $tbayaropsh->no }}">
                                 </div>        
                                 <div class="form-group">
                                     <label>Jenis</label>
                                     <select class="form-control select2" name="jenis" id="jenis">
-                                        <option disabled selected>--Select Jenis--</option>
+                                        <option selected>{{ $tbayaropsh->jenis }}</option>
                                         <option>Uang Keluar</option>
                                         <option>Uang Masuk</option>
                                     </select>
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label>Akun Pembayaran</label>
                                     <select class="form-control select2" name="akun_bayar" id="akun_bayar">
-                                        <option disabled selected>--Select Akun Pembayaran--</option>
+                                        <option selected>{{ $tbayaropsh->akun_pembayaran  }}</option>
                                         @foreach($banks as $data => $bank)
                                         <option>{{ $bank->code." - ".$bank->name }}</option>
                                         @endforeach
@@ -54,11 +54,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d") }}">
+                                <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d", strtotime($tbayaropsh->tdt)) }}">
                                 </div>                                 
                                 <div class="form-group">
                                     <label>Ref No.</label>
-                                    <input type="text" class="form-control" name="noref" id="noref">
+                                    <input type="text" class="form-control" name="noref" id="noref" value="{{ $tbayaropsh->noref }}">
                                 </div>  
                                 <div class="form-group">
                                     <label>Note</label>
@@ -83,6 +83,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $counter = 0; @endphp
+                                    @for($i = 0; $i < sizeof($tbayaropsds); $i++)
+                                    @php $counter++; @endphp
+                                    <tr>
+                                        <th class="id-header" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
+                                        <td><input style='width:120px;' readonly class='noteclass form-control' name='note_d[]' type='text' value='{{ $tbayaropsds[$i]->note }}'></td>
+                                        <td><input style='width:120px;' readonly class='totalclass form-control' name='total_d[]' id='total_d{{ $counter }}' type='text' value='{{ number_format( $tbayaropsds[$i]->total, 2, '.', ',') }}'></td>
+                                        <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
+                                        <td><input style='width:120px;' readonly hidden class='noteclass form-control' name='no_d[]' type='text' value='{{ $tbayaropsds[$i]->no_tbayaropsh }}'></td>
+                                    </tr>
+                                    @endfor
                                 </tbody>                            
                             </table>
                         </div>                                              
@@ -92,13 +103,13 @@
                             <div class="col-md-4 offset-md-8">
                                 <div class="form-group">
                                     <label>Grand Total</label>
-                                    <input type="text" class="form-control" name="grand_total" form="thisform" id="grand_total" value="0" readonly>
+                                    <input type="text" class="form-control" name="grand_total" form="thisform" id="grand_total" value="{{ number_format( (Int)$tbayaropsh->grdtotal, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>                
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tbayaropspost') }}">Submit</button>
+                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="/tbayarops/{{ $tbayaropsh->id }}">Submit</button>
                         <button class="btn btn-secondary" type="reset">Reset</button>
                     </div>
                 </div>
@@ -120,7 +131,7 @@
                 minimumResultsForSearch: Infinity
             });
 
-            var counter = 1;
+            var counter = parseInt({{ $counter}}) +1;
             $(document).on("click", "#addItem", function(e) {
                 e.preventDefault();
 
@@ -137,7 +148,7 @@
                     return false;
                 }
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' style='width:100px;' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'></td><td><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' style='width:100px;' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'><td><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td></td><td><button title='Delete' class='delete btn btn-primary' value="+counter+"><i style='font-size:15pt;color:#fff;' class='fa fa-trash'></i></button></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                 totalparse = parseFloat(total.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);
@@ -150,8 +161,12 @@
                     // $('#quantity').val(0);
                 }else{
                     grandtot_old = parseFloat($("#grand_total").val().replace(/,/g, ''));
+                    subtot = Number(totalparse).toFixed(2);
+                    grandtot = Number(grandtot_old).toFixed(2);
+                    grandtot_new =  Number(subtot) + Number(grandtot);
+                    
 
-                    grandtot_new =  totalparse + grandtot_old;
+                    console.log( Number(subtot) + Number(grandtot))
 
                     $("#grand_total").val(thousands_separators(grandtot_new));
                 }
@@ -170,7 +185,7 @@
                 e.preventDefault();
                 var r = confirm("Delete Transaksi ?");
                 if (r == true) {
-                    counter_id = $(this).closest('tr').text();
+                    counter_id = $(this).val();
                     subtotal = parseFloat($("#total_d"+ counter_id).val().replace(/,/g, ''));                    
 
                     grand_total = parseFloat($("#grand_total").val().replace(/,/g, ''))

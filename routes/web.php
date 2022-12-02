@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transpos/{tposh}/edit', [ControllerTransPos::class, 'getedit'])->name('transposedit');
     Route::post('/transpos/{tposh}', [ControllerTransPos::class, 'update'])->name('transposupdate');
     Route::post('/transpos/delete/{tposh}', [ControllerTransPos::class, 'delete'])->name('tposdelete');
-
+    
     //TBeli Barang
     Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('transbelibrg');
     Route::get('/transbelibrglist', [ControllerTransPembelianBrg::class, 'list'])->name('tbelibrglist');
@@ -129,7 +129,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transpengeluaranbrglist', [ControllerTransPengeluaranBrg::class, 'list'])->name('tpengeluaranbrglist');
     
     // TBayar Operasional
-    Route::get('/tbayaroperasional', [ControllerTransBayarOps::class, 'index'])->name('tbayaroperasional');
+    Route::get('/tbayarops', [ControllerTransBayarOps::class, 'index'])->name('tbayarops');
+    Route::post('/tbayaropspost', [ControllerTransBayarOps::class, 'post'])->name('tbayaropspost');
+    
+    // TBayar Operasional LIST
+    Route::get('/tbayaropslist', [ControllerTransBayarOps::class, 'list'])->name('tbayaropslist');
+    Route::get('/tbayarops/{tbayaropsh}/edit', [ControllerTransBayarOps::class, 'getedit'])->name('tbayaropsedit');
+    Route::post('/tbayarops/{tbayaropsh}', [ControllerTransBayarOps::class, 'update'])->name('tbayaropsupdate');
+
 
     // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
