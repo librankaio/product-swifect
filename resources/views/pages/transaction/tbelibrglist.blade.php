@@ -36,7 +36,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mbrgpost') }}">Save</button>
+                                formaction="{{ route('mbrgpost') }}">Search</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>

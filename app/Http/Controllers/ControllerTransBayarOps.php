@@ -19,7 +19,6 @@ class ControllerTransBayarOps extends Controller
 
     public function post(Request $request){
         // dd($request->all());
-
         $checkexist = Tbayaropsh::select('id','no')->where('no','=', $request->no)->first();
         if($checkexist == null){
             Tbayaropsh::create([
@@ -102,6 +101,20 @@ class ControllerTransBayarOps extends Controller
         $tbayaropsds = Tbayaropsd::select('id','idh','no_tbayaropsh','total')->whereNull('deleted_at')->get();
         return view('pages.transaction.tbayaropslist',[
             'tbayaropshs' => $tbayaropshs,
+            'tbayaropsds' => $tbayaropsds
+        ]);
+    }
+
+    public function delete(Tbayaropsh $tbayaropsh){
+        Tbayaropsh::find($tbayaropsh->id)->delete();
+        return redirect()->back();
+    }
+
+    public function print(Tbayaropsh $tbayaropsh){
+        // dd($tbayaropsh);
+        $tbayaropsds = Tbayaropsd::select('id','idh','no_tbayaropsh','total','note')->whereNull('deleted_at')->where('idh','=',$tbayaropsh->id)->get();
+        return view('pages.print.tbayaropsprint',[
+            'tbayaropsh' => $tbayaropsh,
             'tbayaropsds' => $tbayaropsds
         ]);
     }

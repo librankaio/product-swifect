@@ -139,4 +139,13 @@ class ControllerTransPos extends Controller
         Tposh::find($tposh->id)->delete();
         return redirect()->back();
     }
+
+    public function print(Tposh $tposh){
+        $tposhds = Tposhd::select('id','idh','code_mitem','code_muom','qty','price','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
+        // dd($tposhds);
+        return view('pages.print.tposprint',[
+            'tposh' => $tposh,
+            'tposhds' => $tposhds
+        ]);
+    }
 }

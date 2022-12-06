@@ -26,4 +26,13 @@ class ControllerTransPembelianBrg extends Controller
             'tposhds' => $tposhds
         ]);
     }
+
+    public function print(Tposh $tposh){
+        $tposhds = Tposhd::select('id','idh','code_mitem','code_muom','qty','price','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
+        // dd($tposhds);
+        return view('pages.print.tpembelianbrgprint',[
+            'tposh' => $tposh,
+            'tposhds' => $tposhds
+        ]);
+    }
 }

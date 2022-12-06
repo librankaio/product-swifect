@@ -36,7 +36,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mbrgpost') }}">Save</button>
+                                formaction="{{ route('mbrgpost') }}">Search</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -72,8 +72,8 @@
                                         <td><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
-                                        <td><a href="#"
-                                                class="btn btn-icon icon-left btn-outline-primary"><i class="fa fa-print"> Print</i></a></td>
+                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
+                                                class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
                                         <td>
                                             <form action="/tbayarops/delete/{{ $tbayaropsh->id }}"
                                                 id="del-{{ $tbayaropsh->id }}" method="POST">

@@ -119,10 +119,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transpos/{tposh}/edit', [ControllerTransPos::class, 'getedit'])->name('transposedit');
     Route::post('/transpos/{tposh}', [ControllerTransPos::class, 'update'])->name('transposupdate');
     Route::post('/transpos/delete/{tposh}', [ControllerTransPos::class, 'delete'])->name('tposdelete');
+    Route::get('/transpos/{tposh}/print', [ControllerTransPos::class, 'print'])->name('transposprint');
     
     //TBeli Barang
     Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('transbelibrg');
     Route::get('/transbelibrglist', [ControllerTransPembelianBrg::class, 'list'])->name('tbelibrglist');
+    Route::get('/transbelibrg/{tbayaropsh}/print', [ControllerTransPembelianBrg::class, 'print'])->name('transbelibrgprint');
     
     // TBeli Barang
     Route::get('/transpengeluaranbrg', [ControllerTransPengeluaranBrg::class, 'index'])->name('tpengeluaranbrg');
@@ -136,6 +138,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tbayaropslist', [ControllerTransBayarOps::class, 'list'])->name('tbayaropslist');
     Route::get('/tbayarops/{tbayaropsh}/edit', [ControllerTransBayarOps::class, 'getedit'])->name('tbayaropsedit');
     Route::post('/tbayarops/{tbayaropsh}', [ControllerTransBayarOps::class, 'update'])->name('tbayaropsupdate');
+    Route::post('/tbayarops/delete/{tbayaropsh}', [ControllerTransBayarOps::class, 'delete'])->name('tbayaropsdelete');
+    Route::get('/tbayarops/{tbayaropsh}/print', [ControllerTransBayarOps::class, 'print'])->name('tbayaropsprint');
 
 
     // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
