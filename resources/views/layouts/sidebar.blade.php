@@ -6,7 +6,7 @@
             <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>
             <li><a class="nav-link" href="{{ route('msatuan') }}">Master Satuan</a></li>
             <li><a class="nav-link" href="{{ route('mgrup') }}">Master Data Group</a></li>
-            {{-- <li><a class="nav-link" href="{{ route('mmerk') }}">Master Merk</a></li> --}}
+            <li><a class="nav-link" href="{{ route('mchartacc') }}">Master Chart Of Account</a></li>
             <li><a class="nav-link" href="{{ route('mbank') }}">Master Bank</a></li>
             {{-- <li><a class="nav-link" href="{{ route('mcabang') }}">Master Cabang</a></li> --}}
             {{-- <li><a class="nav-link" href="{{ route('muser') }}">Master User</a></li> --}}
@@ -28,6 +28,8 @@
             <li><a class="nav-link" href="{{ route('tposlist') }}">Point of Sales List</a></li>
             <li><a class="nav-link" href="{{ route('tbayarops') }}">Pembayaran Operasional</a></li>
             <li><a class="nav-link" href="{{ route('tbayaropslist') }}">Pembayaran Ops. List</a></li>
+            <li><a class="nav-link" href="{{ route('tjurnalvoucher') }}">Journal Voucher</a></li>
+            <li><a class="nav-link" href="{{ route('tjurnalvoucherlist') }}">Journal Voucher List</a></li>
         </ul>
     </li>
     <li class="menu-header">Reports</li>

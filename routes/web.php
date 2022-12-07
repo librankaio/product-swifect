@@ -3,6 +3,7 @@
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerMasterBank;
 use App\Http\Controllers\ControllerMasterCabang;
+use App\Http\Controllers\ControllerMasterChartOfAcc;
 use App\Http\Controllers\ControllerMasterCustomer;
 use App\Http\Controllers\ControllerMasterDataBrg;
 use App\Http\Controllers\ControllerMasterGroup;
@@ -12,6 +13,7 @@ use App\Http\Controllers\ControllerMasterSatuan;
 use App\Http\Controllers\ControllerMasterSupp;
 use App\Http\Controllers\ControllerMasterUser;
 use App\Http\Controllers\ControllerTransBayarOps;
+use App\Http\Controllers\ControllerTransJurnalVouch;
 use App\Http\Controllers\ControllerTransPembelianBrg;
 use App\Http\Controllers\ControllerTransPengeluaranBrg;
 use App\Http\Controllers\ControllerTransPos;
@@ -109,6 +111,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/masterloct/{mwhse}/edit', [ControllerMasterLocation::class, 'getedit'])->name('mwhsegetedit');
     Route::post('/masterloct/{mwhse}', [ControllerMasterLocation::class, 'update'])->name('mwhseupdt');
     Route::post('/masterloct/delete/{mwhse}', [ControllerMasterLocation::class, 'delete'])->name('mwhsedelete');
+    
+    // Mchartofacc
+    Route::get('/mchartacc', [ControllerMasterChartOfAcc::class, 'index'])->name('mchartacc');
+    Route::post('/mchartaccpost', [ControllerMasterChartOfAcc::class, 'post'])->name('mchartaccpost');
+    Route::get('/mchartacc/{mchartofacc}/edit', [ControllerMasterChartOfAcc::class, 'getedit'])->name('mchartaccedit');
+    Route::post('/mchartacc/{mchartofacc}', [ControllerMasterChartOfAcc::class, 'update'])->name('mchartaccupdt');
+    Route::post('/mchartacc/delete/{mchartofacc}', [ControllerMasterChartOfAcc::class, 'delete'])->name('mchartaccdelete');
 
     //TPOS or Transaction POS
     Route::get('/transpos', [ControllerTransPos::class, 'index'])->name('tpos');
@@ -140,8 +149,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tbayarops/{tbayaropsh}', [ControllerTransBayarOps::class, 'update'])->name('tbayaropsupdate');
     Route::post('/tbayarops/delete/{tbayaropsh}', [ControllerTransBayarOps::class, 'delete'])->name('tbayaropsdelete');
     Route::get('/tbayarops/{tbayaropsh}/print', [ControllerTransBayarOps::class, 'print'])->name('tbayaropsprint');
-
-
+    
+    // TJournal Voucher
+    Route::get('/tjurnalvoucher', [ControllerTransJurnalVouch::class, 'index'])->name('tjurnalvoucher');
+    Route::post('/tjurnalvoucher', [ControllerTransJurnalVouch::class, 'post'])->name('tjurnalvoucherpost');
+    Route::post('/getcoa', [ControllerTransJurnalVouch::class, 'getCoa'])->name('getcoa');
+    
+    // Tjournal Voucher List
+    Route::get('/tjurnalvoucherlist', [ControllerTransJurnalVouch::class, 'list'])->name('tjurnalvoucherlist');
+    Route::get('/tjurnalvoucher/{tjurnalvouchh}/edit', [ControllerTransJurnalVouch::class, 'getedit'])->name('tjurnalvoucheredit');
+    Route::post('/tjurnalvoucher/{tjurnalvouchh}', [ControllerTransJurnalVouch::class, 'update'])->name('tjurnalvoucherupdate');
     // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
 });
