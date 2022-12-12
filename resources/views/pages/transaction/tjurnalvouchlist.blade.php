@@ -2,7 +2,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Transaction</h1>
+        <h1>Header Information</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
             <div class="breadcrumb-item"><a class="text-muted">Journal Voucher List</a></div>

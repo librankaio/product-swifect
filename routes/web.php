@@ -8,6 +8,7 @@ use App\Http\Controllers\ControllerMasterCustomer;
 use App\Http\Controllers\ControllerMasterDataBrg;
 use App\Http\Controllers\ControllerMasterGroup;
 use App\Http\Controllers\ControllerMasterLocation;
+use App\Http\Controllers\ControllerMasterMataUang;
 use App\Http\Controllers\ControllerMasterMerk;
 use App\Http\Controllers\ControllerMasterSatuan;
 use App\Http\Controllers\ControllerMasterSupp;
@@ -76,6 +77,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/mastersatuan/{muom}/edit', [ControllerMasterSatuan::class, 'getedit'])->name('msatuangetid');
     Route::post('/mastersatuan/{muom}', [ControllerMasterSatuan::class, 'update'])->name('msatuanupdt');
     Route::post('/mastersatuan/delete/{muom}', [ControllerMasterSatuan::class, 'delete'])->name('msatuandelete');
+    
+    //MUOM or Master Mata Uang
+    Route::get('/mmatauang', [ControllerMasterMataUang::class, 'index'])->name('mmatauang');
+    Route::post('/mmatauangpost', [ControllerMasterMataUang::class, 'post'])->name('mmatauangpost');
+    Route::get('/mmatauang/{mmatauang}/edit', [ControllerMasterMataUang::class, 'getedit'])->name('mmatauanggetid');
+    Route::post('/mmatauang/{mmatauang}', [ControllerMasterMataUang::class, 'update'])->name('mmatauangupdt');
+    Route::post('/mmatauang/delete/{mmatauang}', [ControllerMasterMataUang::class, 'delete'])->name('mmatauangdelete');
 
     //MGRP or Master Group
     Route::get('/mastergroup', [ControllerMasterGroup::class, 'index'])->name('mgrup');
@@ -123,6 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transpos', [ControllerTransPos::class, 'index'])->name('tpos');
     Route::post('/transpospost', [ControllerTransPos::class, 'post'])->name('transpospost');
     Route::post('/getmitem', [ControllerTransPos::class, 'getMitem'])->name('getmitem');
+
     //TPOS LIST or Trans POS LIST
     Route::get('/transposlist', [ControllerTransPos::class, 'list'])->name('tposlist');
     Route::get('/transpos/{tposh}/edit', [ControllerTransPos::class, 'getedit'])->name('transposedit');

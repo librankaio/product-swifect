@@ -2,19 +2,20 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Header Information</h1>
+        <h1>Master Data</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
-            <div class="breadcrumb-item"><a class="text-muted">Pembelian Barang List</a></div>
+            <div class="breadcrumb-item active"><a href="#">Master Data</a></div>
+            <div class="breadcrumb-item"><a class="text-muted">Master Mata Uang</a></div>
         </div>
     </div>
 
     <div class="section-body">
+
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Pembelian Barang List</h4>
+                        <h4>Master Mata Uang</h4>
                     </div>
                     <form action="" method="POST">
                         @csrf
@@ -22,21 +23,21 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tanggal Dari</label>
-                                        <input type="date" class="form-control" name="dtfr">
+                                        <label>Mata Uang Code</label>
+                                        <input type="text" class="form-control" name="kode" id="kode">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tanggal Dari</label>
-                                        <input type="date" class="form-control" name="dtfr">
+                                        <label>Mata Uang Name</label>
+                                        <input type="text" class="form-control" name="nama" id="nama">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mbrgpost') }}">Search</button>
+                                formaction="{{ route('mmatauangpost') }}" id="confirm">Save</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -52,36 +53,31 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">No Trans</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Code Customer</th>
+                                        <th scope="col">Kode</th>
+                                        <th scope="col">Nama</th>
                                         <th scope="col">Edit</th>
-                                        <th scope="col">Print</th>
                                         <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php $counter = 0 @endphp
-                                    @foreach($tposhs as $data => $tposh)
+                                    @foreach($datas as $data => $item)
                                     @php $counter++ @endphp
                                     <tr>
                                         <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $tposh->no }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($tposh->tdt)) }}</td>
-                                        <td>{{ $tposh->code_mcust }}</td>
-                                        <td><a href="/transpos/{{ $tposh->id }}/edit"
+                                        <td>{{ $item->code }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td><a href="/mmatauang/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
-                                        <td><a href="#"
-                                                class="btn btn-icon icon-left btn-outline-primary"><i class="fa fa-print"> Print</i></a></td>
                                         <td>
-                                            <form action="/transpos/delete/{{ $tposh->id }}"
-                                                id="del-{{ $tposh->id }}" method="POST">
+                                            <form action="/mmatauang/delete/{{ $item->id }}" id="del-{{ $item->id }}"
+                                                method="POST">
                                                 @csrf
                                                 <button class="btn btn-icon icon-left btn-danger"
-                                                    id="del-{{ $tposh->id }}" type="submit"
-                                                    data-confirm="WARNING!|Do you want to delete {{ $tposh->name }} data?"
-                                                    data-confirm-yes="submitDel({{ $tposh->id }})"><i
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
                                             </form>
@@ -96,21 +92,59 @@
             </div>
         </div>
     </div>
+    <form class="modal-part" id="modal-login-part">
+        <p>This login form is taken from elements with <code>#modal-login-part</code> id.</p>
+        <div class="form-group">
+            <label>Username</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" placeholder="Email" name="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                <input type="password" class="form-control" placeholder="Password" name="password">
+            </div>
+        </div>
+        <div class="form-group mb-0">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
+                <label class="custom-control-label" for="remember-me">Remember Me</label>
+            </div>
+        </div>
+    </form>
 </section>
 @stop
 @section('botscripts')
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('.select2').select2({});
-    });
-
     $('#datatable').DataTable({
         // "ordering":false,
         "bInfo" : false
     });
-
     function submitDel(id){
         $('#del-'+id).submit()
     }
+    $(document).on("click","#confirm",function(e){
+        // Validate ifnull
+        kode = $("#kode").val();
+        nama = $("#nama").val();
+        if (kode == ""){
+            alert("Kode Tidak boleh kosong!");
+            return false;
+        }else if (nama == 0){
+            alert("Nama Tidak boleh kosong!");
+            return false;
+        }
+    });
 </script>
 @endsection

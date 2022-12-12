@@ -8,6 +8,7 @@
             <li><a class="nav-link" href="{{ route('mgrup') }}">Master Data Group</a></li>
             <li><a class="nav-link" href="{{ route('mchartacc') }}">Master Chart Of Account</a></li>
             <li><a class="nav-link" href="{{ route('mbank') }}">Master Bank</a></li>
+            <li><a class="nav-link" href="{{ route('mmatauang') }}">Master Mata Uang</a></li>
             {{-- <li><a class="nav-link" href="{{ route('mcabang') }}">Master Cabang</a></li> --}}
             {{-- <li><a class="nav-link" href="{{ route('muser') }}">Master User</a></li> --}}
             <li><a class="nav-link" href="{{ route('mcust') }}">Master Data Customer</a></li>
