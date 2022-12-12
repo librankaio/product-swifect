@@ -2,7 +2,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Header Information</h1>
+        <h1>Pembelian Barang</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
             <div class="breadcrumb-item"><a class="text-muted">Pembelian Barang</a></div>
@@ -15,7 +15,7 @@
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Pembelian Barang</h4>
+                        <h4>Header Information</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -34,6 +34,15 @@
                                         <option disabled selected>--Select Supplier--</option>
                                         @foreach($suppliers as $data => $supplier)
                                         <option>{{ $supplier->code." - ".$supplier->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mata Uang</label>
+                                    <select class="form-control select2" name="mata_uang" id="mata_uang">
+                                        <option disabled selected>--Select Mata Uang--</option>
+                                        @foreach($matauangs as $data => $matauang)
+                                        <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

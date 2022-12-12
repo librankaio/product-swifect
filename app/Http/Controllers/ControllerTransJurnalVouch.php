@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mchartofacc;
+use App\Models\Mmatauang;
 use App\Models\Tjurnalvouchd;
 use App\Models\Tjurnalvouchh;
 use Illuminate\Http\Request;
@@ -11,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 class ControllerTransJurnalVouch extends Controller
 {
     public function index(){
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $chartaccs = Mchartofacc::select('id','code','jenis')->whereNull('deleted_at')->get();
         return view('pages.transaction.tjurnalvouch',[
-            'chartaccs' => $chartaccs
+            'chartaccs' => $chartaccs,
+            'matauangs' => $matauangs,
         ]);
     }
 
@@ -69,12 +72,14 @@ class ControllerTransJurnalVouch extends Controller
 
     public function getedit(Tjurnalvouchh $tjurnalvouchh){
         // dd($tjurnalvouchh);
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $chartaccs = Mchartofacc::select('id','code','jenis')->whereNull('deleted_at')->get();
         $tjurnalvouchds = Tjurnalvouchd::select('id','idh','no_tjurnalvouchh','kode','nama','debit','credit','memo')->whereNull('deleted_at')->where('idh','=',$tjurnalvouchh->id)->get();
         return view('pages.transaction.tjurnalvouchedit',[
             'tjurnalvouchh' => $tjurnalvouchh,
             'tjurnalvouchds' => $tjurnalvouchds,
-            'chartaccs' => $chartaccs
+            'chartaccs' => $chartaccs,
+            'matauangs' => $matauangs
         ]);
     }
 

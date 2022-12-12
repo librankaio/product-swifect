@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mcust;
 use App\Models\Mitem;
+use App\Models\Mmatauang;
 use App\Models\Tposh;
 use App\Models\Tposhd;
 use Carbon\Carbon;
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\DB;
 class ControllerTransPos extends Controller
 {
     public function index(){
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         return view('pages.transaction.tpos',[
             'customers' => $customers,
-            'items' => $items
+            'items' => $items,
+            'matauangs' => $matauangs
         ]);
     }
 
@@ -77,6 +80,7 @@ class ControllerTransPos extends Controller
     }
 
     public function getedit(Tposh $tposh){
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         $tposhds = Tposhd::select('id','idh','no_tposh','name_mitem','code_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
@@ -84,7 +88,8 @@ class ControllerTransPos extends Controller
             'tposh' => $tposh,
             'tposhds' => $tposhds,
             'customers' => $customers,
-            'items' => $items
+            'items' => $items,
+            'matauangs' => $matauangs
         ]);
     }
 

@@ -2,7 +2,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Header Information</h1>
+        <h1>TPOS LIST</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
             <div class="breadcrumb-item"><a class="text-muted">TPOS LIST</a></div>
@@ -14,7 +14,7 @@
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>TPOS LIST</h4>
+                        <h4>Header Information</h4>
                     </div>
                     <form action="" method="POST">
                         @csrf

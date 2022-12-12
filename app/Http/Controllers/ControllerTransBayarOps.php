@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mbank;
+use App\Models\Mmatauang;
 use App\Models\Tbayaropsd;
 use App\Models\Tbayaropsh;
 use Illuminate\Http\Request;
@@ -11,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 class ControllerTransBayarOps extends Controller
 {
     public function index(){
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $banks = Mbank::select('id','code','name')->whereNull('deleted_at')->get();
         return view('pages.transaction.tbayarops',[
-            'banks' => $banks
+            'banks' => $banks,
+            'matauangs' => $matauangs
         ]);
     }
 
@@ -55,12 +58,14 @@ class ControllerTransBayarOps extends Controller
     }
 
     public function getedit(Tbayaropsh $tbayaropsh){
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $banks = Mbank::select('id','code','name')->whereNull('deleted_at')->get();
         $tbayaropsds = Tbayaropsd::select('id','idh','no_tbayaropsh','total','note')->whereNull('deleted_at')->where('idh','=',$tbayaropsh->id)->get();
         return view('pages.transaction.tbayaropsedit',[
             'tbayaropsh' => $tbayaropsh,
             'tbayaropsds' => $tbayaropsds,
-            'banks' => $banks
+            'banks' => $banks,
+            'matauangs' => $matauangs
         ]);
     }
 

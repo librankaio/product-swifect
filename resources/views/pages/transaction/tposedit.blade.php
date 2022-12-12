@@ -2,7 +2,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Header Information</h1>
+        <h1>Point of Sales EDIT</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
             <div class="breadcrumb-item"><a class="text-muted">Point of Sales EDIT</a></div>
@@ -15,7 +15,7 @@
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Point of Sales EDIT</h4>
+                        <h4>Header Information</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -34,6 +34,15 @@
                                         <option selected>{{ $tposh->code_mcust }}</option>
                                         @foreach($customers as $data => $customer)
                                         <option>{{ $customer->code." - ".$customer->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mata Uang</label>
+                                    <select class="form-control select2" name="mata_uang" id="mata_uang">
+                                        <option disabled selected>--Select Mata Uang--</option>
+                                        @foreach($matauangs as $data => $matauang)
+                                        <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

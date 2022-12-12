@@ -2,7 +2,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Header Information</h1>
+        <h1>Pengeluaran Barang</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
             <div class="breadcrumb-item"><a class="text-muted">Pengeluaran Barang</a></div>
@@ -15,7 +15,7 @@
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Pengeluaran Barang</h4>
+                        <h4>Header Information</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
