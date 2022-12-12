@@ -21,6 +21,7 @@ class Tposhd extends Model
         'no_tposh',
         'code_mitem',
         'qty',
+        'name_mitem',
         'code_muom',
         'price',
         'disc',

@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Debit</label>
-                                        <input type="text" class="form-control" id="debit">
+                                        <input type="text" class="form-control" id="debit" value="0">
                                     </div>
                                     <div class="form-group">
                                         <a href="" id="addItem">
@@ -71,7 +71,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Credit</label>
-                                        <input type="text" class="form-control" id="credit">
+                                        <input type="text" class="form-control" id="credit" value="0">
                                     </div>
                                     <div class="form-group">
                                         <label>Memo/Catatan</label>
@@ -105,12 +105,24 @@
                         </div>      
                         <div class="col-12 col-md-4 col-lg-4 align-self-end">
                             <div class="row">
-                                <div class="col-md-4 offset-8">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Total Debit</label>
+                                        <input type="text" class="form-control" name="total_debit" form="thisform" id="total_debit" value="0" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Total Credit</label>
+                                        <input type="text" class="form-control" name="total_credit" form="thisform" id="total_credit" value="0" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Balance</label>
                                         <input type="text" class="form-control" name="balance" form="thisform" id="balance" value="0" readonly>
                                     </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>                
                         <div class="card-footer text-right">
@@ -173,9 +185,46 @@
                 //     return false;
                 // }
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' style='width:100px;' form='thisform' class='kodeclass form-control' name='kode_d[]' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaclass form-control' name='nama_d[]' type='text' value='" + nama + "'></td><td><input style='width:120px;' readonly form='thisform' class='debitclass form-control' name='debit_d[]' type='text' value='" + debit + "'></td><td><input style='width:120px;' readonly form='thisform' class='creditclass form-control' name='credit_d[]' type='text' value='" + credit + "'></td><td><input style='width:120px;' readonly form='thisform' class='memoclass form-control' name='memo_d[]' type='text' value='" + memo + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='novouchclass form-control' name='no_d[]' type='text' value='" + novouch + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' style='width:100px;' form='thisform' class='kodeclass form-control' name='kode_d[]' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaclass form-control' name='nama_d[]' type='text' value='" + nama + "'></td><td><input style='width:120px;' readonly form='thisform' class='debitclass form-control' name='debit_d[]' id='debit_d"+counter+"' type='text' value='" + debit + "'></td><td><input style='width:120px;' readonly form='thisform' class='creditclass form-control' name='credit_d[]' id='credit_d"+counter+"' type='text' value='" + credit + "'></td><td><input style='width:120px;' readonly form='thisform' class='memoclass form-control' name='memo_d[]' type='text' value='" + memo + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='novouchclass form-control' name='no_d[]' type='text' value='" + novouch + "'></td></tr>";
                 
                 $("#datatable tbody").append(tablerow);
+                $('#credit').prop('readonly', false)
+                $('#debit').prop('readonly', false)  
+
+                if(counter <= 1){
+                    total_debit = debit 
+                    total_credit = credit
+
+                    if(total_debit == 0){
+                        $("#balance").val(thousands_separators(credit));
+                        $("#total_debit").val(thousands_separators(debit));
+                        $("#total_credit").val(thousands_separators(credit));
+                    }else if(total_credit == 0){
+                        $("#balance").val(thousands_separators(credit));
+                        $("#total_debit").val(thousands_separators(debit));
+                        $("#total_credit").val(thousands_separators(credit));
+                    }   
+                }else{
+                    // alert('Please')
+                    old_debit = parseFloat($("#total_debit").val().replace(/,/g, ''))
+                    old_credit = parseFloat($("#total_credit").val().replace(/,/g, ''))
+                    console.log(old_debit, parseFloat(credit.replace(/,/g, '')))
+                    total_debit = parseFloat(old_debit) + parseFloat(debit.replace(/,/g, ''))
+                    total_credit = parseFloat(old_credit) + parseFloat(credit.replace(/,/g, ''))
+                    console.log(total_debit, total_credit)
+                    total_balance = total_debit - total_credit
+                
+                    $("#balance").val(thousands_separators(total_balance));
+                    $("#total_debit").val(thousands_separators(total_debit));
+                    $("#total_credit").val(thousands_separators(total_credit));
+                    // if(debit == 0){
+                        
+                    // }else if(credit == 0){
+                    //     $("#balance").val(debit);
+                    //     $("#total_debit").val(total_debit);
+                    //     $("#total_credit").val(total_credit);
+                    // }
+                }
                 // totalparse = parseFloat(total.replace(/,/g, ''));
                 // if(counter == 1){
                 //     $("#grand_total").val(thousands_separators(totalparse));
@@ -194,8 +243,8 @@
                 counter++;
                 $("#kode").prop('selectedIndex', 0).trigger('change');
                 $("#nama").val('');
-                $("#debit").val('');
-                $("#credit").val('');
+                $("#debit").val(0);
+                $("#credit").val(0);
                 $("#memo").val('');
             });
 
@@ -203,13 +252,22 @@
                 e.preventDefault();
                 var r = confirm("Delete Transaksi ?");
                 if (r == true) {
-                    // counter_id = $(this).closest('tr').text();
-                    // subtotal = parseFloat($("#total_d"+ counter_id).val().replace(/,/g, ''));                    
+                    counter_id = $(this).closest('tr').text();
+                    total_debit_old = parseFloat($("#total_debit").val().replace(/,/g, ''))                   
+                    total_credit_old = parseFloat($("#total_credit").val().replace(/,/g, ''));                    
+                    
+                    debit = parseFloat($("#debit_d"+ counter_id).val().replace(/,/g, ''));
+                    credit = parseFloat($("#credit_d"+ counter_id).val().replace(/,/g, ''));
+                    // console.log(debit,credit);
 
-                    // grand_total = parseFloat($("#grand_total").val().replace(/,/g, ''))
-                    // grandtot_new = grand_total - subtotal;
+                    total_debit_new = total_debit_old - debit;
+                    total_credit_new = total_credit_old - credit;
 
-                    // $("#grand_total").val(thousands_separators(grandtot_new));
+                    balance = total_debit_new - total_credit_new;
+
+                    $("#total_debit").val(thousands_separators(total_debit_new));
+                    $("#total_credit").val(thousands_separators(total_credit_new));
+                    $("#balance").val(thousands_separators(balance));
                     $(this).closest('tr').remove();
                 } else {
                     return false;
@@ -219,6 +277,9 @@
             $(document).on("change", "#credit", function(e) {
                 if($('#credit').val() == ''){
                     $('#credit').val(0);
+                }
+                if($('#credit').val() != 0){
+                    $('#debit').prop('readonly', true)
                 }
                 creditparse = $('#credit').val();
                 if (/\D/g.test(creditparse)){
@@ -240,6 +301,9 @@
                 if($('#debit').val() == ''){
                     $('#debit').val(0);
                 }
+                if($('#debit').val() != 0){
+                    $('#credit').prop('readonly', true)
+                }
                 debitparse = $('#debit').val();
                 if (/\D/g.test(debitparse)){
                 // Filter non-digits from input value.
@@ -255,17 +319,43 @@
                 this.value = this.value.replace(/\D/g, '');
                 }
             });
+            $("#credit").keyup(function(e){
+                if (/\D/g.test(this.value)){
+                    // Filter non-digits from input value.
+                    this.value = this.value.replace(/\D/g, '');
+                }
+                if($('#credit').val() != 0){
+                    $('#debit').prop('readonly', true)
+                }else if($('#credit').val() == 0){
+                    $('#debit').prop('readonly', false)
+                }
+            });
+            $("#debit").keyup(function(e){
+                if (/\D/g.test(this.value)){
+                    // Filter non-digits from input value.
+                    this.value = this.value.replace(/\D/g, '');
+                }
+                if($('#debit').val() != 0){
+                    $('#credit').prop('readonly', true)
+                }else if($('#debit').val() == 0){
+                    $('#credit').prop('readonly', false)
+                }
+            });
         });
 
         $(document).on("click","#confirm",function(e){
         // Validate ifnull
         no = $("#no").val();
+        balance = $("#balance").val();
         code_cust = $("#code_cust").prop('selectedIndex');
         if (no == ""){
             alert("No Tidak boleh kosong!");
             return false;
         }else if (code_cust == 0){
             alert("Please select Code Cust");
+            return false;
+        }else if (balance != 0){
+            alert("Balance harus 0!");
             return false;
         }
         });

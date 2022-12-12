@@ -25,7 +25,9 @@ class ControllerTransJurnalVouch extends Controller
                 'no' => $request->no_vouch,
                 'tdt' => $request->dt,
                 'keterangan' => $request->keterangan,
-                'balance' => (float) str_replace(',', '', $request->grand_total),
+                'total_debit' => (float) str_replace(',', '', $request->total_debit),
+                'total_credit' => (float) str_replace(',', '', $request->total_credit),
+                'balance' => (float) str_replace(',', '', $request->balance),
             ]);
             $idh_loop = Tjurnalvouchh::select('id')->whereNull('deleted_at')->where('no','=',$request->no_vouch)->get();
             // dd($idh_loop);
@@ -86,7 +88,9 @@ class ControllerTransJurnalVouch extends Controller
             'no' => request('no_vouch'),
             'tdt' => request('dt'),
             'keterangan' => request('keterangan'),
-            'balance' => (float) str_replace(',', '', request('grand_total')),
+            'total_debit' => (float) str_replace(',', '', request('total_debit')),
+            'total_credit' => (float) str_replace(',', '', request('total_credit')),
+            'balance' => (float) str_replace(',', '', request('balance')),
         ]);
         $count=0;
         $countrows = sizeof(request('no_d'));

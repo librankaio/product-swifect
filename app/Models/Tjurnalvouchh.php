@@ -20,6 +20,8 @@ class Tjurnalvouchh extends Model
         'no',
         'tdt',
         'keterangan',
+        'total_debit',
+        'total_credit',
         'balance',
     ];
 }

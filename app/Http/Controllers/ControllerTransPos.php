@@ -46,8 +46,9 @@ class ControllerTransPos extends Controller
                 Tposhd::create([
                     'idh' => $idh,
                     'no_tposh' => $request->no,
-                    'code_mitem' => $request->no_d[$i],
+                    'code_mitem' => $request->kode_d[$i],
                     'qty' => $request->quantity[$i],
+                    'name_mitem' => $request->nama_item_d[$i],
                     'code_muom' => $request->satuan_d[$i],
                     'price' => (float) str_replace(',', '', $request->harga_d[$i]),
                     'disc' => (float) str_replace(',', '', $request->disc_d[$i]),
@@ -78,7 +79,7 @@ class ControllerTransPos extends Controller
     public function getedit(Tposh $tposh){
         $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
-        $tposhds = Tposhd::select('id','idh','no_tposh','code_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
+        $tposhds = Tposhd::select('id','idh','no_tposh','name_mitem','code_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
         return view('pages.transaction.tposedit',[
             'tposh' => $tposh,
             'tposhds' => $tposhds,
@@ -111,6 +112,7 @@ class ControllerTransPos extends Controller
                 'no_tposh' => request('no_d')[$i],
                 'code_mitem' => request('kode_d')[$i],
                 'qty' => request('quantity')[$i],
+                'name_mitem' => request('nama_item_d')[$i],
                 'code_muom' => request('satuan_d')[$i],
                 'price' => (float) str_replace(',', '', request('harga_d')[$i]),
                 'disc' => (float) str_replace(',', '', request('disc_d')[$i]),

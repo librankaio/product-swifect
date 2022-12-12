@@ -119,10 +119,22 @@
                         </div>      
                         <div class="col-12 col-md-4 col-lg-4 align-self-end">
                             <div class="row">
-                                <div class="col-md-4 offset-8">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Total Debit</label>
+                                        <input type="text" class="form-control" name="total_debit" form="thisform" id="total_debit" value="{{ number_format( $tjurnalvouchh->total_debit, 2, '.', ',') }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Total Credit</label>
+                                        <input type="text" class="form-control" name="total_credit" form="thisform" id="total_credit" value="{{ number_format( $tjurnalvouchh->total_credit, 2, '.', ',') }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Balance</label>
-                                        <input type="text" class="form-control" name="balance" form="thisform" id="balance" value="0" readonly>
+                                        <input type="text" class="form-control" name="balance" form="thisform" id="balance" value="{{ number_format( $tjurnalvouchh->balance, 2, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -267,6 +279,18 @@
                 if (/\D/g.test(this.value)){
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
+                }
+            });
+            $("#credit").keyup(function(e){
+                if (/\D/g.test(this.value)){
+                    // Filter non-digits from input value.
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+            $("#debit").keyup(function(e){
+                if (/\D/g.test(this.value)){
+                    // Filter non-digits from input value.
+                    this.value = this.value.replace(/\D/g, '');
                 }
             });
         });

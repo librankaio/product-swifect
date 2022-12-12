@@ -137,7 +137,7 @@
                     return false;
                 }
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' style='width:100px;' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'></td><td><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'></td><td><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                 totalparse = parseFloat(total.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);
