@@ -27,6 +27,7 @@ class ControllerTransJurnalVouch extends Controller
             Tjurnalvouchh::create([
                 'no' => $request->no_vouch,
                 'tdt' => $request->dt,
+                'mata_uang' => $request->mata_uang,
                 'keterangan' => $request->keterangan,
                 'total_debit' => (float) str_replace(',', '', $request->total_debit),
                 'total_credit' => (float) str_replace(',', '', $request->total_credit),
@@ -92,6 +93,7 @@ class ControllerTransJurnalVouch extends Controller
         Tjurnalvouchh::where('id', '=', $tjurnalvouchh->id)->update([
             'no' => request('no_vouch'),
             'tdt' => request('dt'),
+            'mata_uang' => request('mata_uang'),
             'keterangan' => request('keterangan'),
             'total_debit' => (float) str_replace(',', '', request('total_debit')),
             'total_credit' => (float) str_replace(',', '', request('total_credit')),

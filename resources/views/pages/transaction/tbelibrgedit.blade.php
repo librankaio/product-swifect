@@ -22,16 +22,16 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>No Trans</label>
-                                    <input type="text" class="form-control" name="no" id="no">
+                                    <input type="text" class="form-control" name="no" id="no" value="{{ $tpembelianh->no }}">
                                 </div>                                
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d") }}">
+                                    <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d", strtotime($tpembelianh->tdt)) }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Supplier</label>
                                     <select class="form-control select2" name="code_cust" id="code_cust">
-                                        <option disabled selected>--Select Supplier--</option>
+                                        <option selected>{{ $tpembelianh->supplier }}</option>
                                         @foreach($suppliers as $data => $supplier)
                                         <option>{{ $supplier->code." - ".$supplier->name }}</option>
                                         @endforeach
@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label>Mata Uang</label>
                                     <select class="form-control select2" name="mata_uang" id="mata_uang">
-                                        <option disabled selected>--Select Mata Uang--</option>
+                                        <option selected>{{ $tpembelianh->mata_uang }}</option>
                                         @foreach($matauangs as $data => $matauang)
                                         <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
@@ -48,11 +48,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Nomer Lainnya</label>
-                                    <input type="text" class="form-control" name="nolain">
+                                    <input type="text" class="form-control" name="nolain" value="{{ $tpembelianh->nolain }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Note</label>
-                                    <textarea class="form-control" style="height:50px" name="note"></textarea>
+                                    <textarea class="form-control" style="height:50px" name="note">{{ $tpembelianh->note }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -141,6 +141,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $counter = 0; @endphp
+                                    @for($i = 0; $i < sizeof($tpembeliands); $i++)
+                                    @php $counter++; @endphp
+                                    <tr>
+                                        <th class="id-header" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
+                                        {{-- <td><input style='width:120px;' readonly class='kodeclass' name='id_d[]' type='text' value='{{ $tposhds[$i]->id }}'></td> --}}
+                                        <td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tpembeliands[$i]->code_mitem }}'></td>
+                                        <td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='{{ $tpembeliands[$i]->name_mitem }}'></td>
+                                        <td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpembeliands[$i]->qty, 2, '.', ',') }}'></td>
+                                        <td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='{{ $tpembeliands[$i]->code_muom }}' name='satuan_d[]'></td>
+                                        <td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='{{ number_format($tpembeliands[$i]->price, 2, '.', ',') }}' name='harga_d[]'></td>
+                                        <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc, 2, '.', ',') }}' name='disc_d[]' id='disc_d_"+counter+"'></td>
+                                        <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax, 2, '.', ',') }}' name='tax_d[]' id='tax_d_"+counter+"'></td>
+                                        <td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpembeliands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d_"+counter+"'></td>
+                                        <td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ $tpembeliands[$i]->note }}' name='note_d[]'></td>
+                                        <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
+                                        <td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value=''></td>
+                                    </tr>
+                                    @endfor
                                 </tbody>                            
                             </table>
                         </div>                                              
@@ -150,19 +169,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Discount</label>
-                                    <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" readonly>
+                                    <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tpembelianh->disc, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Tax</label>
-                                    <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" readonly>
+                                    <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tpembelianh->tax, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Total</label>
-                                    <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" readonly>
+                                    <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tpembelianh->grdtotal, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                         </div>

@@ -49,7 +49,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card" style="border: 1px solid lightblue">
                         <div class="card-header">
-                            <h4>Add Items</h4>
+                            <h4>Add Accounts</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">

@@ -80,7 +80,7 @@
                                     <label>Kode</label>
                                     <select class="form-control select2" id="kode">
                                         <option disabled selected>--Select Kode--</option>
-                                        @foreach($items as $data => $item)
+                                        @foreach($items as $data => $item)                                        
                                         <option value="{{ $item->code }}">{{ $item->code."-".$item->name }}</option>
                                         @endforeach
                                     </select>
@@ -283,6 +283,7 @@
                 counter++;
                 $("#kode").prop('selectedIndex', 0).trigger('change');
                 $("#nama").val('');
+                $("#nama_item").val('');
                 $("#hrgsatuan").val(0);
                 $("#satuan").val('');
                 $("#quantity").val(0);

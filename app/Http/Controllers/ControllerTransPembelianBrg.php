@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mitem;
 use App\Models\Mmatauang;
 use App\Models\Msupp;
+use App\Models\Tpembeliand;
+use App\Models\Tpembelianh;
 use App\Models\Tposh;
 use App\Models\Tposhd;
 use Illuminate\Http\Request;
@@ -21,12 +23,74 @@ class ControllerTransPembelianBrg extends Controller
             'matauangs' => $matauangs
         ]);
     }
+
+    public function post(Request $request){
+        // dd($request->all());
+        $checkexist = Tpembelianh::select('id','no')->where('no','=', $request->no)->first();
+        if($checkexist == null){
+            Tpembelianh::create([
+                'no' => $request->no,
+                'tdt' => $request->dt,
+                'mata_uang' => $request->mata_uang,
+                'supplier' => $request->code_cust,
+                'nolain' => $request->nolain,
+                'disc' => (float) str_replace(',', '', $request->price_disc),
+                'tax' => (float) str_replace(',', '', $request->price_tax),
+                'grdtotal' => (float) str_replace(',', '', $request->price_total),
+                'note' => $request->note,
+            ]);
+            $idh_loop = Tpembelianh::select('id')->whereNull('deleted_at')->where('no','=',$request->no)->get();
+            for($j=0; $j<sizeof($idh_loop); $j++){
+                $idh = $idh_loop[$j]->id;
+            }    
+            // dd($idh_loop);
+            $countrows = sizeof($request->no_d);
+            $count=0;
+            for ($i=0;$i<sizeof($request->no_d);$i++){
+                Tpembeliand::create([
+                    'idh' => $idh,
+                    'no_pembelianh' => $request->no,
+                    'code_mitem' => $request->kode_d[$i],
+                    'name_mitem' => $request->nama_item_d[$i],
+                    'qty' => $request->quantity[$i],
+                    'code_muom' => $request->satuan_d[$i],
+                    'price' => (float) str_replace(',', '', $request->harga_d[$i]),
+                    'disc' => (float) str_replace(',', '', $request->disc_d[$i]),
+                    'tax' => (float) str_replace(',', '', $request->tax_d[$i]),
+                    'subtotal' => (float) str_replace(',', '', $request->subtot_d[$i]),
+                    'note' => $request->note_d[$i],
+                ]);
+                $count++;
+            }
+            if($count == $countrows){
+                return redirect()->back();
+            }
+        }else{
+            return redirect()->back();
+        }        
+    }
+
+    public function getedit(Tpembelianh $tpembelianh){
+        $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
+        $suppliers = Msupp::select('id','code','name')->whereNull('deleted_at')->get();
+        $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
+        $tpembeliands = Tpembeliand::select('id','idh','no_pembelianh','code_mitem','name_mitem','code_muom','qty','subtotal','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tpembelianh->id)->get();
+        // dd($tpembeliands);
+        return view('pages.transaction.tbelibrgedit',[
+            'tpembelianh' =>  $tpembelianh,
+            'tpembeliands' => $tpembeliands,
+            'suppliers' => $suppliers,
+            'items' => $items,
+            'matauangs' => $matauangs,
+        ]);
+    }
+
     public function list(){
-        $tposhs = Tposh::select('id','no','tdt','code_mcust','disc','tax','grdtotal','note')->whereNull('deleted_at')->get();
-        $tposhds = Tposhd::select('id','idh','code_mitem','qty','price','subtotal','note')->whereNull('deleted_at')->get();
+        $tpembelianhs = Tpembelianh::select('id','no','tdt','supplier','mata_uang','nolain','disc','tax','grdtotal','note')->whereNull('deleted_at')->get();
+        $tpembeliands = Tpembeliand::select('id','idh','no_pembelianh','code_mitem','name_mitem','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->get();
         return view('pages.transaction.tbelibrglist',[
-            'tposhs' => $tposhs,
-            'tposhds' => $tposhds
+            'tpembelianhs' => $tpembelianhs,
+            'tpembeliands' => $tpembeliands
         ]);
     }
 

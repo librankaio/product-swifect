@@ -18,6 +18,7 @@ class Mchartofacc extends Model
     
     protected $fillable = [
         'code',
+        'name',
         'jenis',
         'saldo',
     ];

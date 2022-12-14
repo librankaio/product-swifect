@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label>Mata Uang</label>
                                     <select class="form-control select2" name="mata_uang" id="mata_uang">
-                                        <option disabled selected>--Select Mata Uang--</option>
+                                        <option selected>{{$tposh->mata_uang}}</option>
                                         @foreach($matauangs as $data => $matauang)
                                         <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Nomer Lainnya</label>
-                                    <input type="text" class="form-control" name="nolain">
+                                    <input type="text" class="form-control" name="nolain" value="{{ $tposh->nolain }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Note</label>

@@ -22,8 +22,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Code Name</label>
+                                        <label>Code</label>
                                         <input type="text" class="form-control" name="kode" id="kode">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="name" id="name">
                                     </div>
                                     <div class="form-group">
                                         <label>Jenis</label>
@@ -54,7 +58,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Code Name</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Name</th>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Saldo</th>
                                         <th scope="col">Edit</th>
@@ -68,6 +73,7 @@
                                     <tr>
                                         <th scope="row">{{ $counter }}</th>
                                         <td>{{ $item->code }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td>{{ $item->jenis }}</td>
                                         <td>{{ number_format( $item->saldo, 2, '.', ',')}}</td>
                                         <td><a href="/mchartacc/{{ $item->id }}/edit"

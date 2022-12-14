@@ -23,13 +23,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tanggal Dari</label>
-                                        <input type="date" class="form-control" name="dtfr">
+                                        <input type="date" class="form-control" name="dtfr" value="{{ date("Y-m-d") }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tanggal Dari</label>
-                                        <input type="date" class="form-control" name="dtfr">
+                                        <input type="date" class="form-control" name="dtto" value="{{ date("Y-m-d") }}">
                                     </div>
                                 </div>
                             </div>
@@ -62,26 +62,26 @@
                                 </thead>
                                 <tbody>
                                     @php $counter = 0 @endphp
-                                    @foreach($tposhs as $data => $tposh)
+                                    @foreach($tpembelianhs as $data => $tpembelianh)
                                     @php $counter++ @endphp
                                     <tr>
                                         <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $tposh->no }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($tposh->tdt)) }}</td>
-                                        <td>{{ $tposh->code_mcust }}</td>
-                                        <td><a href="/transpos/{{ $tposh->id }}/edit"
+                                        <td>{{ $tpembelianh->no }}</td>
+                                        <td>{{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}</td>
+                                        <td>{{ $tpembelianh->supplier }}</td>
+                                        <td><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         <td><a href="#"
                                                 class="btn btn-icon icon-left btn-outline-primary"><i class="fa fa-print"> Print</i></a></td>
                                         <td>
-                                            <form action="/transpos/delete/{{ $tposh->id }}"
-                                                id="del-{{ $tposh->id }}" method="POST">
+                                            <form action="/transbelibrg/delete/{{ $tpembelianh->id }}"
+                                                id="del-{{ $tpembelianh->id }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-icon icon-left btn-danger"
-                                                    id="del-{{ $tposh->id }}" type="submit"
-                                                    data-confirm="WARNING!|Do you want to delete {{ $tposh->name }} data?"
-                                                    data-confirm-yes="submitDel({{ $tposh->id }})"><i
+                                                    id="del-{{ $tpembelianh->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $tpembelianh->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $tpembelianh->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
                                             </form>

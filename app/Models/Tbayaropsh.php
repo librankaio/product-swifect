@@ -19,6 +19,7 @@ class Tbayaropsh extends Model
     protected $fillable = [
         'no',
         'tdt',
+        'mata_uang',
         'jenis',
         'noref',
         'total',

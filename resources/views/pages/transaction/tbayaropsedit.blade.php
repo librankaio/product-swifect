@@ -31,11 +31,7 @@
                                         <option>Uang Keluar</option>
                                         <option>Uang Masuk</option>
                                     </select>
-                                </div>      
-                                <div class="form-group">
-                                    <label>Nominal</label>
-                                    <input type="text" class="form-control" name="nominal" id="nominal" value="0">
-                                </div>      
+                                </div>       
                                 <div class="form-group">
                                     <label>Akun Pembayaran</label>
                                     <select class="form-control select2" name="akun_bayar" id="akun_bayar">
@@ -55,7 +51,7 @@
                                 <div class="form-group">
                                     <label>Mata Uang</label>
                                     <select class="form-control select2" name="mata_uang" id="mata_uang">
-                                        <option disabled selected>--Select Mata Uang--</option>
+                                        <option selected>{{ $tbayaropsh->mata_uang }}</option>
                                         @foreach($matauangs as $data => $matauang)
                                         <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
@@ -68,11 +64,37 @@
                                 <div class="form-group">
                                     <label>Ref No.</label>
                                     <input type="text" class="form-control" name="noref" id="noref" value="{{ $tbayaropsh->noref }}">
-                                </div>  
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card" style="border: 1px solid lightblue">
+                    <div class="card-header">
+                        <h4>Add Items</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nominal</label>
+                                    <input type="text" class="form-control" name="nominal" id="nominal" value="0">
+                                </div>                                 
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Note</label>
                                     <textarea class="form-control" style="height:50px" name="note" id="note"></textarea>
-                                </div>                                
+                                </div> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <a href="" id="addItem">
+                                        <i class="fa fa-plus" style="font-size:18pt"></i>
+                                    </a>
+                                </div>  
                             </div>
                         </div>
                     </div>

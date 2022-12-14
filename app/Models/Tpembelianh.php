@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tposh extends Model
+class Tpembelianh extends Model
 {
     use HasFactory;
 
@@ -14,14 +14,13 @@ class Tposh extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = "tposhs";
+    protected $table = "tpembelianhs";
 
     protected $fillable = [
         'no',
         'tdt',
-        'code_mcust',
+        'supplier',
         'mata_uang',
-        'pay_method',
         'nolain',
         'disc',
         'tax',

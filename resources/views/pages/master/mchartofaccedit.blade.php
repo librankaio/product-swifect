@@ -22,8 +22,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Code Name</label>
+                                        <label>Code</label>
                                         <input type="text" class="form-control" name="kode" id="kode" value="{{ $mchartofacc->code }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="name" id="name" value="{{ $mchartofacc->name }}">
                                     </div>
                                     <div class="form-group">
                                         <label>Jenis</label>

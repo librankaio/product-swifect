@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ControllerMasterChartOfAcc extends Controller
 {
     public function index(){
-        $datas = Mchartofacc::select('id','code','jenis','saldo')->whereNull('deleted_at')->get();
+        $datas = Mchartofacc::select('id','code','name','jenis','saldo')->whereNull('deleted_at')->get();
         return view('pages.master.mchartofacc',[
             'datas' => $datas
         ]);
@@ -20,6 +20,7 @@ class ControllerMasterChartOfAcc extends Controller
         if($checkexist == null){
             Mchartofacc::create([
                 'code' => $request->kode,
+                'name' => $request->name,
                 'jenis' => $request->jenis,
                 'saldo' => (float) str_replace(',', '', $request->saldo),
             ]);
@@ -38,6 +39,7 @@ class ControllerMasterChartOfAcc extends Controller
         // dd(request()->all());
         Mchartofacc::where('id', '=', $mchartofacc->id)->update([
             'code' => request('kode'),
+            'name' => request('name'),
             'jenis' => request('jenis'),
             'saldo' => (float) str_replace(',', '', request('saldo')),
         ]);

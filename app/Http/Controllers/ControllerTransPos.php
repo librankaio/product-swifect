@@ -31,8 +31,10 @@ class ControllerTransPos extends Controller
             Tposh::create([
                 'no' => $request->no,
                 'tdt' => $request->dt,
+                'mata_uang' => $request->mata_uang,
                 'code_mcust' => $request->code_cust,
                 'pay_method' => $request->pay_method,
+                'nolain' => $request->nolain,
                 'disc' => (float) str_replace(',', '', $request->price_disc),
                 'tax' => (float) str_replace(',', '', $request->price_tax),
                 'grdtotal' => (float) str_replace(',', '', $request->price_total),
@@ -102,8 +104,10 @@ class ControllerTransPos extends Controller
         Tposh::where('id', '=', $tposh->id)->update([
             'no' => request('no'),
             'tdt' => request('dt'),
+            'mata_uang' => request('mata_uang'),
             'code_mcust' => request('code_cust'),
             'pay_method' => request('pay_method'),
+            'nolain' => request('nolain'),
             'disc' => (float) str_replace(',', '', request('price_disc')),
             'tax' => (float) str_replace(',', '', request('price_tax')),
             'grdtotal' => (float) str_replace(',', '', request('price_total')),

@@ -27,6 +27,7 @@ class ControllerTransBayarOps extends Controller
             Tbayaropsh::create([
                 'no' => $request->no,
                 'tdt' => $request->dt,
+                'mata_uang' => $request->mata_uang,
                 'jenis' => $request->jenis,
                 'akun_pembayaran' => $request->akun_bayar,
                 'noref' => $request->noref,
@@ -78,6 +79,7 @@ class ControllerTransBayarOps extends Controller
         Tbayaropsh::where('id', '=', $tbayaropsh->id)->update([
             'no' => request('no'),
             'tdt' => request('dt'),
+            'mata_uang' => request('mata_uang'),
             'jenis' => request('jenis'),
             'akun_pembayaran' => request('akun_bayar'),
             'noref' => request('noref'),
