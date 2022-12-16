@@ -141,9 +141,10 @@ Route::group(['middleware' => ['auth']], function () {
     
     //TBeli Barang
     Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('transbelibrg');
-    Route::get('/transbelibrg/{tpembelianh}/edit', [ControllerTransPembelianBrg::class, 'getedit'])->name('transbelibrgedit');
     Route::post('/transbelibrgpost', [ControllerTransPembelianBrg::class, 'post'])->name('transbelibrgpost');
     Route::get('/transbelibrglist', [ControllerTransPembelianBrg::class, 'list'])->name('tbelibrglist');
+    Route::get('/transbelibrg/{tpembelianh}/edit', [ControllerTransPembelianBrg::class, 'getedit'])->name('transbelibrgedit');
+    Route::post('/transbelibrg/{tpembelianh}', [ControllerTransPembelianBrg::class, 'update'])->name('transbelibrgupdate');
     Route::get('/transbelibrg/{tbayaropsh}/print', [ControllerTransPembelianBrg::class, 'print'])->name('transbelibrgprint');
     
     // TBeli Barang

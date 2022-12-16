@@ -10,6 +10,7 @@ use App\Models\Tpembelianh;
 use App\Models\Tposh;
 use App\Models\Tposhd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ControllerTransPembelianBrg extends Controller
 {
@@ -68,6 +69,47 @@ class ControllerTransPembelianBrg extends Controller
         }else{
             return redirect()->back();
         }        
+    }
+
+    public function update(Tpembelianh $tpembelianh){
+        // dd(request()->all());
+        for($j=0;$j<sizeof(request('no_d'));$j++){
+            $no_tposh = request('no');
+        }
+        DB::delete('delete from tpembeliands where no_pembelianh = ?', [$no_tposh] );
+        Tpembelianh::where('id', '=', $tpembelianh->id)->update([
+            'no' => request('no'),
+            'tdt' => request('dt'),
+            'mata_uang' => request('mata_uang'),
+            'supplier' => request('code_cust'),
+            'nolain' => request('nolain'),
+            'disc' => (float) str_replace(',', '', request('price_disc')),
+            'tax' => (float) str_replace(',', '', request('price_tax')),
+            'grdtotal' => (float) str_replace(',', '', request('price_total')),
+            'note' => request('note')
+        ]);
+        $count=0;
+        $countrows = sizeof(request('no_d'));
+        for ($i=0;$i<sizeof(request('no_d'));$i++){
+            Tpembeliand::create([
+                'idh' => $tpembelianh->id,
+                'no_pembelianh' => $tpembelianh->no,
+                'code_mitem' => request('kode_d')[$i],
+                'name_mitem' => request('nama_item_d')[$i],
+                'qty' => request('quantity')[$i],
+                'code_muom' => request('satuan_d')[$i],
+                'price' => (float) str_replace(',', '', request('harga_d')[$i]),
+                'disc' => (float) str_replace(',', '', request('disc_d')[$i]),
+                'tax' => (float) str_replace(',', '', request('tax_d')[$i]),
+                'subtotal' => (float) str_replace(',', '', request('subtot_d')[$i]),
+                'note' => request('note_d')[$i],
+            ]);
+            $count++;
+        }
+        
+        if($count == $countrows){
+            return redirect()->back();
+        }
     }
 
     public function getedit(Tpembelianh $tpembelianh){
