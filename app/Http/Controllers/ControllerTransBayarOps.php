@@ -113,6 +113,7 @@ class ControllerTransBayarOps extends Controller
     }
 
     public function delete(Tbayaropsh $tbayaropsh){
+        // dd($tbayaropsh);
         Tbayaropsh::find($tbayaropsh->id)->delete();
         return redirect()->back();
     }

@@ -144,4 +144,10 @@ class ControllerTransPembelianBrg extends Controller
             'tposhds' => $tposhds
         ]);
     }
+
+    public function delete(Tpembelianh $tpembelianh){
+        // dd($tpembelianh);
+        Tpembelianh::find($tpembelianh->id)->delete();
+        return redirect()->route('tbelibrglist');
+    }
 }

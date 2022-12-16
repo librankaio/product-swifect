@@ -126,7 +126,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/mchartacc/{mchartofacc}/edit', [ControllerMasterChartOfAcc::class, 'getedit'])->name('mchartaccedit');
     Route::post('/mchartacc/{mchartofacc}', [ControllerMasterChartOfAcc::class, 'update'])->name('mchartaccupdt');
     Route::post('/mchartacc/delete/{mchartofacc}', [ControllerMasterChartOfAcc::class, 'delete'])->name('mchartaccdelete');
-
+    
     //TPOS or Transaction POS
     Route::get('/transpos', [ControllerTransPos::class, 'index'])->name('tpos');
     Route::post('/transpospost', [ControllerTransPos::class, 'post'])->name('transpospost');
@@ -146,6 +146,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transbelibrg/{tpembelianh}/edit', [ControllerTransPembelianBrg::class, 'getedit'])->name('transbelibrgedit');
     Route::post('/transbelibrg/{tpembelianh}', [ControllerTransPembelianBrg::class, 'update'])->name('transbelibrgupdate');
     Route::get('/transbelibrg/{tbayaropsh}/print', [ControllerTransPembelianBrg::class, 'print'])->name('transbelibrgprint');
+    Route::post('/transbelibrg/delete/{tpembelianh}', [ControllerTransPembelianBrg::class, 'delete'])->name('transbelibrgdelete');
     
     // TBeli Barang
     Route::get('/transpengeluaranbrg', [ControllerTransPengeluaranBrg::class, 'index'])->name('tpengeluaranbrg');
@@ -171,6 +172,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tjurnalvoucherlist', [ControllerTransJurnalVouch::class, 'list'])->name('tjurnalvoucherlist');
     Route::get('/tjurnalvoucher/{tjurnalvouchh}/edit', [ControllerTransJurnalVouch::class, 'getedit'])->name('tjurnalvoucheredit');
     Route::post('/tjurnalvoucher/{tjurnalvouchh}', [ControllerTransJurnalVouch::class, 'update'])->name('tjurnalvoucherupdate');
+    Route::get('/tjurnalvoucher/{tjurnalvouchh}/print', [ControllerTransJurnalVouch::class, 'print'])->name('tjurnalvoucherprint');
     // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
 });

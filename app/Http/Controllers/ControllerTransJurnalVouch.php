@@ -127,4 +127,13 @@ class ControllerTransJurnalVouch extends Controller
             'tjurnalvouchds' => $tjurnalvouchds
         ]);
     }
+
+    public function print(Tjurnalvouchh $tjurnalvouchh){
+        // dd($tjurnalvouchh);
+        $tjurnalvouchds = Tjurnalvouchd::select('id','idh','no_tjurnalvouchh','kode','nama','debit','credit','memo')->whereNull('deleted_at')->where('idh','=',$tjurnalvouchh->id)->get();
+        return view('pages.print.tjurnalvouchprint',[
+            'tjurnalvouchh' => $tjurnalvouchh,
+            'tjurnalvouchds' => $tjurnalvouchds
+        ]);
+    }
 }
