@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Nama</label>
-                                        <input type="text" class="form-control" id="nama">
+                                        <input type="text" class="form-control" id="nama" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Debit</label>

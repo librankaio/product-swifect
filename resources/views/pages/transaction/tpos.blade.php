@@ -40,8 +40,10 @@
                                 <div class="form-group">
                                     <label>Mata Uang</label>
                                     <select class="form-control select2" name="mata_uang" id="mata_uang">
-                                        <option disabled selected>--Select Mata Uang--</option>
                                         @foreach($matauangs as $data => $matauang)
+                                        @if($matauang->code == 'IDR' && $matauang->name == 'Rupiah')
+                                        <option selected>{{ $matauang->code." - ".$matauang->name }}</option>
+                                        @endif
                                         <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
                                     </select>
@@ -87,7 +89,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Item</label>
-                                    <input type="text" class="form-control" id="nama_item">
+                                    <input type="text" class="form-control" id="nama_item" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Satuan</label>
@@ -257,6 +259,7 @@
                     $("#price_disc").val(thousands_separators(disc));
                     $("#price_tax").val(thousands_separators(tax));
                     $("#price_total").val(thousands_separators(total));
+                    $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
                     $('#hrgsatuan').val(0);
@@ -276,6 +279,7 @@
                     $("#price_disc").val(thousands_separators(disc_new));
                     $("#price_tax").val(thousands_separators(tax_new));
                     $("#price_total").val(thousands_separators(subtot_new));
+                    $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
                     console.log("Disc : "+disc_new, "Tax : "+tax_new, "Total : "+subtot_new);

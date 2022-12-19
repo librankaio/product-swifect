@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Item</label>
-                                    <input type="text" class="form-control" id="nama_item">
+                                    <input type="text" class="form-control" id="nama_item" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>Harga Satuan</label>
@@ -281,6 +281,7 @@
                 $("#price_disc").val(thousands_separators(disc_new));
                 $("#price_tax").val(thousands_separators(tax_new));
                 $("#price_total").val(thousands_separators(subtot_new));
+                $("#nama_item").val('');
                 $('#tax').val(0);
                 $('#disc').val(0);
 

@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Nama Item</label>
-                                        <input type="text" class="form-control" id="nama_item">
+                                        <input type="text" class="form-control" id="nama_item" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Harga Satuan</label>
@@ -150,9 +150,9 @@
                                             <td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpembeliands[$i]->qty, 2, '.', ',') }}'></td>
                                             <td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='{{ $tpembeliands[$i]->code_muom }}' name='satuan_d[]'></td>
                                             <td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='{{ number_format($tpembeliands[$i]->price, 2, '.', ',') }}' name='harga_d[]'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc, 2, '.', ',') }}' name='disc_d[]' id='disc_d_{{ $counter }}'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax, 2, '.', ',') }}' name='tax_d[]' id='tax_d_{{ $counter }}'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpembeliands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d_{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc, 2, '.', ',') }}' name='disc_d[]' id='disc_d{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax, 2, '.', ',') }}' name='tax_d[]' id='tax_d{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpembeliands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d{{ $counter }}'></td>
                                             <td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ $tpembeliands[$i]->note }}' name='note_d[]'></td>
                                             <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
                                             <td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value=''></td>
@@ -167,19 +167,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Discount</label>
-                                        <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tpembelianh->disc, 2, '.', ',') }}" readonly>
+                                        <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tpembelianh->disc, 3, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Tax</label>
-                                        <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tpembelianh->tax, 2, '.', ',') }}" readonly>
+                                        <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tpembelianh->tax, 3, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Total</label>
-                                        <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tpembelianh->grdtotal, 2, '.', ',') }}" readonly>
+                                        <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tpembelianh->grdtotal, 3, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -267,6 +267,7 @@
                     $("#price_disc").val(thousands_separators(disc));
                     $("#price_tax").val(thousands_separators(tax));
                     $("#price_total").val(thousands_separators(total));
+                    $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
                     $('#hrgsatuan').val(0);
@@ -286,6 +287,7 @@
                     $("#price_disc").val(thousands_separators(disc_new));
                     $("#price_tax").val(thousands_separators(tax_new));
                     $("#price_total").val(thousands_separators(subtot_new));
+                    $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
                     console.log("Disc : " + disc_new, "Tax : " + tax_new, "Total : " + subtot_new);
@@ -306,26 +308,54 @@
                 counter_id = $(this).val();
                 var r = confirm("Delete Transaksi ?");
                 if (r == true) {
-                    // counter_id = $(this).closest('tr').text();
-                    console.log(counter_id);
-                    subtot = parseFloat($("#subtot_d_" + counter_id).val().replace(/,/g, ''));
 
-                    price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
-                    price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
-                    price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
-                    disc = subtot * ($("#disc_d_" + counter_id).val() / 100);
-                    tax = (subtot - disc) * ($("#tax_d_" + counter_id).val() / 100);
-                    console.log(price_tax, price_disc, price_total);
-                    totaltax = price_tax - tax;
-                    totaldisc = price_disc - disc;
-                    totalwithdisc = (subtot) - disc;
-                    total = price_total - (totalwithdisc + tax);
-                    console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
+                    if(counter_id != 0){
+                        // counter_id = $(this).closest('tr').text();
+                        console.log(counter_id);
+                        subtot = parseFloat($("#subtot_d" + counter_id).val().replace(/,/g, ''));
+                        console.log(subtot);
 
-                    $("#price_disc").val(thousands_separators(totaldisc));
-                    $("#price_tax").val(thousands_separators(totaltax));
-                    $("#price_total").val(thousands_separators(total));
-                    $(this).closest('tr').remove();
+                        price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
+                        price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
+                        price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
+                        disc = subtot * ($("#disc_d" + counter_id).val() / 100);
+                        tax = (subtot - disc) * ($("#tax_d" + counter_id).val() / 100);
+                        console.log(price_tax, price_disc, price_total);
+                        console.log(Number(price_tax) - Number(tax));
+                        totaltax = price_tax - tax;
+                        totaldisc = price_disc - disc;
+                        totalwithdisc = (subtot) - disc;
+                        total = price_total - (totalwithdisc + tax);
+                        console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
+
+                        $("#price_disc").val(thousands_separators(totaldisc));
+                        $("#price_tax").val(thousands_separators(totaltax));
+                        $("#price_total").val(thousands_separators(total));
+                        $(this).closest('tr').remove();
+
+                        counter_id = 0;
+                    }else{
+                        counter_id = $(this).closest('tr').text();
+                        console.log(counter_id);
+                        subtot = parseFloat($("#subtot_d_" + counter_id).val().replace(/,/g, ''));
+
+                        price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
+                        price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
+                        price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
+                        disc = subtot * ($("#disc_d_" + counter_id).val() / 100);
+                        tax = (subtot - disc) * ($("#tax_d_" + counter_id).val() / 100);
+                        console.log(price_tax, price_disc, price_total);
+                        totaltax = price_tax - tax;
+                        totaldisc = price_disc - disc;
+                        totalwithdisc = (subtot) - disc;
+                        total = price_total - (totalwithdisc + tax);
+                        console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
+
+                        $("#price_disc").val(thousands_separators(totaldisc));
+                        $("#price_tax").val(thousands_separators(totaltax));
+                        $("#price_total").val(thousands_separators(total));
+                        $(this).closest('tr').remove();
+                    }                    
                 } else {
                     return false;
                 }

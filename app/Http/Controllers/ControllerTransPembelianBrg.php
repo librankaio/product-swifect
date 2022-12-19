@@ -136,12 +136,12 @@ class ControllerTransPembelianBrg extends Controller
         ]);
     }
 
-    public function print(Tposh $tposh){
-        $tposhds = Tposhd::select('id','idh','code_mitem','code_muom','qty','price','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
-        // dd($tposhds);
+    public function print(Tpembelianh $tpembelianh){
+        $tpembeliands = Tpembeliand::select('id','idh','no_pembelianh','code_mitem','name_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tpembelianh->id)->get();
+        // dd($tpembelianh);
         return view('pages.print.tpembelianbrgprint',[
-            'tposh' => $tposh,
-            'tposhds' => $tposhds
+            'tpembelianh' => $tpembelianh,
+            'tpembeliands' => $tpembeliands
         ]);
     }
 

@@ -72,8 +72,8 @@
                                         <td><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
-                                        <td><a href="#"
-                                                class="btn btn-icon icon-left btn-outline-primary"><i class="fa fa-print"> Print</i></a></td>
+                                        <td><a href="/transbelibrg/{{ $tpembelianh->id }}/print"
+                                                class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
                                         <td>
                                             <form action="/transbelibrg/delete/{{ $tpembelianh->id }}"
                                                 id="del-{{ $tpembelianh->id }}" method="POST">

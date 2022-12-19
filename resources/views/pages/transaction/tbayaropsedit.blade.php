@@ -79,14 +79,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nominal</label>
-                                    <input type="text" class="form-control" name="nominal" id="nominal" value="0">
+                                    <label>Note</label>
+                                    <textarea class="form-control" style="height:50px" name="note" id="note"></textarea>
                                 </div>                                 
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Note</label>
-                                    <textarea class="form-control" style="height:50px" name="note" id="note"></textarea>
+                                    <label>Nominal</label>
+                                    <input type="text" class="form-control" name="nominal" id="nominal" value="0">                                    
                                 </div> 
                             </div>
                             <div class="col-md-6">

@@ -35,8 +35,10 @@
                                     <div class="form-group">
                                         <label>Mata Uang</label>
                                         <select class="form-control select2" name="mata_uang" id="mata_uang">
-                                            <option disabled selected>--Select Mata Uang--</option>
                                             @foreach($matauangs as $data => $matauang)
+                                            @if($matauang->code == 'IDR' && $matauang->name == 'Rupiah')
+                                            <option selected>{{ $matauang->code." - ".$matauang->name }}</option>
+                                            @endif
                                             <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                             @endforeach
                                         </select>
@@ -65,7 +67,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Nama</label>
-                                        <input type="text" class="form-control" id="nama">
+                                        <input type="text" class="form-control" id="nama" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Debit</label>
