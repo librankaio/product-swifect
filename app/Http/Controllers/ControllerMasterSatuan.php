@@ -58,7 +58,7 @@ class ControllerMasterSatuan extends Controller
         }
         $pembelian = Tpembeliand::select('code_muom')->where('code_muom','=',$itemname)->whereNull('deleted_at')->first();
         $pos = Tposhd::select('code_muom')->where('code_muom','=',$itemname)->whereNull('deleted_at')->first();
-        dd($pembelian);
+        // dd($pembelian);
         $havetrans = 0;
         if($pembelian != null || $pos != null){
             $havetrans = 1;
