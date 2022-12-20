@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 class ControllerTransBayarOps extends Controller
 {
     public function index(){
+        $notrans = DB::select("select fgetcode('tbayaropshs') as codetrans");
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $banks = Mbank::select('id','code','name')->whereNull('deleted_at')->get();
         return view('pages.transaction.tbayarops',[
+            'notrans' => $notrans,
             'banks' => $banks,
             'matauangs' => $matauangs
         ]);

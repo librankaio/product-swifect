@@ -6,6 +6,9 @@ use App\Models\Mgrp;
 use App\Models\Mitem;
 use App\Models\Muom;
 use App\Models\Mwhse;
+use App\Models\Tpembeliand;
+use App\Models\Tposh;
+use App\Models\Tposhd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -119,7 +122,23 @@ class ControllerMasterDataBrg extends Controller
     }
 
     public function delete(Mitem $mitem){
-        Mitem::find($mitem->id)->delete();
-        return redirect()->route('mbrg');
+        $item = Mitem::where('id','=',$mitem->id)->get();
+        foreach($item as $data){
+            $itemname = $data->name;
+        }
+        $pembelian = Tpembeliand::select('name_mitem')->where('name_mitem','=',$itemname)->whereNull('deleted_at')->first();
+        $pos = Tposhd::select('name_mitem')->where('name_mitem','=',$itemname)->whereNull('deleted_at')->first();
+        
+        $havetrans = 0;
+        if($pembelian != null || $pos != null){
+            $havetrans = 1;
+        }
+
+        if($havetrans == 0){
+            Mitem::find($mitem->id)->delete();
+            return redirect()->route('mbrg')->with('success','Data Berhasil Di Hapus');
+        }else{
+            return redirect()->route('mbrg')->with('error','Tidak dapat menghapus data, karena data ada di dalam transaksi lainnya');
+        }
     }
 }

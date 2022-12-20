@@ -386,11 +386,17 @@
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
             }
+            if(this.value >= 99){
+                this.value = 99;
+            }
         });
         $("#tax").keyup(function(e){
             if (/\D/g.test(this.value)){
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
+            }
+            if(this.value >= 99){
+                this.value = 99;
             }
         });
         

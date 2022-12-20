@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Muom;
+use App\Models\Tpembeliand;
+use App\Models\Tposhd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,7 +49,26 @@ class ControllerMasterSatuan extends Controller
 
     public function delete(Muom $muom){
         // dd($muom);
-        Muom::find($muom->id)->delete();
-        return redirect()->route('msatuan');
+        // Muom::find($muom->id)->delete();
+        // return redirect()->route('msatuan');
+
+        $item = Muom::where('id','=',$muom->id)->get();
+        foreach($item as $data){
+            $itemname = $data->name;
+        }
+        $pembelian = Tpembeliand::select('code_muom')->where('code_muom','=',$itemname)->whereNull('deleted_at')->first();
+        $pos = Tposhd::select('code_muom')->where('code_muom','=',$itemname)->whereNull('deleted_at')->first();
+        dd($pembelian);
+        $havetrans = 0;
+        if($pembelian != null || $pos != null){
+            $havetrans = 1;
+        }
+
+        if($havetrans == 0){
+            Muom::find($muom->id)->delete();
+            return redirect()->route('msatuan')->with('success','Data Berhasil Di Hapus');
+        }else{
+            return redirect()->route('msatuan')->with('error','Tidak dapat menghapus data, karena data ada di dalam transaksi lainnya');
+        }
     }
 }

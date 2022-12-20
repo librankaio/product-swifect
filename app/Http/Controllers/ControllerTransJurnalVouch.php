@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 class ControllerTransJurnalVouch extends Controller
 {
     public function index(){
+        // $novouch = DB::select("select fgetcode('tjurnalvouchhs') as codetrans");
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $chartaccs = Mchartofacc::select('id','code','jenis')->whereNull('deleted_at')->get();
         return view('pages.transaction.tjurnalvouch',[
+            // 'novouch' => $novouch,
             'chartaccs' => $chartaccs,
             'matauangs' => $matauangs,
         ]);

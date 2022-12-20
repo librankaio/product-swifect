@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\DB;
 class ControllerTransPos extends Controller
 {
     public function index(){
+        $notrans = DB::select("select fgetcode('tposhs') as codetrans");
+        // dd($notrans);
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         return view('pages.transaction.tpos',[
+            'notrans' => $notrans,
             'customers' => $customers,
             'items' => $items,
             'matauangs' => $matauangs

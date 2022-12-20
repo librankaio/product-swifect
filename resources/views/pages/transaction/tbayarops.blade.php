@@ -22,7 +22,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>No Trans</label>
-                                    <input type="text" class="form-control" name="no" id="no">
+                                    @foreach($notrans as $key => $code)
+                                        @php $codetrans = $code->codetrans @endphp
+                                    @endforeach
+                                    <input type="text" class="form-control" name="no" id="no" value="{{ $codetrans }}">
                                 </div>        
                                 <div class="form-group">
                                     <label>Jenis</label>
