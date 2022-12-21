@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Msupp;
 use App\Models\Tpembelianh;
-use App\Models\Tposh;
 use Illuminate\Http\Request;
 
 class ControllerMasterSupp extends Controller

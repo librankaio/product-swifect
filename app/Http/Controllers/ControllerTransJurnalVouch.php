@@ -104,20 +104,34 @@ class ControllerTransJurnalVouch extends Controller
         $count=0;
         $countrows = sizeof(request('no_d'));
         for ($i=0;$i<sizeof(request('no_d'));$i++){
-            Tjurnalvouchd::create([
-                'idh' => $tjurnalvouchh->id,
-                'no_tjurnalvouchh' => request('no_vouch'),
-                'kode' => request('kode_d')[$i],
-                'nama' => request('nama_d')[$i],
-                'debit' => (float) str_replace(',', '', request('debit_d')[$i]),
-                'credit' => (float) str_replace(',', '', request('credit_d')[$i]),
-                'memo' => request('memo')[$i],
-            ]);
-            $count++;
+            if(request('memo') == null){
+                $nullmemo = '';
+                Tjurnalvouchd::create([
+                    'idh' => $tjurnalvouchh->id,
+                    'no_tjurnalvouchh' => request('no_vouch'),
+                    'kode' => request('kode_d')[$i],
+                    'nama' => request('nama_d')[$i],
+                    'debit' => (float) str_replace(',', '', request('debit_d')[$i]),
+                    'credit' => (float) str_replace(',', '', request('credit_d')[$i]),
+                    'memo' => $nullmemo
+                ]);
+                $count++;
+            }else{
+                Tjurnalvouchd::create([
+                    'idh' => $tjurnalvouchh->id,
+                    'no_tjurnalvouchh' => request('no_vouch'),
+                    'kode' => request('kode_d')[$i],
+                    'nama' => request('nama_d')[$i],
+                    'debit' => (float) str_replace(',', '', request('debit_d')[$i]),
+                    'credit' => (float) str_replace(',', '', request('credit_d')[$i]),
+                    'memo' => request('memo')[$i],
+                ]);
+                $count++;
+            }            
         }
         
         if($count == $countrows){
-            return redirect()->back();
+            return redirect()->route('tjurnalvoucherlist');
         }
     }
 

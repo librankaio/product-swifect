@@ -110,7 +110,7 @@ class ControllerTransPembelianBrg extends Controller
         }
         
         if($count == $countrows){
-            return redirect()->back();
+            return redirect()->route('tbelibrglist');
         }
     }
 

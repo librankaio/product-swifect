@@ -101,7 +101,7 @@ class ControllerTransBayarOps extends Controller
         }
         
         if($count == $countrows){
-            return redirect()->back();
+            return redirect()->route('tbayaropslist');
         }
     }
 

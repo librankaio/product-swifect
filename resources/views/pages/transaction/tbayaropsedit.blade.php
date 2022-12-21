@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>No Trans</label>
-                                    <input type="text" class="form-control" name="no" id="no" value="{{ $tbayaropsh->no }}">
+                                    <input type="text" class="form-control" name="no" id="no" value="{{ $tbayaropsh->no }}" readonly>
                                 </div>        
                                 <div class="form-group">
                                     <label>Jenis</label>

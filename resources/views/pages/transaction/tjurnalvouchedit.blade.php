@@ -22,7 +22,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>No Voucher</label>
-                                        <input type="text" class="form-control" name="no_vouch" id="no_vouch" value="{{ $tjurnalvouchh->no }}">
+                                        <input type="text" class="form-control" name="no_vouch" id="no_vouch" value="{{ $tjurnalvouchh->no }}" readonly>
                                     </div>                                
                                     <div class="form-group">
                                         <label>Tanggal</label>

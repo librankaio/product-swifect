@@ -136,7 +136,7 @@ class ControllerTransPos extends Controller
         }
         
         if($count == $countrows){
-            return redirect()->back();
+            return redirect()->route('tposlist');
         }
     }
 
