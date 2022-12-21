@@ -130,6 +130,11 @@
         // "ordering":false,
         "bInfo" : false
     });
+
+    $(".alert button.close").click(function (e) {
+        $(this).parent().fadeOut(2000);
+    });
+    
     function submitDel(id){
         $('#del-'+id).submit()
     }

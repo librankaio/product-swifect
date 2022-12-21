@@ -25,7 +25,7 @@
                                     @foreach($notrans as $key => $code)
                                         @php $codetrans = $code->codetrans @endphp
                                     @endforeach
-                                    <input type="text" class="form-control" name="no" id="no" value="{{ $codetrans }}">
+                                    <input type="text" class="form-control" name="no" id="no" value="{{ $codetrans }}" readonly>
                                 </div>                                
                                 <div class="form-group">
                                     <label>Tanggal</label>

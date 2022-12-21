@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Msupp;
+use App\Models\Tpembelianh;
+use App\Models\Tposh;
 use Illuminate\Http\Request;
 
 class ControllerMasterSupp extends Controller
@@ -49,7 +51,27 @@ class ControllerMasterSupp extends Controller
     }
 
     public function delete(Msupp $msupp){
-        Msupp::find($msupp->id)->delete();
-        return redirect()->route('msupp');
+        // Msupp::find($msupp->id)->delete();
+        // return redirect()->route('msupp');
+
+        $item = Msupp::where('id','=',$msupp->id)->get();
+        foreach($item as $data){
+            $itemname = $data->name;
+        }
+
+        $pembelian = Tpembelianh::select('supplier')->where('supplier', 'like', '%' . $itemname . '%')->whereNull('deleted_at')->first();
+        // dd($pembelian);
+        
+        $havetrans = 0;
+        if($pembelian != null ){
+            $havetrans = 1;
+        }
+
+        if($havetrans == 0){
+            Msupp::find($msupp->id)->delete();
+            return redirect()->route('msupp')->with('success','Data Berhasil Di Hapus');
+        }else{
+            return redirect()->route('msupp')->with('error','Tidak dapat menghapus data, karena data ada di dalam transaksi lainnya');
+        }
     }
 }

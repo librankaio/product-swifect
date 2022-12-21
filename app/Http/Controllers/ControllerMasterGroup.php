@@ -43,5 +43,24 @@ class ControllerMasterGroup extends Controller
     public function delete(Mgrp $mgrp){
         Mgrp::find($mgrp->id)->delete();
         return redirect()->route('mgrup');
+
+        // $item = Mgrp::where('id','=',$mgrp->id)->get();
+        // foreach($item as $data){
+        //     $itemname = $data->name;
+        // }
+        // $pembelian = Tpembeliand::select('code_muom')->where('code_muom','=',$itemname)->whereNull('deleted_at')->first();
+        // $pos = Tposhd::select('code_muom')->where('code_muom','=',$itemname)->whereNull('deleted_at')->first();
+        // // dd($pembelian);
+        // $havetrans = 0;
+        // if($pembelian != null || $pos != null){
+        //     $havetrans = 1;
+        // }
+
+        // if($havetrans == 0){
+        //     Mgrp::find($mgrp->id)->delete();
+        //     return redirect()->route('mgrup')->with('success','Data Berhasil Di Hapus');
+        // }else{
+        //     return redirect()->route('mgrup')->with('error','Tidak dapat menghapus data, karena data ada di dalam transaksi lainnya');
+        // }
     }
 }

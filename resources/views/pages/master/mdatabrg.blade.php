@@ -48,7 +48,7 @@
     <div class="section-body">
         <form action="" method="POST" enctype="multipart/form-data">
             @csrf
-        <div class="row" id="notification">
+        <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 @include('layouts.flash-message')
             </div>

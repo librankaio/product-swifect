@@ -22,10 +22,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>No Voucher</label>
-                                        {{-- @foreach($novouch as $key => $code)
+                                        @foreach($novouch as $key => $code)
                                         @php $vouchercode = $code->codetrans @endphp
-                                        @endforeach --}}
-                                        <input type="text" class="form-control" name="no_vouch" id="no_vouch">
+                                        @endforeach
+                                        <input type="text" class="form-control" name="no_vouch" id="no_vouch" value="{{ $vouchercode }}" readonly>
                                     </div>                                
                                     <div class="form-group">
                                         <label>Tanggal</label>
