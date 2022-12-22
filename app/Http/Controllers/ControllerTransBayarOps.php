@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mbank;
 use App\Models\Mmatauang;
+use App\Models\Mnamacabang;
 use App\Models\Tbayaropsd;
 use App\Models\Tbayaropsh;
 use Illuminate\Http\Request;
@@ -14,11 +15,13 @@ class ControllerTransBayarOps extends Controller
     public function index(){
         $notrans = DB::select("select fgetcode('tbayaropshs') as codetrans");
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $banks = Mbank::select('id','code','name')->whereNull('deleted_at')->get();
         return view('pages.transaction.tbayarops',[
             'notrans' => $notrans,
+            'matauangs' => $matauangs,
+            'cabangs' => $cabangs,
             'banks' => $banks,
-            'matauangs' => $matauangs
         ]);
     }
 

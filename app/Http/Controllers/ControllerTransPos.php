@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mcust;
 use App\Models\Mitem;
 use App\Models\Mmatauang;
+use App\Models\Mnamacabang;
 use App\Models\Tposh;
 use App\Models\Tposhd;
 use Carbon\Carbon;
@@ -18,10 +19,12 @@ class ControllerTransPos extends Controller
         // dd($notrans);
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         return view('pages.transaction.tpos',[
             'notrans' => $notrans,
             'customers' => $customers,
+            'cabangs' => $cabangs,
             'items' => $items,
             'matauangs' => $matauangs
         ]);

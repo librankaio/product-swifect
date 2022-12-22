@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mchartofacc;
 use App\Models\Mmatauang;
+use App\Models\Mnamacabang;
 use App\Models\Tjurnalvouchd;
 use App\Models\Tjurnalvouchh;
 use Illuminate\Http\Request;
@@ -14,11 +15,13 @@ class ControllerTransJurnalVouch extends Controller
     public function index(){
         $novouch = DB::select("select fgetcode('tjurnal') as codetrans");
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $chartaccs = Mchartofacc::select('id','code','jenis')->whereNull('deleted_at')->get();
         return view('pages.transaction.tjurnalvouch',[
             'novouch' => $novouch,
             'chartaccs' => $chartaccs,
             'matauangs' => $matauangs,
+            'cabangs' => $cabangs,
         ]);
     }
 
@@ -136,7 +139,7 @@ class ControllerTransJurnalVouch extends Controller
     }
 
     public function list(Tjurnalvouchh $tjurnalvouchh){
-        $tjurnalvouchhs = Tjurnalvouchh::select('id','no','tdt','keterangan','balance')->whereNull('deleted_at')->get();
+        $tjurnalvouchhs = Tjurnalvouchh::select('id','no','tdt','keterangan','balance','total_debit','total_credit','mata_uang')->whereNull('deleted_at')->get();
         $tjurnalvouchds = Tjurnalvouchd::select('id','idh','no_tjurnalvouchh','kode','nama','debit','credit','memo')->whereNull('deleted_at')->get();
         return view('pages.transaction.tjurnalvouchlist',[
             'tjurnalvouchhs' => $tjurnalvouchhs,

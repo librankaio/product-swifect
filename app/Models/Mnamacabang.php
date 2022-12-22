@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tjurnalvouchh extends Model
+class Mnamacabang extends Model
 {
     use HasFactory;
 
@@ -14,15 +14,11 @@ class Tjurnalvouchh extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = "tjurnalvouchhs";
-    
+    protected $table = "mnamacbgs";
+
     protected $fillable = [
-        'no',
-        'tdt',
-        'mata_uang',
-        'keterangan',
-        'total_debit',
-        'total_credit',
-        'balance',
+        'code',
+        'name',
+        'address',
     ];
 }

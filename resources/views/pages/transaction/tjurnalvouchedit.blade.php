@@ -35,7 +35,7 @@
                                     <div class="form-group">
                                         <label>Mata Uang</label>
                                         <select class="form-control select2" name="mata_uang" id="mata_uang">
-                                            <option disabled selected>--Select Mata Uang--</option>
+                                            <option selected>{{ $tjurnalvouchh->mata_uang }}</option>
                                             @foreach($matauangs as $data => $matauang)
                                             <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                             @endforeach

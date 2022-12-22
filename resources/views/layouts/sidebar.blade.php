@@ -14,6 +14,7 @@
             <li><a class="nav-link" href="{{ route('mcust') }}">Master Data Customer</a></li>
             <li><a class="nav-link" href="{{ route('msupp') }}">Master Data Supplier</a></li>
             <li><a class="nav-link" href="{{ route('mwhse') }}">Master Data Lokasi</a></li>
+            <li><a class="nav-link" href="{{ route('mnamacabang') }}">Master Data Nama Cabang</a></li>
         </ul>
     </li>
     <li class="menu-header">Transaction</li>

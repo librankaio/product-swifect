@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerMasterGroup;
 use App\Http\Controllers\ControllerMasterLocation;
 use App\Http\Controllers\ControllerMasterMataUang;
 use App\Http\Controllers\ControllerMasterMerk;
+use App\Http\Controllers\ControllerMasterNamaCabang;
 use App\Http\Controllers\ControllerMasterSatuan;
 use App\Http\Controllers\ControllerMasterSupp;
 use App\Http\Controllers\ControllerMasterUser;
@@ -127,6 +128,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/mchartacc/{mchartofacc}', [ControllerMasterChartOfAcc::class, 'update'])->name('mchartaccupdt');
     Route::post('/mchartacc/delete/{mchartofacc}', [ControllerMasterChartOfAcc::class, 'delete'])->name('mchartaccdelete');
     
+    // Mnamacabang
+    Route::get('/mnamacabang', [ControllerMasterNamaCabang::class, 'index'])->name('mnamacabang');
+    Route::post('/mnamacabangpost', [ControllerMasterNamaCabang::class, 'post'])->name('mnamacabangpost');
+    Route::get('/mnamacabang/{mnamacabang}/edit', [ControllerMasterNamaCabang::class, 'getedit'])->name('mnamacabangedit');
+    Route::post('/mnamacabang/{mnamacabang}', [ControllerMasterNamaCabang::class, 'update'])->name('mnamacabangupdt');
+    Route::post('/mnamacabang/delete/{mnamacabang}', [ControllerMasterNamaCabang::class, 'delete'])->name('mnamacabangdelete');
+
     //TPOS or Transaction POS
     Route::get('/transpos', [ControllerTransPos::class, 'index'])->name('tpos');
     Route::post('/transpospost', [ControllerTransPos::class, 'post'])->name('transpospost');
