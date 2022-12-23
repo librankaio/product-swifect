@@ -19,6 +19,7 @@ class Tpembelianh extends Model
     protected $fillable = [
         'no',
         'tdt',
+        'cabang',
         'supplier',
         'mata_uang',
         'nolain',

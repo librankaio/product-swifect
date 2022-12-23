@@ -37,6 +37,7 @@ class ControllerTransPembelianBrg extends Controller
             Tpembelianh::create([
                 'no' => $request->no,
                 'tdt' => $request->dt,
+                'cabang' => $request->cabang,
                 'mata_uang' => $request->mata_uang,
                 'supplier' => $request->code_cust,
                 'nolain' => $request->nolain,
@@ -85,6 +86,7 @@ class ControllerTransPembelianBrg extends Controller
         Tpembelianh::where('id', '=', $tpembelianh->id)->update([
             'no' => request('no'),
             'tdt' => request('dt'),
+            'cabang' => request('cabang'),
             'mata_uang' => request('mata_uang'),
             'supplier' => request('code_cust'),
             'nolain' => request('nolain'),
@@ -120,12 +122,14 @@ class ControllerTransPembelianBrg extends Controller
     public function getedit(Tpembelianh $tpembelianh){
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $suppliers = Msupp::select('id','code','name')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         $tpembeliands = Tpembeliand::select('id','idh','no_pembelianh','code_mitem','name_mitem','code_muom','qty','subtotal','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tpembelianh->id)->get();
         // dd($tpembeliands);
         return view('pages.transaction.tbelibrgedit',[
             'tpembelianh' =>  $tpembelianh,
             'tpembeliands' => $tpembeliands,
+            'cabangs' => $cabangs,
             'suppliers' => $suppliers,
             'items' => $items,
             'matauangs' => $matauangs,

@@ -19,6 +19,7 @@ class Tposh extends Model
     protected $fillable = [
         'no',
         'tdt',
+        'cabang',
         'code_mcust',
         'mata_uang',
         'pay_method',

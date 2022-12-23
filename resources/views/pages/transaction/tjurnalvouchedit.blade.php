@@ -41,6 +41,15 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Cabang</label>
+                                        <select class="form-control select2" name="cabang" id="cabang">
+                                            <option selected>{{ $tjurnalvouchh->cabang }}</option>
+                                            @foreach($cabangs as $data => $cabang)
+                                            <option>{{ $cabang->name." - ".$cabang->address }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

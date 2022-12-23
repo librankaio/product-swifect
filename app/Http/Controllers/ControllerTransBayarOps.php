@@ -32,6 +32,7 @@ class ControllerTransBayarOps extends Controller
             Tbayaropsh::create([
                 'no' => $request->no,
                 'tdt' => $request->dt,
+                'cabang' => $request->cabang,
                 'mata_uang' => $request->mata_uang,
                 'jenis' => $request->jenis,
                 'akun_pembayaran' => $request->akun_bayar,
@@ -66,11 +67,13 @@ class ControllerTransBayarOps extends Controller
     public function getedit(Tbayaropsh $tbayaropsh){
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $banks = Mbank::select('id','code','name')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $tbayaropsds = Tbayaropsd::select('id','idh','no_tbayaropsh','total','note')->whereNull('deleted_at')->where('idh','=',$tbayaropsh->id)->get();
         return view('pages.transaction.tbayaropsedit',[
             'tbayaropsh' => $tbayaropsh,
             'tbayaropsds' => $tbayaropsds,
             'banks' => $banks,
+            'cabangs' => $cabangs,
             'matauangs' => $matauangs
         ]);
     }
@@ -84,6 +87,7 @@ class ControllerTransBayarOps extends Controller
         Tbayaropsh::where('id', '=', $tbayaropsh->id)->update([
             'no' => request('no'),
             'tdt' => request('dt'),
+            'cabang' => request('cabang'),
             'mata_uang' => request('mata_uang'),
             'jenis' => request('jenis'),
             'akun_pembayaran' => request('akun_bayar'),

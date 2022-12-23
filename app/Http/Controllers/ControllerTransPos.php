@@ -37,6 +37,7 @@ class ControllerTransPos extends Controller
             Tposh::create([
                 'no' => $request->no,
                 'tdt' => $request->dt,
+                'cabang' => $request->cabang,
                 'mata_uang' => $request->mata_uang,
                 'code_mcust' => $request->code_cust,
                 'pay_method' => $request->pay_method,
@@ -90,12 +91,14 @@ class ControllerTransPos extends Controller
     public function getedit(Tposh $tposh){
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $customers = Mcust::select('id','code','name')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         $tposhds = Tposhd::select('id','idh','no_tposh','name_mitem','code_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
         return view('pages.transaction.tposedit',[
             'tposh' => $tposh,
             'tposhds' => $tposhds,
             'customers' => $customers,
+            'cabangs' => $cabangs,
             'items' => $items,
             'matauangs' => $matauangs
         ]);
@@ -110,6 +113,7 @@ class ControllerTransPos extends Controller
         Tposh::where('id', '=', $tposh->id)->update([
             'no' => request('no'),
             'tdt' => request('dt'),
+            'cabang' => request('cabang'),
             'mata_uang' => request('mata_uang'),
             'code_mcust' => request('code_cust'),
             'pay_method' => request('pay_method'),

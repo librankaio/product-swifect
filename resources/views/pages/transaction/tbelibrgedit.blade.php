@@ -29,6 +29,15 @@
                                         <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d", strtotime($tpembelianh->tdt)) }}">
                                     </div>
                                     <div class="form-group">
+                                        <label>Cabang</label>
+                                        <select class="form-control select2" name="cabang" id="cabang">
+                                            <option selected>{{ $tpembelianh->cabang }}</option>
+                                            @foreach($cabangs as $data => $cabang)
+                                            <option>{{ $cabang->name." - ".$cabang->address }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Supplier</label>
                                         <select class="form-control select2" name="code_cust" id="code_cust">
                                             <option selected>{{ $tpembelianh->supplier }}</option>

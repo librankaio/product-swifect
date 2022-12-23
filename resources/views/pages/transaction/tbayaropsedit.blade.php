@@ -42,6 +42,15 @@
                                     </select>
                                 </div>      
                                 <div class="form-group">
+                                    <label>Cabang</label>
+                                    <select class="form-control select2" name="cabang" id="cabang">
+                                        <option selected>{{ $tbayaropsh->cabang  }}</option>
+                                        @foreach($cabangs as $data => $cabang)
+                                        <option>{{ $cabang->name." - ".$cabang->address }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <a href="" id="addItem">
                                         <i class="fa fa-plus" style="font-size:18pt"></i>
                                     </a>

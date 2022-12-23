@@ -32,6 +32,7 @@ class ControllerTransJurnalVouch extends Controller
             Tjurnalvouchh::create([
                 'no' => $request->no_vouch,
                 'tdt' => $request->dt,
+                'cabang' => $request->cabang,
                 'mata_uang' => $request->mata_uang,
                 'keterangan' => $request->keterangan,
                 'total_debit' => (float) str_replace(',', '', $request->total_debit),
@@ -80,11 +81,13 @@ class ControllerTransJurnalVouch extends Controller
         // dd($tjurnalvouchh);
         $matauangs = Mmatauang::select('id','code','name')->whereNull('deleted_at')->get();
         $chartaccs = Mchartofacc::select('id','code','jenis')->whereNull('deleted_at')->get();
+        $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $tjurnalvouchds = Tjurnalvouchd::select('id','idh','no_tjurnalvouchh','kode','nama','debit','credit','memo')->whereNull('deleted_at')->where('idh','=',$tjurnalvouchh->id)->get();
         return view('pages.transaction.tjurnalvouchedit',[
             'tjurnalvouchh' => $tjurnalvouchh,
             'tjurnalvouchds' => $tjurnalvouchds,
             'chartaccs' => $chartaccs,
+            'cabangs' => $cabangs,
             'matauangs' => $matauangs
         ]);
     }
@@ -98,6 +101,7 @@ class ControllerTransJurnalVouch extends Controller
         Tjurnalvouchh::where('id', '=', $tjurnalvouchh->id)->update([
             'no' => request('no_vouch'),
             'tdt' => request('dt'),
+            'cabang' => request('cabang'),
             'mata_uang' => request('mata_uang'),
             'keterangan' => request('keterangan'),
             'total_debit' => (float) str_replace(',', '', request('total_debit')),
