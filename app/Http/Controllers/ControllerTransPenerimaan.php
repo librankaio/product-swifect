@@ -8,6 +8,7 @@ use App\Models\Mnamacabang;
 use App\Models\Msupp;
 use App\Models\Tpembeliand;
 use App\Models\Tpembelianh;
+use App\Models\Tpenerimaand;
 use App\Models\Tpenerimaanh;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,7 +76,7 @@ class ControllerTransPenerimaan extends Controller
             $countrows = sizeof($request->no_d);
             $count=0;
             for ($i=0;$i<sizeof($request->no_d);$i++){
-                Tpembeliand::create([
+                Tpenerimaand::create([
                     'idh' => $idh,
                     'no_tpenerimaanh' => $request->no,
                     'code_mitem' => $request->kode_d[$i],
@@ -95,6 +96,6 @@ class ControllerTransPenerimaan extends Controller
             }
         }else{
             return redirect()->back();
-        }        
+        }
     }
 }

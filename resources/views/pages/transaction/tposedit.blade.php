@@ -69,6 +69,10 @@
                                     <input type="text" class="form-control" name="nolain" value="{{ $tposh->nolain }}">
                                 </div>
                                 <div class="form-group">
+                                    <label>Kurs</label>
+                                    <input type="text" class="form-control" name="kurs" value="">
+                                </div>
+                                <div class="form-group">
                                     <label>Note</label>
                                     <textarea class="form-control" style="height:50px" name="note">{{ $tposh->note }}</textarea>
                                 </div>

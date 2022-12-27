@@ -73,7 +73,11 @@
                                 <div class="form-group">
                                     <label>Ref No.</label>
                                     <input type="text" class="form-control" name="noref" id="noref">
-                                </div>                                                               
+                                </div>        
+                                <div class="form-group">
+                                    <label>Kurs</label>
+                                    <input type="text" class="form-control" name="kurs" value="">
+                                </div>                                                       
                             </div>
                         </div>
                     </div>

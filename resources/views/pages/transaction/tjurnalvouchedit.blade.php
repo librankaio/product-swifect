@@ -50,6 +50,10 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Kurs</label>
+                                        <input type="text" class="form-control" name="kurs" value="">
+                                    </div>
                                 </div>
                             </div>
                         </div>

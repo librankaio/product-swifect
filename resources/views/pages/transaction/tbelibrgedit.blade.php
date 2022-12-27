@@ -60,6 +60,10 @@
                                         <input type="text" class="form-control" name="nolain" value="{{ $tpembelianh->nolain }}">
                                     </div>
                                     <div class="form-group">
+                                        <label>Kurs</label>
+                                        <input type="text" class="form-control" name="kurs" value="">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Note</label>
                                         <textarea class="form-control" style="height:50px" name="note">{{ $tpembelianh->note }}</textarea>
                                     </div>
