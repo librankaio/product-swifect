@@ -16,7 +16,9 @@ use App\Http\Controllers\ControllerMasterSupp;
 use App\Http\Controllers\ControllerMasterUser;
 use App\Http\Controllers\ControllerTransBayarOps;
 use App\Http\Controllers\ControllerTransJurnalVouch;
+use App\Http\Controllers\ControllerTransPembelian;
 use App\Http\Controllers\ControllerTransPembelianBrg;
+use App\Http\Controllers\ControllerTransPenerimaan;
 use App\Http\Controllers\ControllerTransPengeluaranBrg;
 use App\Http\Controllers\ControllerTransPos;
 use Illuminate\Support\Facades\Route;
@@ -181,6 +183,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tjurnalvoucher/{tjurnalvouchh}/edit', [ControllerTransJurnalVouch::class, 'getedit'])->name('tjurnalvoucheredit');
     Route::post('/tjurnalvoucher/{tjurnalvouchh}', [ControllerTransJurnalVouch::class, 'update'])->name('tjurnalvoucherupdate');
     Route::get('/tjurnalvoucher/{tjurnalvouchh}/print', [ControllerTransJurnalVouch::class, 'print'])->name('tjurnalvoucherprint');
+    
+    //TPenerimaan
+    Route::get('/tpenerimaan', [ControllerTransPenerimaan::class, 'index'])->name('tpenerimaan');
+    Route::post('/getnopembeliand', [ControllerTransPenerimaan::class, 'getnopembeliand'])->name('getnopembeliand');
+    Route::post('/getnopembelianh', [ControllerTransPenerimaan::class, 'getnopembelianh'])->name('getnopembelianh');
+    Route::post('/tpenerimaanpost', [ControllerTransPenerimaan::class, 'post'])->name('tpenerimaanpost');
+
+    //TPembelian
+    Route::get('/tpembelian', [ControllerTransPembelian::class, 'index'])->name('tpembelian');
     // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
 });
