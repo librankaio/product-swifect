@@ -37,6 +37,7 @@ class ControllerTransBayarOps extends Controller
                 'jenis' => $request->jenis,
                 'akun_pembayaran' => $request->akun_bayar,
                 'noref' => $request->noref,
+                'kurs' => (float) str_replace(',', '', $request->kurs),
                 'total' => $request->nominal,
                 'grdtotal' => (float) str_replace(',', '', $request->grand_total),
             ]);
@@ -92,6 +93,7 @@ class ControllerTransBayarOps extends Controller
             'jenis' => request('jenis'),
             'akun_pembayaran' => request('akun_bayar'),
             'noref' => request('noref'),
+            'kurs' => (float) str_replace(',', '', request('kurs')),
             'total' => request('nominal'),
             'grdtotal' => (float) str_replace(',', '', request('grand_total'))
         ]);

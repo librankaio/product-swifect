@@ -189,6 +189,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/getnopembeliand', [ControllerTransPenerimaan::class, 'getnopembeliand'])->name('getnopembeliand');
     Route::post('/getnopembelianh', [ControllerTransPenerimaan::class, 'getnopembelianh'])->name('getnopembelianh');
     Route::post('/tpenerimaanpost', [ControllerTransPenerimaan::class, 'post'])->name('tpenerimaanpost');
+    
+    //Tpenerimaan List
+    Route::get('/tpenerimaanlist', [ControllerTransPenerimaan::class, 'list'])->name('tpenerimaanlist');
+    Route::get('/tpenerimaan/{tpenerimaanh}/edit', [ControllerTransPenerimaan::class, 'getedit'])->name('tpenerimaanedit');
+    Route::post('/tpenerimaan/{tpenerimaanh}', [ControllerTransPenerimaan::class, 'update'])->name('tpenerimaanupdate');
+
 
     //TPembelian
     Route::get('/tpembelian', [ControllerTransPembelian::class, 'index'])->name('tpembelian');

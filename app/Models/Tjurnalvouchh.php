@@ -21,6 +21,8 @@ class Tjurnalvouchh extends Model
         'tdt',
         'mata_uang',
         'keterangan',
+        'cabang',
+        'kurs',
         'total_debit',
         'total_credit',
         'balance',

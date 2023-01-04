@@ -2,10 +2,10 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Penerimaan Barang</h1>
+        <h1>Penerimaan Barang Edit</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Transaction</a></div>
-            <div class="breadcrumb-item"><a class="text-muted">Penerimaan Barang</a></div>
+            <div class="breadcrumb-item"><a class="text-muted">Penerimaan Barang Edit</a></div>
         </div>
     </div>
     <div class="section-body">
@@ -22,28 +22,22 @@
                             <div class="col-md-12">                                
                                 <div class="form-group">
                                     <label>No Trans</label>
-                                    @foreach($notrans as $key => $code)
-                                        @php $codetrans = $code->codetrans @endphp
-                                    @endforeach
-                                    <input type="text" class="form-control" name="no" id="no" value="{{ $codetrans }}" readonly>
+                                    <input type="text" class="form-control" name="no" id="no" value="{{ $tpenerimaanh->no }}" readonly>
                                 </div>       
                                 <div class="form-group">
                                     <label>No Pembelian</label>
                                     <select class="form-control select2" name="nopembelian" id="nopembelian">
-                                        <option disabled selected>--Select No Pembelian--</option>
-                                        @foreach($nopembelians as $data => $nopembelian)
-                                        <option>{{ $nopembelian->no }}</option>
-                                        @endforeach
+                                        <option selected>{{ $tpenerimaanh->no_tpembelian }}</option>
                                     </select>
                                 </div>                         
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d") }}">
+                                    <input type="date" class="form-control" name="dt" value="{{ date("Y-m-d", strtotime($tpenerimaanh->tdt)) }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Cabang</label>
                                     <select class="form-control select2" name="cabang" id="cabang">
-                                        <option disabled selected>--Select Cabang--</option>
+                                        <option selected>{{ $tpenerimaanh->cabang }}</option>
                                         @foreach($cabangs as $data => $cabang)
                                         <option>{{ $cabang->name." - ".$cabang->address }}</option>
                                         @endforeach
@@ -52,7 +46,7 @@
                                 <div class="form-group">
                                     <label>Supplier</label>
                                     <select class="form-control select2" name="code_cust" id="code_cust">
-                                        <option disabled selected>--Select Supplier--</option>
+                                        <option selected>{{ $tpenerimaanh->supplier }}</option>
                                         @foreach($suppliers as $data => $supplier)
                                         <option>{{ $supplier->code." - ".$supplier->name }}</option>
                                         @endforeach
@@ -61,25 +55,23 @@
                                 <div class="form-group">
                                     <label>Mata Uang</label>
                                     <select class="form-control select2" name="mata_uang" id="mata_uang">
+                                        <option selected>{{ $tpenerimaanh->mata_uang }}</option>
                                         @foreach($matauangs as $data => $matauang)
-                                        @if($matauang->code == 'IDR' && $matauang->name == 'Rupiah')
-                                        <option selected>{{ $matauang->code." - ".$matauang->name }}</option>
-                                        @endif
                                         <option>{{ $matauang->code." - ".$matauang->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nomer Lainnya</label>
-                                    <input type="text" class="form-control" name="nolain">
+                                    <input type="text" class="form-control" name="nolain" value="{{ $tpenerimaanh->nolain }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Kurs</label>
-                                    <input type="text" class="form-control" name="kurs" id="kurs" value="1">
+                                    <input type="text" class="form-control" name="kurs" id="kurs" value="{{ number_format($tpenerimaanh->kurs) }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Note</label>
-                                    <textarea class="form-control" style="height:50px" name="note"></textarea>
+                                    <textarea class="form-control" style="height:50px" name="note">{{ $tpenerimaanh->note }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -172,6 +164,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $counter = 0; @endphp
+                                        @for($i = 0; $i < sizeof($tpenerimaands); $i++) @php $counter++; @endphp <tr>
+                                            <th class="id-header" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
+                                            {{-- <td><input style='width:120px;' readonly class='kodeclass' name='id_d[]' type='text' value='{{ $tposhds[$i]->id }}'></td> --}}
+                                            <td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tpenerimaands[$i]->code_mitem }}'></td>
+                                            <td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='{{ $tpenerimaands[$i]->name_mitem }}'></td>
+                                            <td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpenerimaands[$i]->qty, 2, '.', ',') }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='{{ $tpenerimaands[$i]->code_muom }}' name='satuan_d[]'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='{{ number_format($tpenerimaands[$i]->price, 2, '.', ',') }}' name='harga_d[]'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpenerimaands[$i]->disc, 2, '.', ',') }}' name='disc_d[]' id='disc_d{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpenerimaands[$i]->tax, 2, '.', ',') }}' name='tax_d[]' id='tax_d{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpenerimaands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d{{ $counter }}'></td>
+                                            <td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ $tpenerimaands[$i]->note }}' name='note_d[]'></td>
+                                            <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
+                                            <td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value=''></td>
+                                            </tr>
+                                        @endfor
                                 </tbody>                            
                             </table>
                         </div>                                              
@@ -181,25 +190,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Discount</label>
-                                    <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" readonly>
+                                    <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tpenerimaanh->disc, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Tax</label>
-                                    <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" readonly>
+                                    <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tpenerimaanh->tax, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Total</label>
-                                    <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" readonly>
+                                    <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tpenerimaanh->grdtotal, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>                
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tpenerimaanpost') }}">Submit</button>
+                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="/tpenerimaan/{{ $tpenerimaanh->id }}">Submit</button>
                         <button class="btn btn-secondary" type="reset">Reset</button>
                     </div>
                 </div>
@@ -521,9 +530,6 @@
         code_cust = $("#code_cust").prop('selectedIndex');
         if (no == ""){
             alert("No Tidak boleh kosong!");
-            return false;
-        }else if (code_cust == 0){
-            alert("Please select Code Cust");
             return false;
         }
         });

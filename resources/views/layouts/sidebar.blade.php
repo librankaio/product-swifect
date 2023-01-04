@@ -33,6 +33,7 @@
             <li><a class="nav-link" href="{{ route('tjurnalvoucher') }}">Journal Voucher</a></li>
             <li><a class="nav-link" href="{{ route('tjurnalvoucherlist') }}">Journal Voucher List</a></li>
             <li><a class="nav-link" href="{{ route('tpenerimaan') }}">Penerimaan Barang</a></li>
+            <li><a class="nav-link" href="{{ route('tpenerimaanlist') }}">Penerimaan Barang List</a></li>
             <li><a class="nav-link" href="{{ route('tpembelian') }}">Pembelian</a></li>
         </ul>
     </li>

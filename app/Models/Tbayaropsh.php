@@ -23,6 +23,7 @@ class Tbayaropsh extends Model
         'mata_uang',
         'jenis',
         'noref',
+        'kurs',
         'total',
         'grdtotal',
         'akun_pembayaran',

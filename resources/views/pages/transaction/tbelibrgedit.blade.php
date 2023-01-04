@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Kurs</label>
-                                        <input type="text" class="form-control" name="kurs" value="">
+                                        <input type="text" class="form-control" name="kurs" id="kurs" value="{{ number_format($tpembelianh->kurs) }}">
                                     </div>
                                     <div class="form-group">
                                         <label>Note</label>
@@ -402,6 +402,13 @@
                 $("#subtot").val(thousands_separators(total));
             });
 
+            $(document).on("change", "#kurs", function(e) {
+                if($('#kurs').val() == ''){
+                    $('#kurs').val(1);
+                }
+                $(this).val(thousands_separators($(this).val()));
+            });
+
             $(document).on("change", "#hrgsatuan", function(e) {
                 if ($('#hrgsatuan').val() == '') {
                     $('#hrgsatuan').val(0);
@@ -426,6 +433,13 @@
                     this.value = this.value.replace(/\D/g, '');
                 }
             });
+
+            $(document).on("click", "#kurs", function(e) {
+                if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+                }
+            });
         });
         // VALIDATE TRIGGER
         $("#quantity").keyup(function(e) {
@@ -439,6 +453,12 @@
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
             }
+        });
+        $("#kurs").keyup(function(e){
+            if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+            }            
         });
         $("#disc").keyup(function(e) {
             if (/\D/g.test(this.value)) {
@@ -457,7 +477,7 @@
             if(this.value >= 99){
                 this.value = 99;
             }
-        });
+        });    
 
         $(document).on("click", "#confirm", function(e) {
             // Validate ifnull

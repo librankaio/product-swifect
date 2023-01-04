@@ -76,8 +76,8 @@
                                 </div>        
                                 <div class="form-group">
                                     <label>Kurs</label>
-                                    <input type="text" class="form-control" name="kurs" value="">
-                                </div>                                                       
+                                    <input type="text" class="form-control" name="kurs" id="kurs" value="1">
+                                </div>                                       
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,21 @@
                 $("#nominal").val(thousands_separators(totalparse));
             });
 
+            $(document).on("change", "#kurs", function(e) {
+                if($('#kurs').val() == ''){
+                    $('#kurs').val(1);
+                }
+                $(this).val(thousands_separators($(this).val()));
+            });
+
             $(document).on("click", "#nominal", function(e) {
+                if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+                }
+            });
+
+            $(document).on("click", "#kurs", function(e) {
                 if (/\D/g.test(this.value)){
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
@@ -253,6 +267,12 @@
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
             }
+        });
+        $("#kurs").keyup(function(e){
+            if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+            }            
         });
 
         $(document).on("click","#confirm",function(e){

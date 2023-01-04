@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Kurs</label>
-                                    <input type="text" class="form-control" name="kurs" value="">
+                                    <input type="text" class="form-control" name="kurs" id="kurs" value="1">
                                 </div>
                                 <div class="form-group">
                                     <label>Note</label>
@@ -374,8 +374,20 @@
                 
                 $("#subtot").val(thousands_separators(total));
             });
+            $(document).on("change", "#kurs", function(e) {
+                if($('#kurs').val() == ''){
+                    $('#kurs').val(1);
+                }
+                $(this).val(thousands_separators($(this).val()));
+            });
 
             $(document).on("click", "#hrgsatuan", function(e) {
+                if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+                }
+            });
+            $(document).on("click", "#kurs", function(e) {
                 if (/\D/g.test(this.value)){
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
@@ -390,6 +402,12 @@
             }
         });
         $("#hrgsatuan").keyup(function(e){
+            if (/\D/g.test(this.value)){
+                // Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+            }            
+        });
+        $("#kurs").keyup(function(e){
             if (/\D/g.test(this.value)){
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
