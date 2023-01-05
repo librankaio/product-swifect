@@ -149,10 +149,11 @@ class ControllerTransPembelianBrg extends Controller
 
     public function print(Tpembelianh $tpembelianh){
         $tpembeliands = Tpembeliand::select('id','idh','no_pembelianh','code_mitem','name_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tpembelianh->id)->get();
-        // dd($tpembelianh);
+        $msupps = Msupp::select('phone','code')->whereNull('deleted_at')->where('code', 'like', '%' . $tpembelianh->code . '%')->first();
         return view('pages.print.tpembelianbrgprint',[
             'tpembelianh' => $tpembelianh,
-            'tpembeliands' => $tpembeliands
+            'tpembeliands' => $tpembeliands,
+            'msupps' => $msupps,
         ]);
     }
 

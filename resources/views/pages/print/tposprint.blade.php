@@ -2,16 +2,31 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<title>Pembayaran Operasional</title>
+    <link rel="stylesheet" href="{{ asset('../assets/css/printstyle.css') }}">
 </head>
 <body class="idr" onload="window.print()">
-
+    <div class="row">
+        <div class="column-3" style="background-color:#aaa;">
+            <h5>PELANGGAN : {{ $tposh->code_mcust }}<br>
+            TELEPON : {{ date("d/m/Y", strtotime($tposh->tdt)) }}<br>
+            ALAMAT : {{ $tposh->pay_method }}</h5>
+        </div>
+        <div class="column-3" style="background-color:#bbb; text-align: center;">
+            <h2>POINT OF SALES</h2>
+            <h5>NO TRANSAKSI : {{ $tposh->no }}<br>
+            TANGGAL : {{ date("d/m/Y", strtotime($tposh->tdt)) }}<br>
+            CUSTOMER : {{ $tposh->code_mcust }} <br> 
+            PAYMENT METHOD : {{ $tposh->pay_method }} <br>
+            NOTE : {{ $tposh->note }}</h5>
+        </div>
+        <div class="column-3" style="background-color:#bbb; text-align: right;">
+            <h2>INVOICE</h2>
+            <h5>NO INVOICE : {{ $tposh->no }}<br>
+            SALES : {{ $tposh->code_mcust }} <br> 
+            TGL TRANSAKSI : {{ date("d/m/Y", strtotime($tposh->tdt)) }}<br></h5>
+        </div>
+      </div>
 <div style="margin-left: 0%; margin-right: 0%;">
-<h2>POINT OF SALES</h2>
-<h5>NO TRANSAKSI : {{ $tposh->no }}<br>
-TANGGAL : {{ date("d/m/Y", strtotime($tposh->tdt)) }}<br>
-CUSTOMER : {{ $tposh->code_mcust }} <br> 
-PAYMENT METHOD : {{ $tposh->pay_method }} <br>
-NOTE : {{ $tposh->note }}</h5>
 <center>
 <table id="mytable" border="1px" cellspacing="0">
     <tr>
@@ -45,7 +60,46 @@ NOTE : {{ $tposh->note }}</h5>
     <td align="center" colspan="3">Grand Total : {{ number_format( $tposh->grdtotal, 2, '.', ',') }}</td>
     </table>
 </center>
-<br><br>
+<br>
+<hr style="border: 1px dashed black;" />
+<div class="row">
+    <div class="column-3" style="background-color:#bbb; text-align: left;">
+        <h5>PEMBAYARAN #1 : {{ $tposh->code_mcust }}<br>
+            SISA : {{ date("d/m/Y", strtotime($tposh->tdt)) }}<br>
+            ALAMAT : {{ $tposh->pay_method }}</h5>
+    </div>
+    <div class="column-3" style="background-color:#bbb; text-align: center;">
+        <h5>TOTAL QTY : {{ $tposh->code_mcust }}</h5>
+    </div>
+    <div class="column-3" style="background-color:#bbb; text-align: right;">
+        <h5>TOTAL QTY #1 : {{ $tposh->code_mcust }} <br>
+            DISKON : {{ $tposh->code_mcust }} <br>
+            CHARGE : {{ $tposh->code_mcust }}</h5>
+        <h4>GRAND TOTAL : </h4>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="column">
+        <div class="column" style="text-align: center;">
+            <div class="box"></div>
+            <h5>HORMAT KAMI</h5>
+        </div>
+        <div class="column" style="text-align: center;">
+            <div class="box"></div>
+            <h5>TTD</h5>
+        </div>
+    </div>
+    <div class="column">
+        <div class="column" style="text-align: left;">
+            <h5>CATATAN :</h5>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="column"></div>
+    <div class="column" style="text-align: right;">Page 1 Of 1</div>
+</div>
 <p>
 	<footer><a href="http://www.swifect.com">~ Swifect Custom Application ~</a></footer>
 </div>

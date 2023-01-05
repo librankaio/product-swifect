@@ -2,17 +2,41 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<title>Pembelian Barang</title>
+    <link rel="stylesheet" href="{{ asset('../assets/css/printstyle.css') }}">
 </head>
 <body class="idr" onload="window.print()">
-
+<div class="row">
+  <div class="column" style="background-color:#aaa;">
+    <h2>Pembelian Barang</h2>
+    <h5>NO TRANSAKSI : {{ $tpembelianh->no }}<br>
+    TANGGAL : {{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}<br>
+    SUPPLIER : {{ $tpembelianh->supplier }} <br> 
+    MATA UANG : {{ $tpembelianh->mata_uang }} <br> 
+    NOMER LAINNYA : {{ $tpembelianh->nolain }} <br>
+    NOTE : {{ $tpembelianh->note }}</h5>
+  </div>
+  <div class="column" style="background-color:#bbb; text-align: right;">
+    <h2>Pembelian Barang</h2>
+    <h5>NO TRANSAKSI : {{ $tpembelianh->no }}<br>
+    TANGGAL : {{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}<br>
+    SUPPLIER : {{ $tpembelianh->supplier }} <br> 
+    MATA UANG : {{ $tpembelianh->mata_uang }} <br> 
+    NOMER LAINNYA : {{ $tpembelianh->nolain }} <br>
+    NOTE : {{ $tpembelianh->note }}</h5>
+  </div>
+</div>
+<hr>
+<div class="row">
+    <div class="column">
+        <h5>TANGGAL TRANSAKSI: {{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}<br>
+            TANGGAL JATUH TEMPO: {{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}</h5>
+    </div>
+    <div class="column">
+        <h5>PHONE : {{ $msupps->phone }}<br>
+            SUPPLIER : {{ $tpembelianh->supplier }}</h5>
+    </div>
+</div>
 <div style="margin-left: 0%; margin-right: 0%;">
-<h2>Pembelian Barang</h2>
-<h5>NO TRANSAKSI : {{ $tpembelianh->no }}<br>
-TANGGAL : {{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}<br>
-SUPPLIER : {{ $tpembelianh->supplier }} <br> 
-MATA UANG : {{ $tpembelianh->mata_uang }} <br> 
-NOMER LAINNYA : {{ $tpembelianh->nolain }} <br>
-NOTE : {{ $tpembelianh->note }}</h5>
 <center>
 <table id="mytable" border="1px" cellspacing="0">
     <tr>
@@ -50,7 +74,22 @@ NOTE : {{ $tpembelianh->note }}</h5>
     <td align="center" colspan="4">Grand Total : {{ number_format( $tpembelianh->grdtotal, 2, '.', ',') }}</td>
     </table>
 </center>
-<br><br>
+<br>
+<hr style="border: 1px dashed black;" />
+<h5>NOTE : {{ $tpembelianh->note }}</h5>
+<br>
+<div class="row">
+    <div class="column">
+        <div class="column" style="text-align: center;">
+            <div class="box"></div>
+            <H5>HORMAT KAMI</H5>
+        </div>
+        <div class="column" style="text-align: center;">
+            <div class="box"></div>
+            <H5>TTD</H5>
+        </div>
+    </div>
+</div>
 <p>
 	<footer><a href="http://www.swifect.com">~ Swifect Custom Application ~</a></footer>
 </div>

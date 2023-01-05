@@ -123,7 +123,7 @@ class ControllerTransPenerimaan extends Controller
         $count=0;
         $countrows = sizeof(request('no_d'));
         for ($i=0;$i<sizeof(request('no_d'));$i++){
-            Tpenerimaand::create([
+            Tpenerimaand ::create([
                 'idh' => $tpenerimaanh->id,
                 'no_tpenerimaanh' => $tpenerimaanh->no,
                 'code_mitem' => request('kode_d')[$i],
