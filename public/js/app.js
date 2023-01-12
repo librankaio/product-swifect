@@ -2066,6 +2066,8 @@ window.jQuery = window.$ = __webpack_require__(/*! jquery */ "./node_modules/jqu
 __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 // require("prismjs");
 __webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
+// window.jQuery = window.$ = require("js-big-decimal")
+// require("js-big-decimal")
 
 // window.Chart = require('chart.js');
 // import './mychart.js';

@@ -338,19 +338,6 @@
                 subtotparse = parseFloat(subtot.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);
                 if(counter == 1){
-                    // disc = subtotparse * ($("#disc").val() / 100);
-                    // tax = (subtotparse - disc) * ($("#tax").val() / 100);
-                    // total =  (subtotparse - disc) + parseFloat(tax);
-                    // $("#price_disc").val(thousands_separators(disc));
-                    // $("#price_tax").val(thousands_separators(tax));
-                    // $("#price_total").val(thousands_separators(total));
-                    // $("#nama_item").val('');
-                    // $('#tax').val(0);
-                    // $('#disc').val(0);
-                    // $('#hrgsatuan').val(0);
-                    // $('#quantity').val(0);
-                    // console.log("Disc : "+disc.toFixed(2), "Tax : "+tax, "Total : "+total);
-
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
@@ -366,26 +353,7 @@
                     $('#disc').val(0);
                     $('#hrgsatuan').val(0);
                     $('#quantity').val(0);
-                    console.log("Disc : "+disc.toFixed(2), "Tax : "+tax, "Total : "+total);
                 }else{
-                    // disc_old = parseFloat($("#price_disc").val().replace(/,/g, ''));
-                    // tax_old = parseFloat($("#price_tax").val().replace(/,/g, ''));
-                    // subtot_old = parseFloat($("#price_total").val().replace(/,/g, ''));
-
-                    // disc = subtotparse * (parseFloat($("#disc").val()) / 100);
-                    // tax = (subtotparse - disc) * (parseFloat($("#tax").val()) / 100);
-                    // total =  (subtotparse - disc) + tax;
-                    // disc_new = disc_old + disc;
-                    // tax_new = tax_old + tax;
-                    // subtot_new = subtot_old + total;
-                    // $("#price_disc").val(thousands_separators(disc_new));
-                    // $("#price_tax").val(thousands_separators(tax_new));
-                    // $("#price_total").val(thousands_separators(subtot_new));
-                    // $("#nama_item").val('');
-                    // $('#tax').val(0);
-                    // $('#disc').val(0);
-                    // console.log("Disc : "+disc_new, "Tax : "+tax_new, "Total : "+subtot_new);
-
                     disc_old = $("#price_disc").val().replaceAll(",", "");
                     tax_old = $("#price_tax").val().replaceAll(",", "");
                     subtot_old = $("#price_total").val().replaceAll(",", "");
@@ -396,22 +364,9 @@
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * (Number(thistax).toFixed(2) / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
 
-                    // console.log(Number(disc_old) + Number(disc))
-                    // disc_new = Number(disc_old) + Number(disc);
-                    // tax_new =  Number(tax_old) + Number(tax);
-                    // subtot_new = Number(subtot_old) + Number(total);
-
-                    // total =  (subtotparse - disc) + tax;
                     disc_new = Number(Number(disc_old).toFixed(2)) + Number(disc.toFixed(2));
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     subtot_new = Number(Number(subtot_old).toFixed(2)) + Number(total.toFixed(2));
-                    console.log(Number(Number(disc_old).toFixed(2)), Number(disc.toFixed(2)))
-                    console.log(Number(Number(tax_old).toFixed(2)), Number(tax.toFixed(2)))
-                    console.log(Number(Number(subtot_old).toFixed(2)), Number(total.toFixed(2)))
-
-                    console.log(Number(disc_new))
-                    console.log(Number(tax_new))
-                    console.log(Number(subtot_new))
 
                     $("#price_disc").val(thousands_separators(Number(disc_new)));
                     $("#price_tax").val(thousands_separators(Number(tax_new)));
@@ -438,26 +393,6 @@
                 e.preventDefault();
                 var r = confirm("Delete Transaksi ?");
                 if (r == true) {
-                    // counter_id = $(this).closest('tr').text();
-                    // subtot = parseFloat($("#subtot_d_"+ counter_id).val().replace(/,/g, ''));
-
-                    // price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
-                    // price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
-                    // price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
-                    // disc = subtot * ($("#disc_d_"+ counter_id).val() / 100);
-                    // tax = (subtot - disc) * ($("#tax_d_"+ counter_id).val() / 100);
-                    // console.log(price_tax, price_disc, price_total);
-                    // totaltax = price_tax - tax;
-                    // totaldisc = price_disc - disc;
-                    // totalwithdisc = (subtot) - disc;
-                    // total =  price_total - (totalwithdisc + tax);
-                    // console.log("disc delete :"+totaldisc, "tax del : "+totaltax,"total del :" +total);
-
-                    // $("#price_disc").val(thousands_separators(totaldisc));
-                    // $("#price_tax").val(thousands_separators(totaltax));
-                    // $("#price_total").val(thousands_separators(total));
-                    // $(this).closest('tr').remove();
-
                     counter_id = $(this).closest('tr').text();
                     subtot = $("#subtot_d_"+ counter_id).val().replaceAll(",", "");
                     console.log(subtot);
@@ -479,9 +414,6 @@
                     totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
                     totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
                     totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
-
-                    console.log("disc delete :"+totaldisc, "tax del : "+totaltax,"total del :" +totalfinal);
-                    console.log(totalfinal);
 
                     $("#price_disc").val(thousands_separators(totaldisc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));

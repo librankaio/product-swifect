@@ -224,10 +224,8 @@
                                 // console.log(thousands_separators($('#hrgsatuan').val()));
                                 $("#satuan").val(response[i].code_muom)
                                 // $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
-                                totalhrg = hrg * $('#quantity').val()
-                                console.log(totalhrg.toFixed(2));
-                                $("#subtot").val(thousands_separators(totalhrg.toFixed(2)));
-                                $("#hrgsatuan").val(thousands_separators(hrg.toFixed(2)));
+                                $("#subtot").val(thousands_separators(hrg * $('#quantity').val()));
+                                $("#hrgsatuan").val(thousands_separators(hrg));
                             }
                         }
                     }
@@ -259,6 +257,8 @@
                 tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                 subtotparse = subtot.replaceAll(",", "");
+                subtotnum = new bigDecimal(subtotparse);
+                console.log(subtotnum.getValue());
                 $("#datatable tbody").append(tablerow);
                 if(counter == 1){
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
@@ -287,22 +287,9 @@
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * (Number(thistax).toFixed(2) / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
 
-                    // console.log(Number(disc_old) + Number(disc))
-                    // disc_new = Number(disc_old) + Number(disc);
-                    // tax_new =  Number(tax_old) + Number(tax);
-                    // subtot_new = Number(subtot_old) + Number(total);
-
-                    // total =  (subtotparse - disc) + tax;
                     disc_new = Number(Number(disc_old).toFixed(2)) + Number(disc.toFixed(2));
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     subtot_new = Number(Number(subtot_old).toFixed(2)) + Number(total.toFixed(2));
-                    console.log(Number(Number(disc_old).toFixed(2)), Number(disc.toFixed(2)))
-                    console.log(Number(Number(tax_old).toFixed(2)), Number(tax.toFixed(2)))
-                    console.log(Number(Number(subtot_old).toFixed(2)), Number(total.toFixed(2)))
-
-                    console.log(Number(disc_new))
-                    console.log(Number(tax_new))
-                    console.log(Number(subtot_new))
 
                     $("#price_disc").val(thousands_separators(Number(disc_new)));
                     $("#price_tax").val(thousands_separators(Number(tax_new)));
@@ -349,14 +336,6 @@
                     totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
                     totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
                     totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
-
-
-                    // console.log((Number(totalwithdisc.toFixed(2)) + Number(tax.toFixed(2))) - Number(price_total).toFixed(2));
-                    // total = (totalwithdisc + tax) - price_total;
-                    // total = (Number(totalwithdisc.toFixed(2)) + Number(tax.toFixed(2))) - Number(price_total).toFixed(2);
-
-                    console.log("disc delete :"+totaldisc, "tax del : "+totaltax,"total del :" +totalfinal);
-                    console.log(totalfinal);
 
                     $("#price_disc").val(thousands_separators(totaldisc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));

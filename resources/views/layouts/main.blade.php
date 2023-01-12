@@ -21,6 +21,7 @@
     {% block plugins_css %}{% endblock %}
     @yield('topscripts')
 
+    <script src="https://unpkg.com/js-big-decimal@1.3.1/dist/web/js-big-decimal.min.js"></script>
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('../assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('../assets/css/components.css') }}">
