@@ -186,21 +186,27 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-4 align-self-end">
+                    <div class="col-12 col-md-6 col-lg-6 align-self-end">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Subtotal</label>
+                                    <input type="text" class="form-control" name="subtotal" id="subtotal" form="thisform" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Discount</label>
                                     <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tposh->disc, 3, '.', ',') }}" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tax</label>
                                     <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tposh->tax, 3,'.', ',') }}" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Total</label>
                                     <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tposh->grdtotal, 3, '.', ',') }}" readonly>

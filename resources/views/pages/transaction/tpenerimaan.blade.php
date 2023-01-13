@@ -176,21 +176,27 @@
                             </table>
                         </div>                                              
                     </div>      
-                    <div class="col-12 col-md-4 col-lg-4 align-self-end">
+                    <div class="col-12 col-md-6 col-lg-6 align-self-end">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Subtotal</label>
+                                    <input type="text" class="form-control" name="subtotal_h" id="subtotal_h" form="thisform" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Discount</label>
                                     <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tax</label>
                                     <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Total</label>
                                     <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" readonly>
@@ -341,8 +347,9 @@
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
+                    subtot = Number(subtotparse).toFixed(2);
 
-
+                    $("#subtotal_h").val(thousands_separators(subtot));
                     $("#price_disc").val(thousands_separators(disc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
@@ -354,9 +361,10 @@
                     $('#hrgsatuan').val(0);
                     $('#quantity').val(0);
                 }else{
+                    subtot_old = $("#subtotal_h").val().replaceAll(",", "");
                     disc_old = $("#price_disc").val().replaceAll(",", "");
                     tax_old = $("#price_tax").val().replaceAll(",", "");
-                    subtot_old = $("#price_total").val().replaceAll(",", "");
+                    total_old = $("#price_total").val().replaceAll(",", "");
                     thisdisc = $("#disc").val();
                     thistax = $("#tax").val()
 
@@ -364,13 +372,15 @@
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * (Number(thistax).toFixed(2) / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
 
+                    subtot_new = Number(Number(subtotparse).toFixed(2)) + Number(Number(subtot_old).toFixed(2));
                     disc_new = Number(Number(disc_old).toFixed(2)) + Number(disc.toFixed(2));
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
-                    subtot_new = Number(Number(subtot_old).toFixed(2)) + Number(total.toFixed(2));
+                    total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
 
+                    $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
                     $("#price_disc").val(thousands_separators(Number(disc_new)));
                     $("#price_tax").val(thousands_separators(Number(tax_new)));
-                    $("#price_total").val(thousands_separators(Number(subtot_new)));
+                    $("#price_total").val(thousands_separators(Number(total_new)));
 
 
                     $("#nama_item").val('');
@@ -395,10 +405,11 @@
                 if (r == true) {
                     counter_id = $(this).closest('tr').text();
                     subtot = $("#subtot_d_"+ counter_id).val().replaceAll(",", "");
-                    console.log(subtot);
+                    // console.log(subtot);
                     price_tax = $("#price_tax").val().replaceAll(",", "");
                     price_disc = $("#price_disc").val().replaceAll(",", "");
                     price_total = $("#price_total").val().replaceAll(",", "");
+                    subtotal_h = $("#subtotal_h").val().replaceAll(",", "");
                     disc_d = $("#disc_d_"+ counter_id).val()
                     tax_d = $("#tax_d_"+ counter_id).val()
                     
@@ -407,14 +418,16 @@
                     tax = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) * (Number(tax_d).toFixed(2) / 100);
                     total =  (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
                     
-                    console.log("disc before :"+disc, "tax before : "+tax,"total before :" +total);
+                    // console.log("disc before :"+disc, "tax before : "+tax,"total before :" +total);
 
-                    console.log(price_tax, price_disc, price_total);
+                    // console.log(price_tax, price_disc, price_total);
 
+                    subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
                     totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
                     totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
                     totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
 
+                    $("#subtotal_h").val(thousands_separators(subtotal.toFixed(2)));
                     $("#price_disc").val(thousands_separators(totaldisc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));
                     $("#price_total").val(thousands_separators(totalfinal.toFixed(2)));
