@@ -63,6 +63,14 @@ Route::group(['middleware' => ['auth']], function () {
         return view('chartjs');
     })->name('home');
     // Route::get('/home', [ControllerMasterDataBrg::class, 'home'])->name('home');
+    
+    //MUSER or Master data User
+    Route::get('/materdatauser', [ControllerMasterUser::class, 'index'])->name('muser');
+    Route::post('/materdatauserpost', [ControllerMasterUser::class, 'post'])->name('muserpost');
+    Route::get('/materdatauser/{user}/edit', [ControllerMasterUser::class, 'getedit'])->name('materdatauseredit');
+    Route::post('/materdatauser/{user}', [ControllerMasterUser::class, 'update'])->name('materdatauserupdt');
+    Route::post('/materdatauser/delete/{user}', [ControllerMasterUser::class, 'delete'])->name('materdatauserdelete');
+
     //MITEM or Master data Item
     Route::get('/masterdatabarang', [ControllerMasterDataBrg::class, 'index'])->name('mbrg');
     Route::post('/masterdatabarangpost', [ControllerMasterDataBrg::class, 'post'])->name('mbrgpost');
@@ -198,6 +206,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //TPembelian
     Route::get('/tpembelian', [ControllerTransPembelian::class, 'index'])->name('tpembelian');
-    // Route::get('/masteruser', [ControllerMasterUser::class, 'index'])->name('muser');
+
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
 });
