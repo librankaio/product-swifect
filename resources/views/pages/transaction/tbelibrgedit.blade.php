@@ -160,11 +160,11 @@
                                             {{-- <td><input style='width:120px;' readonly class='kodeclass' name='id_d[]' type='text' value='{{ $tposhds[$i]->id }}'></td> --}}
                                             <td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tpembeliands[$i]->code_mitem }}'></td>
                                             <td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='{{ $tpembeliands[$i]->name_mitem }}'></td>
-                                            <td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpembeliands[$i]->qty, 2, '.', ',') }}'></td>
+                                            <td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpembeliands[$i]->qty) }}'></td>
                                             <td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='{{ $tpembeliands[$i]->code_muom }}' name='satuan_d[]'></td>
                                             <td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='{{ number_format($tpembeliands[$i]->price, 2, '.', ',') }}' name='harga_d[]'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc, 2, '.', ',') }}' name='disc_d[]' id='disc_d{{ $counter }}'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax, 2, '.', ',') }}' name='tax_d[]' id='tax_d{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc) }}' name='disc_d[]' id='disc_d{{ $counter }}'></td>
+                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax) }}' name='tax_d[]' id='tax_d{{ $counter }}'></td>
                                             <td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpembeliands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d{{ $counter }}'></td>
                                             <td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ $tpembeliands[$i]->note }}' name='note_d[]'></td>
                                             <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
@@ -180,25 +180,25 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Subtotal</label>
-                                        <input type="text" class="form-control" name="subtotal" id="subtotal" form="thisform" readonly>
+                                        <input type="text" class="form-control" name="subtotal" id="subtotal_h" form="thisform" value="{{ number_format($tpembelianh->subtotal, 2, '.', ',') }}"readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Discount</label>
-                                        <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tpembelianh->disc, 3, '.', ',') }}" readonly>
+                                        <input type="text" class="form-control" name="price_disc" id="price_disc" form="thisform" value="{{ number_format($tpembelianh->disc, 2, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tax</label>
-                                        <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tpembelianh->tax, 3, '.', ',') }}" readonly>
+                                        <input type="text" class="form-control" name="price_tax" form="thisform" id="price_tax" value="{{ number_format($tpembelianh->tax, 2, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Total</label>
-                                        <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tpembelianh->grdtotal, 3, '.', ',') }}" readonly>
+                                        <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($tpembelianh->grdtotal, 2, '.', ',') }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -253,7 +253,7 @@
                 });
             });
 
-            var counter = 1;
+            var counter = parseInt({{ $counter}}) +1;
             $(document).on("click", "#addItem", function(e) {
                 e.preventDefault();
                 if ($('#quantity').val() == 0) {
@@ -277,15 +277,29 @@
 
                 tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_" + counter + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_" + counter + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_" + counter + "'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
 
-                subtotparse = parseFloat(subtot.replace(/,/g, ''));
+                subtotparse = subtot.replaceAll(",", "");
                 $("#datatable tbody").append(tablerow);
                 if (counter == 1) {
-                    disc = subtotparse * ($("#disc").val() / 100);
-                    tax = (subtotparse - disc) * ($("#tax").val() / 100);
-                    total = (subtotparse - disc) + parseFloat(tax);
-                    $("#price_disc").val(thousands_separators(disc));
-                    $("#price_tax").val(thousands_separators(tax));
-                    $("#price_total").val(thousands_separators(total));
+                    disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
+                    tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
+                    total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
+                    subtot = Number(subtotparse).toFixed(2);
+
+                    $("#subtotal_h").val(thousands_separators(subtot));
+                    $("#price_disc").val(thousands_separators(disc.toFixed(2)));
+                    $("#price_tax").val(thousands_separators(tax.toFixed(2)));
+                    $("#price_total").val(thousands_separators(total.toFixed(2)));
+
+                    // disc = subtotparse * ($("#disc").val() / 100);
+                    // tax = (subtotparse - disc) * ($("#tax").val() / 100);
+                    // total = (subtotparse - disc) + parseFloat(tax);
+
+
+                    // $("#price_disc").val(thousands_separators(disc));
+                    // $("#price_tax").val(thousands_separators(tax));
+                    // $("#price_total").val(thousands_separators(total));
+
+
                     $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
@@ -293,22 +307,46 @@
                     $('#quantity').val(0);
                     console.log("Disc : " + disc.toFixed(2), "Tax : " + tax, "Total : " + total);
                 } else {
-                    disc_old = parseFloat($("#price_disc").val().replace(/,/g, ''));
-                    tax_old = parseFloat($("#price_tax").val().replace(/,/g, ''));
-                    subtot_old = parseFloat($("#price_total").val().replace(/,/g, ''));
+                    disc_old = $("#price_disc").val().replaceAll(",", "");
+                    tax_old = $("#price_tax").val().replaceAll(",", "");
+                    total_old = $("#price_total").val().replaceAll(",", "");
+                    subtot_old = $("#subtotal_h").val().replaceAll(",", "");
+                    thisdisc = $("#disc").val();
+                    thistax = $("#tax").val()
+                    console.log(subtot_old);
+                    disc = Number(subtotparse).toFixed(2) * (Number(thisdisc).toFixed(2) / 100);
+                    tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * (Number(thistax).toFixed(2) / 100);
+                    total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
+                    
+                    subtot_new = Number(Number(subtotparse).toFixed(2)) + Number(Number(subtot_old).toFixed(2));
+                    console.log(subtot_new)
+                    disc_new = Number(Number(disc_old).toFixed(2)) + Number(disc.toFixed(2));
+                    tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
+                    total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
 
-                    disc = subtotparse * (parseFloat($("#disc").val()) / 100);
-                    tax = (subtotparse - disc) * (parseFloat($("#tax").val()) / 100);
-                    total = (subtotparse - disc) + tax;
-                    disc_new = disc_old + disc;
-                    tax_new = tax_old + tax;
-                    subtot_new = subtot_old + total;
-                    $("#price_disc").val(thousands_separators(disc_new));
-                    $("#price_tax").val(thousands_separators(tax_new));
-                    $("#price_total").val(thousands_separators(subtot_new));
+                    $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
+                    $("#price_disc").val(thousands_separators(Number(disc_new)));
+                    $("#price_tax").val(thousands_separators(Number(tax_new)));
+                    $("#price_total").val(thousands_separators(Number(total_new)));
+
+
                     $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
+
+
+                    // disc = subtotparse * (parseFloat($("#disc").val()) / 100);
+                    // tax = (subtotparse - disc) * (parseFloat($("#tax").val()) / 100);
+                    // total = (subtotparse - disc) + tax;
+                    // disc_new = disc_old + disc;
+                    // tax_new = tax_old + tax;
+                    // subtot_new = subtot_old + total;
+                    // $("#price_disc").val(thousands_separators(disc_new));
+                    // $("#price_tax").val(thousands_separators(tax_new));
+                    // $("#price_total").val(thousands_separators(subtot_new));
+                    // $("#nama_item").val('');
+                    // $('#tax').val(0);
+                    // $('#disc').val(0);
                     console.log("Disc : " + disc_new, "Tax : " + tax_new, "Total : " + subtot_new);
                 }
                 counter++;
@@ -331,49 +369,90 @@
                     if(counter_id != 0){
                         // counter_id = $(this).closest('tr').text();
                         console.log(counter_id);
-                        subtot = parseFloat($("#subtot_d" + counter_id).val().replace(/,/g, ''));
-                        console.log(subtot);
+                        subtot = $("#subtot_d" + counter_id).val().replaceAll(",", "");
+                        // console.log(subtot.toFixed(2));
 
-                        price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
-                        price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
-                        price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
-                        disc = subtot * ($("#disc_d" + counter_id).val() / 100);
-                        tax = (subtot - disc) * ($("#tax_d" + counter_id).val() / 100);
-                        console.log(price_tax, price_disc, price_total);
-                        console.log(Number(price_tax) - Number(tax));
-                        totaltax = price_tax - tax;
-                        totaldisc = price_disc - disc;
-                        totalwithdisc = (subtot) - disc;
-                        total = price_total - (totalwithdisc + tax);
+                        price_tax = $("#price_tax").val().replaceAll(",", "");
+                        price_disc = $("#price_disc").val().replaceAll(",", "");
+                        price_total = $("#price_total").val().replaceAll(",", "");
+                        subtotal_h = $("#subtotal_h").val().replaceAll(",", "");
+
+                        console.log("tax : "+ price_tax,"price : "+price_disc,"total : "+price_total);
+                        disc_d = $("#disc_d" + counter_id).val()
+                        tax_d = $("#tax_d" + counter_id).val()
+
+                        disc = Number(subtot).toFixed(2) * (Number(disc_d).toFixed(2) / 100);
+                        tax = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) * (Number(tax_d).toFixed(2) / 100);
+                        total = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2))
+
+                        subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
+                        totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
+                        totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
+                        totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
+
+                        // totaltax = price_tax - tax;
+                        // totaldisc = price_disc - disc;
+                        // totalwithdisc = (subtot) - disc;
+                        // total = price_total - (totalwithdisc + tax);
                         console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
 
-                        $("#price_disc").val(thousands_separators(totaldisc));
-                        $("#price_tax").val(thousands_separators(totaltax));
-                        $("#price_total").val(thousands_separators(total));
+                        $("#subtotal_h").val(thousands_separators(subtotal.toFixed(2)));
+                        $("#price_disc").val(thousands_separators(totaldisc.toFixed(2)));
+                        $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));
+                        $("#price_total").val(thousands_separators(totalfinal.toFixed(2)));
                         $(this).closest('tr').remove();
 
                         counter_id = 0;
                     }else{
                         counter_id = $(this).closest('tr').text();
                         console.log(counter_id);
-                        subtot = parseFloat($("#subtot_d_" + counter_id).val().replace(/,/g, ''));
+                        subtot = $("#subtot_d_" + counter_id).val().replaceAll(",", "");
 
-                        price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
-                        price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
-                        price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
-                        disc = subtot * ($("#disc_d_" + counter_id).val() / 100);
-                        tax = (subtot - disc) * ($("#tax_d_" + counter_id).val() / 100);
-                        console.log(price_tax, price_disc, price_total);
-                        totaltax = price_tax - tax;
-                        totaldisc = price_disc - disc;
-                        totalwithdisc = (subtot) - disc;
-                        total = price_total - (totalwithdisc + tax);
-                        console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
+                        price_tax = $("#price_tax").val().replaceAll(",", "");
+                        price_disc = $("#price_disc").val().replaceAll(",", "");
+                        price_total = $("#price_total").val().replaceAll(",", "");
+                        subtotal_h = $("#subtotal_h").val().replaceAll(",", "");
+                        
 
-                        $("#price_disc").val(thousands_separators(totaldisc));
-                        $("#price_tax").val(thousands_separators(totaltax));
-                        $("#price_total").val(thousands_separators(total));
+                        disc_d = $("#disc_d_" + counter_id).val()
+                        tax_d = $("#tax_d_" + counter_id).val()
+                        
+                        disc = Number(subtot).toFixed(2) * (Number(disc_d).toFixed(2) / 100);
+                        tax = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) * (Number(tax_d).toFixed(2) / 100);
+                        total = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2))
+                        console.log("tax : "+ tax,"price : "+disc,"total : "+total);
+                        
+                        subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
+                        totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
+                        totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
+                        totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
+                        console.log("Hasil : "+(Number(subtotal_h) - Number(subtot)) );
+                        $("#subtotal_h").val(thousands_separators(subtotal.toFixed(2)));
+                        $("#price_disc").val(thousands_separators(totaldisc.toFixed(2)));
+                        $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));
+                        $("#price_total").val(thousands_separators(totalfinal.toFixed(2)));
                         $(this).closest('tr').remove();
+
+                        // counter_id = $(this).closest('tr').text();
+                        // console.log(counter_id);
+                        // subtot = parseFloat($("#subtot_d_" + counter_id).val().replace(/,/g, ''));
+
+                        // price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
+                        // price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
+                        // price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
+                        // disc = subtot * ($("#disc_d_" + counter_id).val() / 100);
+                        // tax = (subtot - disc) * ($("#tax_d_" + counter_id).val() / 100);
+                        // console.log(price_tax, price_disc, price_total);
+                        // totaltax = price_tax - tax;
+                        // totaldisc = price_disc - disc;
+                        // totalwithdisc = (subtot) - disc;
+                        // total = price_total - (totalwithdisc + tax);
+                        // console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
+
+                        // $("#price_disc").val(thousands_separators(totaldisc));
+                        // $("#price_tax").val(thousands_separators(totaltax));
+                        // $("#price_total").val(thousands_separators(total));
+                        // $(this).closest('tr').remove();
                     }                    
                 } else {
                     return false;

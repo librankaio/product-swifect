@@ -23,6 +23,7 @@ class Tpembelianh extends Model
         'supplier',
         'mata_uang',
         'nolain',
+        'subtotal',
         'kurs',
         'disc',
         'tax',
