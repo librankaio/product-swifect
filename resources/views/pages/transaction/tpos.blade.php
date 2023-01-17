@@ -151,20 +151,20 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama Item</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Satuan</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">Discount</th>
-                                        <th scope="col">Tax</th>
-                                        <th scope="col">Subtotal</th>
-                                        <th scope="col">Note</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Kode</th>
+                                        <th scope="col" class="border border-5">Nama Item</th>
+                                        <th scope="col" class="border border-5">Quantity</th>
+                                        <th scope="col" class="border border-5">Satuan</th>
+                                        <th scope="col" class="border border-5">Harga</th>
+                                        <th scope="col" class="border border-5">Discount</th>
+                                        <th scope="col" class="border border-5">Tax</th>
+                                        <th scope="col" class="border border-5">Subtotal</th>
+                                        <th scope="col" class="border border-5">Note</th>
+                                        <th scope="col" class="border border-5">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -270,7 +270,7 @@
                 note = $("#note").val();
 
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                 subtotparse = parseFloat(subtot.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);
@@ -290,8 +290,9 @@
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
+                    subtot = Number(subtotparse).toFixed(2);
 
-
+                    $("#subtotal_h").val(thousands_separators(subtot));
                     $("#price_disc").val(thousands_separators(disc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
@@ -338,6 +339,7 @@
                     // subtot_new = Number(subtot_old) + Number(total);
 
                     // total =  (subtotparse - disc) + tax;
+                    subtot_new = Number(Number(subtotparse).toFixed(2)) + Number(Number(subtot_old).toFixed(2));
                     disc_new = Number(Number(disc_old).toFixed(2)) + Number(disc.toFixed(2));
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     subtot_new = Number(Number(subtot_old).toFixed(2)) + Number(total.toFixed(2));
@@ -349,6 +351,7 @@
                     console.log(Number(tax_new))
                     console.log(Number(subtot_new))
 
+                    $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
                     $("#price_disc").val(thousands_separators(Number(disc_new)));
                     $("#price_tax").val(thousands_separators(Number(tax_new)));
                     $("#price_total").val(thousands_separators(Number(subtot_new)));
@@ -400,6 +403,7 @@
                     price_tax = $("#price_tax").val().replaceAll(",", "");
                     price_disc = $("#price_disc").val().replaceAll(",", "");
                     price_total = $("#price_total").val().replaceAll(",", "");
+                    subtotal_h = $("#subtotal_h").val().replaceAll(",", "");
                     disc_d = $("#disc_d_"+ counter_id).val()
                     tax_d = $("#tax_d_"+ counter_id).val()
                     
@@ -412,6 +416,7 @@
 
                     console.log(price_tax, price_disc, price_total);
 
+                    subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
                     totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
                     totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
                     totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
@@ -424,6 +429,7 @@
                     console.log("disc delete :"+totaldisc, "tax del : "+totaltax,"total del :" +totalfinal);
                     console.log(totalfinal);
 
+                    $("#subtotal_h").val(thousands_separators(subtotal.toFixed(2)));
                     $("#price_disc").val(thousands_separators(totaldisc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));
                     $("#price_total").val(thousands_separators(totalfinal.toFixed(2)));

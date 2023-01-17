@@ -137,38 +137,38 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-sm" id="datatable">
+                                <table class="table table-bordered" id="datatable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Kode</th>
-                                            <th scope="col">Nama Item</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Satuan</th>
-                                            <th scope="col">Harga</th>
-                                            <th scope="col">Discount</th>
-                                            <th scope="col">Tax</th>
-                                            <th scope="col">Subtotal</th>
-                                            <th scope="col">Note</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col" class="border border-5">No</th>
+                                            <th scope="col" class="border border-5">Kode</th>
+                                            <th scope="col" class="border border-5">Nama Item</th>
+                                            <th scope="col" class="border border-5">Quantity</th>
+                                            <th scope="col" class="border border-5">Satuan</th>
+                                            <th scope="col" class="border border-5">Harga</th>
+                                            <th scope="col" class="border border-5">Discount</th>
+                                            <th scope="col" class="border border-5">Tax</th>
+                                            <th scope="col" class="border border-5">Subtotal</th>
+                                            <th scope="col" class="border border-5">Note</th>
+                                            <th scope="col" class="border border-5">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php $counter = 0; @endphp
                                         @for($i = 0; $i < sizeof($tpembeliands); $i++) @php $counter++; @endphp <tr>
-                                            <th class="id-header" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
+                                            <th class="id-header border border-5" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
                                             {{-- <td><input style='width:120px;' readonly class='kodeclass' name='id_d[]' type='text' value='{{ $tposhds[$i]->id }}'></td> --}}
-                                            <td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tpembeliands[$i]->code_mitem }}'></td>
-                                            <td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='{{ $tpembeliands[$i]->name_mitem }}'></td>
-                                            <td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpembeliands[$i]->qty) }}'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='{{ $tpembeliands[$i]->code_muom }}' name='satuan_d[]'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='{{ number_format($tpembeliands[$i]->price, 2, '.', ',') }}' name='harga_d[]'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc) }}' name='disc_d[]' id='disc_d{{ $counter }}'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax) }}' name='tax_d[]' id='tax_d{{ $counter }}'></td>
-                                            <td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpembeliands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d{{ $counter }}'></td>
-                                            <td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ $tpembeliands[$i]->note }}' name='note_d[]'></td>
-                                            <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
-                                            <td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value=''></td>
+                                            <td class="border border-5"><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tpembeliands[$i]->code_mitem }}'></td>
+                                            <td class="border border-5"><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='{{ $tpembeliands[$i]->name_mitem }}'></td>
+                                            <td class="border border-5"><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='{{ number_format($tpembeliands[$i]->qty) }}'></td>
+                                            <td class="border border-5"><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='{{ $tpembeliands[$i]->code_muom }}' name='satuan_d[]'></td>
+                                            <td class="border border-5"><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='{{ number_format($tpembeliands[$i]->price, 2, '.', ',') }}' name='harga_d[]'></td>
+                                            <td class="border border-5"><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='{{ number_format($tpembeliands[$i]->disc) }}' name='disc_d[]' id='disc_d{{ $counter }}'></td>
+                                            <td class="border border-5"><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='{{ number_format($tpembeliands[$i]->tax) }}' name='tax_d[]' id='tax_d{{ $counter }}'></td>
+                                            <td class="border border-5"><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ number_format($tpembeliands[$i]->subtotal, 2, '.', ',') }}' name='subtot_d[]' id='subtot_d{{ $counter }}'></td>
+                                            <td class="border border-5"><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='{{ $tpembeliands[$i]->note }}' name='note_d[]'></td>
+                                            <td class="border border-5"><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
+                                            <td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value=''></td>
                                             </tr>
                                             @endfor
                                     </tbody>
@@ -275,7 +275,7 @@
                 note = $("#note").val();
 
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_" + counter + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_" + counter + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_" + counter + "'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th class='border border-5' style='readonly:true;'>" + counter + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_" + counter + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_" + counter + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_" + counter + "'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
 
                 subtotparse = subtot.replaceAll(",", "");
                 $("#datatable tbody").append(tablerow);
@@ -365,7 +365,6 @@
                 counter_id = $(this).val();
                 var r = confirm("Delete Transaksi ?");
                 if (r == true) {
-
                     if(counter_id != 0){
                         // counter_id = $(this).closest('tr').text();
                         console.log(counter_id);

@@ -24,6 +24,7 @@ class Tposh extends Model
         'mata_uang',
         'pay_method',
         'nolain',
+        'subtotal',
         'kurs',
         'disc',
         'tax',
