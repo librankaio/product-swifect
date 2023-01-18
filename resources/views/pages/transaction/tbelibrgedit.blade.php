@@ -180,7 +180,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Subtotal</label>
-                                        <input type="text" class="form-control" name="subtotal" id="subtotal_h" form="thisform" value="{{ number_format($tpembelianh->subtotal, 2, '.', ',') }}"readonly>
+                                        <input type="text" class="form-control" name="subtotal_h" id="subtotal_h" form="thisform" value="{{ number_format($tpembelianh->subtotal, 2, '.', ',') }}"readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -285,7 +285,7 @@
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
                     subtot = Number(subtotparse).toFixed(2);
 
-                    $("#subtotal_h").val(thousands_separators(subtot));
+                    $("#subtotal_h").val(thousands_separators(subtot.toFixed(2)));
                     $("#price_disc").val(thousands_separators(disc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
@@ -324,10 +324,15 @@
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
 
-                    $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
-                    $("#price_disc").val(thousands_separators(Number(disc_new)));
-                    $("#price_tax").val(thousands_separators(Number(tax_new)));
-                    $("#price_total").val(thousands_separators(Number(total_new)));
+                    // $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
+                    // $("#price_disc").val(thousands_separators(Number(disc_new)));
+                    // $("#price_tax").val(thousands_separators(Number(tax_new)));
+                    // $("#price_total").val(thousands_separators(Number(total_new)));
+
+                    $("#subtotal_h").val(thousands_separators(subtot_new.toFixed(2)));
+                    $("#price_disc").val(thousands_separators(disc_new.toFixed(2)));
+                    $("#price_tax").val(thousands_separators(tax_new.toFixed(2)));
+                    $("#price_total").val(thousands_separators(total_new.toFixed(2)));
 
 
                     $("#nama_item").val('');
