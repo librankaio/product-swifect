@@ -245,8 +245,9 @@
                                 // console.log(thousands_separators($('#hrgsatuan').val()));
                                 $("#satuan").val(response[i].code_muom)
                                 // $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
-                                $("#subtot").val(thousands_separators(hrg * $('#quantity').val()));
-                                $("#hrgsatuan").val(thousands_separators(hrg));
+                                subtotal = Number(hrg).toFixed(2) * $('#quantity').val()
+                                $("#subtot").val(thousands_separators(subtotal.toFixed(2)));
+                                $("#hrgsatuan").val(thousands_separators(hrg.toFixed(2)));
                             }
                         }
                     }
@@ -283,7 +284,7 @@
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
-                    subtot = Number(subtotparse).toFixed(2);
+                    subtot = Number(subtotparse);
 
                     $("#subtotal_h").val(thousands_separators(subtot.toFixed(2)));
                     $("#price_disc").val(thousands_separators(disc.toFixed(2)));
@@ -313,16 +314,17 @@
                     subtot_old = $("#subtotal_h").val().replaceAll(",", "");
                     thisdisc = $("#disc").val();
                     thistax = $("#tax").val()
-                    console.log(subtot_old);
+                    console.log("Subtot old pada header : "+subtot_old);
                     disc = Number(subtotparse).toFixed(2) * (Number(thisdisc).toFixed(2) / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * (Number(thistax).toFixed(2) / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
                     
                     subtot_new = Number(Number(subtotparse).toFixed(2)) + Number(Number(subtot_old).toFixed(2));
-                    console.log(subtot_new)
+                    console.log("Subtot lama : "+Number(subtotparse).toFixed(2))
                     disc_new = Number(Number(disc_old).toFixed(2)) + Number(disc.toFixed(2));
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
+                    console.log("Subtot lama+baru : "+subtot_new.toFixed(2))
 
                     // $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
                     // $("#price_disc").val(thousands_separators(Number(disc_new)));
@@ -426,6 +428,8 @@
                         total = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2))
                         console.log("tax : "+ tax,"price : "+disc,"total : "+total);
                         
+                        console.log("subtot lama : "+ Number(subtot).toFixed(2))
+                        console.log("subtot baru : "+ Number(subtotal_h).toFixed(2))
                         subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
                         totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
                         totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
@@ -487,8 +491,8 @@
                 var hrg = Number(hrgparse).toFixed(2);
                 var qty = Number($("#quantity").val()).toFixed(2);
                 var total = Number(hrg) * Number(qty);
-                // console.log(hrg);                
-                $("#subtot").val(thousands_separators(total));
+                // console.log(hrg);    
+                $("#subtot").val(thousands_separators(total.toFixed(2)));        
             });
 
             $(document).on("change", "#kurs", function(e) {

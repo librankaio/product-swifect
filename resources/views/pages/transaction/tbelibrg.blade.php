@@ -229,8 +229,9 @@
                                 // console.log(thousands_separators($('#hrgsatuan').val()));
                                 $("#satuan").val(response[i].code_muom)
                                 // $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
-                                $("#subtot").val(thousands_separators(hrg * $('#quantity').val()));
-                                $("#hrgsatuan").val(thousands_separators(hrg));
+                                subtotal = Number(hrg).toFixed(2) * $('#quantity').val()
+                                $("#subtot").val(thousands_separators(subtotal.toFixed(2)));
+                                $("#hrgsatuan").val(thousands_separators(hrg.toFixed(2)));
                             }
                         }
                     }
@@ -269,9 +270,9 @@
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
-                    subtot = Number(subtotparse).toFixed(2);
+                    subtot = Number(subtotparse);
 
-                    $("#subtotal_h").val(thousands_separators(subtot));
+                    $("#subtotal_h").val(thousands_separators(subtot.toFixed(2)));
                     $("#price_disc").val(thousands_separators(disc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
@@ -299,15 +300,21 @@
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
 
-                    $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
-                    $("#price_disc").val(thousands_separators(Number(disc_new)));
-                    $("#price_tax").val(thousands_separators(Number(tax_new)));
-                    $("#price_total").val(thousands_separators(Number(total_new)));
+                    // $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
+                    // $("#price_disc").val(thousands_separators(Number(disc_new)));
+                    // $("#price_tax").val(thousands_separators(Number(tax_new)));
+                    // $("#price_total").val(thousands_separators(Number(total_new)));
 
+                    $("#subtotal_h").val(thousands_separators(subtot_new.toFixed(2)));
+                    $("#price_disc").val(thousands_separators(disc_new.toFixed(2)));
+                    $("#price_tax").val(thousands_separators(tax_new.toFixed(2)));
+                    $("#price_total").val(thousands_separators(total_new.toFixed(2)));
 
                     $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
+                    $('#hrgsatuan').val(0);
+                    $('#quantity').val(0);
                 }
                 counter++;
                 $("#kode").prop('selectedIndex', 0).trigger('change');
