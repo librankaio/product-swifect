@@ -291,15 +291,6 @@
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
 
-                    // disc = subtotparse * ($("#disc").val() / 100);
-                    // tax = (subtotparse - disc) * ($("#tax").val() / 100);
-                    // total = (subtotparse - disc) + parseFloat(tax);
-
-
-                    // $("#price_disc").val(thousands_separators(disc));
-                    // $("#price_tax").val(thousands_separators(tax));
-                    // $("#price_total").val(thousands_separators(total));
-
 
                     $("#nama_item").val('');
                     $('#tax').val(0);
@@ -326,11 +317,6 @@
                     total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
                     console.log("Subtot lama+baru : "+subtot_new.toFixed(2))
 
-                    // $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
-                    // $("#price_disc").val(thousands_separators(Number(disc_new)));
-                    // $("#price_tax").val(thousands_separators(Number(tax_new)));
-                    // $("#price_total").val(thousands_separators(Number(total_new)));
-
                     $("#subtotal_h").val(thousands_separators(subtot_new.toFixed(2)));
                     $("#price_disc").val(thousands_separators(disc_new.toFixed(2)));
                     $("#price_tax").val(thousands_separators(tax_new.toFixed(2)));
@@ -341,19 +327,6 @@
                     $('#tax').val(0);
                     $('#disc').val(0);
 
-
-                    // disc = subtotparse * (parseFloat($("#disc").val()) / 100);
-                    // tax = (subtotparse - disc) * (parseFloat($("#tax").val()) / 100);
-                    // total = (subtotparse - disc) + tax;
-                    // disc_new = disc_old + disc;
-                    // tax_new = tax_old + tax;
-                    // subtot_new = subtot_old + total;
-                    // $("#price_disc").val(thousands_separators(disc_new));
-                    // $("#price_tax").val(thousands_separators(tax_new));
-                    // $("#price_total").val(thousands_separators(subtot_new));
-                    // $("#nama_item").val('');
-                    // $('#tax').val(0);
-                    // $('#disc').val(0);
                     console.log("Disc : " + disc_new, "Tax : " + tax_new, "Total : " + subtot_new);
                 }
                 counter++;
@@ -396,10 +369,6 @@
                         totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
                         totalfinal = Number(price_total).toFixed(2) - Number(total).toFixed(2);
 
-                        // totaltax = price_tax - tax;
-                        // totaldisc = price_disc - disc;
-                        // totalwithdisc = (subtot) - disc;
-                        // total = price_total - (totalwithdisc + tax);
                         console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
 
                         $("#subtotal_h").val(thousands_separators(subtotal.toFixed(2)));
@@ -428,8 +397,6 @@
                         total = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2))
                         console.log("tax : "+ tax,"price : "+disc,"total : "+total);
                         
-                        console.log("subtot lama : "+ Number(subtot).toFixed(2))
-                        console.log("subtot baru : "+ Number(subtotal_h).toFixed(2))
                         subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
                         totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);
                         totaldisc = Number(price_disc).toFixed(2) - Number(disc).toFixed(2);
@@ -440,27 +407,6 @@
                         $("#price_tax").val(thousands_separators(totaltax.toFixed(2)));
                         $("#price_total").val(thousands_separators(totalfinal.toFixed(2)));
                         $(this).closest('tr').remove();
-
-                        // counter_id = $(this).closest('tr').text();
-                        // console.log(counter_id);
-                        // subtot = parseFloat($("#subtot_d_" + counter_id).val().replace(/,/g, ''));
-
-                        // price_tax = parseFloat($("#price_tax").val().replace(/,/g, ''))
-                        // price_disc = parseFloat($("#price_disc").val().replace(/,/g, ''))
-                        // price_total = parseFloat($("#price_total").val().replace(/,/g, ''))
-                        // disc = subtot * ($("#disc_d_" + counter_id).val() / 100);
-                        // tax = (subtot - disc) * ($("#tax_d_" + counter_id).val() / 100);
-                        // console.log(price_tax, price_disc, price_total);
-                        // totaltax = price_tax - tax;
-                        // totaldisc = price_disc - disc;
-                        // totalwithdisc = (subtot) - disc;
-                        // total = price_total - (totalwithdisc + tax);
-                        // console.log("disc delete :" + totaldisc, "tax del : " + totaltax, "total del :" + total);
-
-                        // $("#price_disc").val(thousands_separators(totaldisc));
-                        // $("#price_tax").val(thousands_separators(totaltax));
-                        // $("#price_total").val(thousands_separators(total));
-                        // $(this).closest('tr').remove();
                     }                    
                 } else {
                     return false;

@@ -223,12 +223,9 @@
                         // console.log(response);
                         for (i=0; i < response.length; i++) {
                             if(response[i].code == kode){
-                                // $("#hrgsatuan").val((Number(response[i].price2).toFixed(2)));
                                 $("#nama_item").val(response[i].name)
                                 hrg = Number(response[i].price2);
-                                // console.log(thousands_separators($('#hrgsatuan').val()));
                                 $("#satuan").val(response[i].code_muom)
-                                // $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
                                 subtotal = Number(hrg).toFixed(2) * $('#quantity').val()
                                 $("#subtot").val(thousands_separators(subtotal.toFixed(2)));
                                 $("#hrgsatuan").val(thousands_separators(hrg.toFixed(2)));

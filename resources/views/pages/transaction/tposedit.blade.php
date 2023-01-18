@@ -295,15 +295,6 @@
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
 
-                    // disc = subtotparse * ($("#disc").val() / 100);
-                    // tax = (subtotparse - disc) * ($("#tax").val() / 100);
-                    // total = (subtotparse - disc) + parseFloat(tax);
-
-
-                    // $("#price_disc").val(thousands_separators(disc));
-                    // $("#price_tax").val(thousands_separators(tax));
-                    // $("#price_total").val(thousands_separators(total));
-
 
                     $("#nama_item").val('');
                     $('#tax').val(0);
@@ -349,38 +340,6 @@
                 $("#merk").val('');
                 $("#subtot").val('');
                 $("#note").val('');
-                // END CODE BARU
-
-                // $("#datatable tbody").append(tablerow);
-
-                // disc_input = subtotparse * (discount / 100);
-                // tax_input = (subtotparse - disc_input) * (tax / 100);
-                // total_input = (subtotparse - disc_input) + tax_input;
-                // // console.log(tax_input);
-                // disc_old = parseFloat($("#price_disc").val().replace(/,/g, ''));
-                // tax_old = parseFloat($("#price_tax").val().replace(/,/g, ''));
-                // subtot_old = parseFloat($("#price_total").val().replace(/,/g, ''));
-
-                // disc_new = disc_old + parseFloat(disc_input);
-                // tax_new = tax_old + parseFloat(tax_input);
-                // subtot_new = total_input + parseFloat(total_input);
-
-                // $("#price_disc").val(thousands_separators(disc_new));
-                // $("#price_tax").val(thousands_separators(tax_new));
-                // $("#price_total").val(thousands_separators(subtot_new));
-                // $("#nama_item").val('');
-                // $('#tax').val(0);
-                // $('#disc').val(0);
-
-                // counter++;
-                // $("#kode").prop('selectedIndex', 0).trigger('change');
-                // $("#nama").val('');
-                // $("#hrgsatuan").val(0);
-                // $("#satuan").val('');
-                // $("#quantity").val(0);
-                // $("#merk").val('');
-                // $("#subtot").val('');
-                // $("#note").val('');
             });
 
             $(document).on("click", ".delete", function(e) {

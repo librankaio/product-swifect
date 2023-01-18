@@ -155,20 +155,20 @@
                                 {{-- <label>counter</label> --}}
                                 <input type="text" class="form-control" id="counter" value="0" readonly hidden>
                             </div>
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama Item</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Satuan</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">Discount</th>
-                                        <th scope="col">Tax</th>
-                                        <th scope="col">Subtotal</th>
-                                        <th scope="col">Note</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Kode</th>
+                                        <th scope="col" class="border border-5">Nama Item</th>
+                                        <th scope="col" class="border border-5">Quantity</th>
+                                        <th scope="col" class="border border-5">Satuan</th>
+                                        <th scope="col" class="border border-5">Harga</th>
+                                        <th scope="col" class="border border-5">Discount</th>
+                                        <th scope="col" class="border border-5">Tax</th>
+                                        <th scope="col" class="border border-5">Subtotal</th>
+                                        <th scope="col" class="border border-5">Note</th>
+                                        <th scope="col" class="border border-5">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -237,14 +237,12 @@
                         // console.log(response);
                         for (i=0; i < response.length; i++) {
                             if(response[i].code == kode){
-                                // $("#hrgsatuan").val((Number(response[i].price2).toFixed(2)));
-                                $("#nama_item").val(response[i].name)
                                 hrg = Number(response[i].price2);
-                                // console.log(thousands_separators($('#hrgsatuan').val()));
+                                $("#nama_item").val(response[i].name)
                                 $("#satuan").val(response[i].code_muom)
-                                // $("#subtot").val($("#hrgsatuan").val() * $('#quantity').val());
-                                $("#subtot").val(thousands_separators(hrg * $('#quantity').val()));
-                                $("#hrgsatuan").val(thousands_separators(hrg));
+                                subtotal = Number(hrg).toFixed(2) * $('#quantity').val()
+                                $("#subtot").val(thousands_separators(subtotal.toFixed(2)));
+                                $("#hrgsatuan").val(thousands_separators(hrg.toFixed(2)));
                             }
                         }
                     }
@@ -273,7 +271,7 @@
                                 if(no == 0){
                                     no++;
                                 }
-                                tablerow = "<tr><th style='readonly:true;'>" + no + "</th><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + response[i].code_mitem + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + response[i].name_mitem + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + Number(response[i].qty).toFixed() + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + response[i].code_muom + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + thousands_separators(Number(response[i].price).toFixed(3)) + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + Number(response[i].disc).toFixed() + "' name='disc_d[]' id='disc_d_"+no+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + Number(response[i].tax).toFixed() + "' name='tax_d[]' id='tax_d_"+no+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + thousands_separators(Number(response[i].subtotal).toFixed(3)) + "' name='subtot_d[]' id='subtot_d_"+no+"'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + response[i].note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                                 // subtotparse = parseFloat(subtot.replace(/,/g, ''));
                                 no++;
