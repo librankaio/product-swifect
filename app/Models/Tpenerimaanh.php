@@ -25,6 +25,7 @@ class Tpenerimaanh extends Model
         'mata_uang',
         'nolain',
         'kurs',
+        'subtotal',
         'disc',
         'tax',
         'grdtotal',

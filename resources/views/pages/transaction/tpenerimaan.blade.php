@@ -181,7 +181,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Subtotal</label>
-                                    <input type="text" class="form-control" name="subtotal_h" id="subtotal_h" form="thisform" readonly>
+                                    <input type="text" class="form-control" name="subtot" id="subtotal_h" form="thisform" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -261,25 +261,53 @@
                     success: function(response) {
                         // console.log(response);
                         // console.log(response.length)
-                        if($('#counter').val() != ''){
+                        if($('#counter').val() == 0){
                             no = Number($('#counter').val());
-                        }else{
-                            no = 0;
-                        }
-                        for (i=0; i < response.length; i++) {
-                            if(response[i].no_pembelianh == nopembelian){
-                                if(no == 0){
+                            for (i=0; i < response.length; i++) {
+                                if(response[i].no_pembelianh == nopembelian){
+                                    if(no == 0){
+                                        no++;
+                                    }
+                                    note = '';
+                                    if(response[i].note != null){
+                                        note = response[i].note
+                                    }else if(response[i].note == null){
+                                        note = ''
+                                    }
+                                    tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + no + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + response[i].code_mitem + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + response[i].name_mitem + "'></td><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + Number(response[i].qty).toFixed() + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + response[i].code_muom + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + thousands_separators(Number(response[i].price).toFixed(2)) + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + Number(response[i].disc).toFixed() + "' name='disc_d[]' id='disc_d_"+no+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + Number(response[i].tax).toFixed() + "' name='tax_d[]' id='tax_d_"+no+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + thousands_separators(Number(response[i].subtotal).toFixed(2)) + "' name='subtot_d[]' id='subtot_d_"+no+"'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                    
+                                    // subtotparse = parseFloat(subtot.replace(/,/g, ''));
                                     no++;
+                                    $('#counter').val(no);
+                                    $("#datatable tbody").append(tablerow);
                                 }
-                                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
-                
-                                // subtotparse = parseFloat(subtot.replace(/,/g, ''));
-                                no++;
-                                $('#counter').val(no);
-                                $("#datatable tbody").append(tablerow);
+                            }
+                        }else if($('#counter').val() >= 0){
+                            $("#datatable tbody").empty();
+                            $('#counter').val(no);
+
+                            no = Number($('#counter').val());
+                            for (i=0; i < response.length; i++) {
+                                if(response[i].no_pembelianh == nopembelian){
+                                    if(no == 0){
+                                        no++;
+                                    }
+                                    note = '';
+                                    if(response[i].note != null){
+                                        note = response[i].note
+                                    }else if(response[i].note == null){
+                                        note = ''
+                                    }
+                                    tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + no + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + response[i].code_mitem + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + response[i].name_mitem + "'></td><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + Number(response[i].qty).toFixed() + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + response[i].code_muom + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + thousands_separators(Number(response[i].price).toFixed(2)) + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + Number(response[i].disc).toFixed() + "' name='disc_d[]' id='disc_d_"+no+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + Number(response[i].tax).toFixed() + "' name='tax_d[]' id='tax_d_"+no+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + thousands_separators(Number(response[i].subtotal).toFixed(2)) + "' name='subtot_d[]' id='subtot_d_"+no+"'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                    
+                                    // subtotparse = parseFloat(subtot.replace(/,/g, ''));
+                                    no++;
+                                    $('#counter').val(no);
+                                    $("#datatable tbody").append(tablerow);
+                                }
                             }
                         }
-                        $("#counter").val(Number(no));
+                        
                         console.log(Number($("#counter").val()));
                         $.ajax({
                             url: '{{ route('getnopembelianh') }}', 
@@ -294,9 +322,11 @@
                                 no = 0;
                                 for (j=0; j < response.length; j++) {
                                     if(response[j].no == nopembelian){
-                                        disc = Number(response[j].disc).toFixed(3);
-                                        tax = Number(response[j].tax).toFixed(3);
-                                        total = Number(response[j].grdtotal).toFixed(3);
+                                        subtot = Number(response[j].subtotal).toFixed(2);
+                                        disc = Number(response[j].disc).toFixed(2);
+                                        tax = Number(response[j].tax).toFixed(2);
+                                        total = Number(response[j].grdtotal).toFixed(2);
+                                        $("#subtotal_h").val(thousands_separators(subtot))
                                         $("#price_disc").val(thousands_separators(disc))
                                         $("#price_tax").val(thousands_separators(tax))
                                         $("#price_total").val(thousands_separators(total))
@@ -337,17 +367,17 @@
                 note = $("#note").val();
 
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' hidden readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='kodeclass form-control' name='kode_d[]' type='text' value='" + kode + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='" + nama_item + "'></td><td class='border border-5'class='border border-5'><input type='text' style='width:100px;' form='thisform' class='quantityclass form-control' name='quantity[]' value='" + quantity + "'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='satuanclass form-control' value='" + satuan + "' name='satuan_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='hargaclass form-control' value='" + hrgsatuan + "' name='harga_d[]'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='discclass form-control' value='" + discount + "' name='disc_d[]' id='disc_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='taxclass form-control' value='" + tax + "' name='tax_d[]' id='tax_d_"+counter+"'></td><td class='border border-5'><input type='text' readonly form='thisform' style='width:100px;' class='subtotclass form-control' value='" + subtot + "' name='subtot_d[]' id='subtot_d_"+counter+"'></td><td class='border border-5'><input type='text' form='thisform' style='width:100px;' class='subtotclass form-control' value='" + note + "' name='note_d[]'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
-                subtotparse = parseFloat(subtot.replace(/,/g, ''));
+                subtotparse = subtot.replaceAll(",", "");
                 $("#datatable tbody").append(tablerow);
                 if(counter == 1){
                     disc = Number(subtotparse).toFixed(2) * ($("#disc").val() / 100);
                     tax = (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) * ($("#tax").val() / 100);
                     total =  (Number(subtotparse).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
-                    subtot = Number(subtotparse).toFixed(2);
+                    subtot = Number(subtotparse);
 
-                    $("#subtotal_h").val(thousands_separators(subtot));
+                    $("#subtotal_h").val(thousands_separators(subtot.toFixed(2)));
                     $("#price_disc").val(thousands_separators(disc.toFixed(2)));
                     $("#price_tax").val(thousands_separators(tax.toFixed(2)));
                     $("#price_total").val(thousands_separators(total.toFixed(2)));
@@ -375,15 +405,16 @@
                     tax_new = Number(Number(tax_old).toFixed(2)) + Number(tax.toFixed(2));
                     total_new = Number(Number(total_old).toFixed(2)) + Number(total.toFixed(2));
 
-                    $("#subtotal_h").val(thousands_separators(Number(subtot_new)));
-                    $("#price_disc").val(thousands_separators(Number(disc_new)));
-                    $("#price_tax").val(thousands_separators(Number(tax_new)));
-                    $("#price_total").val(thousands_separators(Number(total_new)));
-
+                    $("#subtotal_h").val(thousands_separators(subtot_new.toFixed(2)));
+                    $("#price_disc").val(thousands_separators(disc_new.toFixed(2)));
+                    $("#price_tax").val(thousands_separators(tax_new.toFixed(2)));
+                    $("#price_total").val(thousands_separators(total_new.toFixed(2)));
 
                     $("#nama_item").val('');
                     $('#tax').val(0);
                     $('#disc').val(0);
+                    $('#hrgsatuan').val(0);
+                    $('#quantity').val(0);
                 }
                 counter++;
                 $("#counter").val(counter);
@@ -403,7 +434,7 @@
                 if (r == true) {
                     counter_id = $(this).closest('tr').text();
                     subtot = $("#subtot_d_"+ counter_id).val().replaceAll(",", "");
-                    // console.log(subtot);
+                    
                     price_tax = $("#price_tax").val().replaceAll(",", "");
                     price_disc = $("#price_disc").val().replaceAll(",", "");
                     price_total = $("#price_total").val().replaceAll(",", "");
@@ -415,10 +446,6 @@
                     disc = Number(subtot).toFixed(2) * (Number(disc_d).toFixed(2) / 100);
                     tax = (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) * (Number(tax_d).toFixed(2) / 100);
                     total =  (Number(subtot).toFixed(2) - Number(disc).toFixed(2)) + Number(tax.toFixed(2));
-                    
-                    // console.log("disc before :"+disc, "tax before : "+tax,"total before :" +total);
-
-                    // console.log(price_tax, price_disc, price_total);
 
                     subtotal = Number(subtotal_h).toFixed(2) - Number(subtot).toFixed(2);
                     totaltax = Number(price_tax).toFixed(2) - Number(tax).toFixed(2);

@@ -44,9 +44,9 @@ class ControllerTransPenerimaan extends Controller
     public function getnopembelianh(Request $request){
         $nopembelian = $request->nopembelian;
         if($nopembelian == ''){
-            $items = Tpembelianh::select('id','no','tdt','cabang','supplier','mata_uang','nolain','disc','tax','grdtotal','note')->whereNull('deleted_at')->get();
+            $items = Tpembelianh::select('id','no','tdt','cabang','supplier','mata_uang','nolain','subtotal','disc','tax','grdtotal','note')->whereNull('deleted_at')->get();
         }else{
-            $items = Tpembelianh::select('id','no','tdt','cabang','supplier','mata_uang','nolain','disc','tax','grdtotal','note')->whereNull('deleted_at')->where('no','=',$nopembelian)->get();
+            $items = Tpembelianh::select('id','no','tdt','cabang','supplier','mata_uang','nolain','subtotal','disc','tax','grdtotal','note')->whereNull('deleted_at')->where('no','=',$nopembelian)->get();
         }
         return json_encode($items);
     }
@@ -64,7 +64,7 @@ class ControllerTransPenerimaan extends Controller
                 'supplier' => $request->code_cust,
                 'nolain' => $request->nolain,
                 'kurs' => (float) str_replace(',', '', $request->kurs),
-                'subtotal' => (float) str_replace(',', '', $request->subtotal),
+                'subtotal' => (float) str_replace(',', '', $request->subtot),
                 'disc' => (float) str_replace(',', '', $request->price_disc),
                 'tax' => (float) str_replace(',', '', $request->price_tax),
                 'grdtotal' => (float) str_replace(',', '', $request->price_total),
@@ -116,7 +116,7 @@ class ControllerTransPenerimaan extends Controller
             'supplier' => request('code_cust'),
             'nolain' => request('nolain'),
             'kurs' => (float) str_replace(',', '', request('kurs')),
-            'subtotal' => (float) str_replace(',', '', request('subtotal')),
+            'subtotal' => (float) str_replace(',', '', request('subtot')),
             'disc' => (float) str_replace(',', '', request('price_disc')),
             'tax' => (float) str_replace(',', '', request('price_tax')),
             'grdtotal' => (float) str_replace(',', '', request('price_total')),
