@@ -117,13 +117,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Deskripsi</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Deskripsi</th>
+                                        <th scope="col" class="border border-5">Total</th>
+                                        <th scope="col" class="border border-5">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -181,7 +181,7 @@
                     return false;
                 }
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'></td><td><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input type='text' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                 totalparse = parseFloat(total.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);

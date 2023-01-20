@@ -117,13 +117,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Deskripsi</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Deskripsi</th>
+                                        <th scope="col" class="border border-5">Total</th>
+                                        <th scope="col" class="border border-5">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,11 +131,11 @@
                                     @for($i = 0; $i < sizeof($tbayaropsds); $i++)
                                     @php $counter++; @endphp
                                     <tr>
-                                        <th class="id-header" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
-                                        <td><input style='width:120px;' readonly class='noteclass form-control' name='note_d[]' type='text' value='{{ $tbayaropsds[$i]->note }}'></td>
-                                        <td><input style='width:120px;' readonly class='totalclass form-control' name='total_d[]' id='total_d{{ $counter }}' type='text' value='{{ number_format( $tbayaropsds[$i]->total, 2, '.', ',') }}'></td>
-                                        <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
-                                        <td><input style='width:120px;' readonly hidden class='noteclass form-control' name='no_d[]' type='text' value='{{ $tbayaropsds[$i]->no_tbayaropsh }}'></td>
+                                        <th class="id-header border border-5" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
+                                        <td class="border border-5"><input style='width:120px;' readonly class='noteclass form-control' name='note_d[]' type='text' value='{{ $tbayaropsds[$i]->note }}'></td>
+                                        <td class="border border-5"><input style='width:120px;' readonly class='totalclass form-control' name='total_d[]' id='total_d{{ $counter }}' type='text' value='{{ number_format( $tbayaropsds[$i]->total, 2, '.', ',') }}'></td>
+                                        <td class="border border-5"><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
+                                        <td hidden><input style='width:120px;' readonly class='noteclass form-control' name='no_d[]' type='text' value='{{ $tbayaropsds[$i]->no_tbayaropsh }}'></td>
                                     </tr>
                                     @endfor
                                 </tbody>                            
@@ -192,7 +192,7 @@
                     return false;
                 }
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'><td><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td></td><td><button title='Delete' class='delete btn btn-primary' value="+counter+"><i style='font-size:15pt;color:#fff;' class='fa fa-trash'></i></button></td><td><input style='width:120px;' readonly hidden form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input type='text' form='thisform' class='noteclass form-control' name='note_d[]' value='" + note + "'><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='totalclass form-control' name='total_d[]' id='total_d"+counter+"' type='text' value='" + total + "'></td></td><td class='border border-5'><button title='Delete' class='delete btn btn-primary' value="+counter+"><i style='font-size:15pt;color:#fff;' class='fa fa-trash'></i></button></td><td hidden><input style='width:120px;' readonly form='thisform' class='noclass form-control' name='no_d[]' type='text' value='" + no + "'></td></tr>";
                 
                 totalparse = parseFloat(total.replace(/,/g, ''));
                 $("#datatable tbody").append(tablerow);
