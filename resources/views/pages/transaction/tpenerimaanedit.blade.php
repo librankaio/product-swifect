@@ -144,8 +144,12 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="form-group">
+                                @php $datacounter = 0; @endphp
+                                @for($j = 0; $j < sizeof($tpenerimaands); $j++) 
+                                @php $datacounter++; @endphp
+                                @endfor
                                 {{-- <label>counter</label> --}}
-                                <input type="text" class="form-control" id="counter" value="0" readonly>
+                                <input type="text" class="form-control" id="counter" value="{{ $datacounter + 1 }}" readonly>
                             </div>
                             <table class="table table-sm" id="datatable">
                                 <thead>
