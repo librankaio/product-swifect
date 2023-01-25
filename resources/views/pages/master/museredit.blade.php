@@ -54,21 +54,31 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="d-block">Admin User</label>
+                                    <label class="d-block">Admin Privilage</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios1">
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Yes
+                                        <input class="form-check-input" type="checkbox" name="create_acs" value="C" checked>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                          Create
                                         </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios2">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            No
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="read_acs" value="R" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                          Read
                                         </label>
-                                    </div>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="update_acs" value="U" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                          Update
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="delete_acs" value="D" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                          Delete
+                                        </label>
+                                      </div>
                                 </div>
                             </div>
                         </div>

@@ -16,8 +16,8 @@ class ControllerMasterUser extends Controller
     }
 
     public function post(Request $request){      
+        dd($request->all());
         $checkexist = User::select('id','username','email')->where('username','=', $request->username)->first();
-        // dd($checkexist);
         if($checkexist == null){
             $password = Hash::make($request->password);
             // dd($password);
@@ -25,7 +25,11 @@ class ControllerMasterUser extends Controller
                 'username' => $request->username,
                 'name' => $request->username,
                 'email' => $request->email,
-                'password' => $request->password
+                'password' => $request->password,
+                'create_acs' => $request->create_acs,
+                'read_acs' => $request->read_acs,
+                'update_acs' => $request->update_acs,
+                'delete_acs' => $request->delete_acs
             ]);
             return redirect()->back();
         }else{
@@ -46,6 +50,10 @@ class ControllerMasterUser extends Controller
             'name' => request('username'),
             'email' => request('email'),
             'password' => request('password'),
+            'create_acs' => request('create_acs'),
+            'read_acs' => request('read_acs'),
+            'update_acs' => request('update_acs'),
+            'delete_acs' => request('delete_acs')
         ]);
 
         return redirect()->route('muser');        

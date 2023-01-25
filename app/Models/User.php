@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'create_acs',
+        'read_acs',
+        'update_acs',
+        'delete_acs',
     ];
 
     /**

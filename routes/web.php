@@ -55,6 +55,7 @@ Route::get('/modal', function () {
 //LOGIN
 Route::get('/', [ControllerLogin::class, 'index'])->name('login');
 Route::post('/', [ControllerLogin::class, 'postLogin'])->name('postlogin');
+Route::get('logout', [ControllerLogin::class, 'logout'])->name('logout');
 // Route::get('/', [ControllerMasterDataBrg::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function () {

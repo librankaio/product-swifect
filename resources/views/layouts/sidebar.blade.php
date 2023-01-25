@@ -3,7 +3,14 @@
     <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-cubes"></i><span>Master Data</span></a>
         <ul class="dropdown-menu">
-            <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>
+            @php
+                $role = session('privilage') ;
+            @endphp
+            {{-- @if($role == 'ADM')
+            <li><a class="nav-link" href="{{ route('muser') }}" style="pointer-events: none;">Master Data User</a></li>           
+            @elseif($role != 'ADM')     
+            @endif --}}
+            <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>          
             <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>
             <li><a class="nav-link" href="{{ route('msatuan') }}">Master Satuan</a></li>
             <li><a class="nav-link" href="{{ route('mgrup') }}">Master Data Group</a></li>

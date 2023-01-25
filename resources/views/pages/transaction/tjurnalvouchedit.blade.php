@@ -108,16 +108,16 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-sm" id="datatable">
+                                <table class="table table-bordered" id="datatable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Kode</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Debit</th>
-                                            <th scope="col">Credit</th>
-                                            <th scope="col">Memo/ Catatan</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col" class="border border-5">No</th>
+                                            <th scope="col" class="border border-5">Kode</th>
+                                            <th scope="col" class="border border-5">Nama</th>
+                                            <th scope="col" class="border border-5">Debit</th>
+                                            <th scope="col" class="border border-5">Credit</th>
+                                            <th scope="col" class="border border-5">Memo/ Catatan</th>
+                                            <th scope="col" class="border border-5">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -125,14 +125,14 @@
                                         @for($i = 0; $i < sizeof($tjurnalvouchds); $i++)
                                         @php $counter++; @endphp
                                         <tr>
-                                            <th class="id-header" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
-                                            <td><input style='width:120px;' readonly class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tjurnalvouchds[$i]->kode }}'></td>
-                                            <td><input style='width:120px;' readonly class='namaclass form-control' name='nama_d[]' type='text' value='{{ $tjurnalvouchds[$i]->nama }}'></td>
-                                            <td><input style='width:120px;' readonly class='debitclass form-control' name='debit_d[]' id='debit_d{{ $counter }}' type='text' value='{{ number_format( $tjurnalvouchds[$i]->debit, 2, '.', ',') }}'></td>
-                                            <td><input style='width:120px;' readonly class='creditclass form-control' name='credit_d[]' id='credit_d{{ $counter }}' type='text' value='{{ number_format( $tjurnalvouchds[$i]->credit, 2, '.', ',') }}'></td>
-                                            <td><input style='width:120px;' readonly class='memoclass form-control' name='memo_d[]' type='text' value='{{ $tjurnalvouchds[$i]->memo }}'></td>
-                                            <td><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
-                                            <td><input style='width:120px;' readonly hidden class='noteclass form-control' name='no_d[]' type='text' value='{{ $tjurnalvouchds[$i]->no_tjurnalvouchh }}'></td>
+                                            <th class="id-header border border-5" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
+                                            <td class="border border-5"><input style='width:120px;' readonly class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tjurnalvouchds[$i]->kode }}'></td>
+                                            <td class="border border-5"><input style='width:120px;' readonly class='namaclass form-control' name='nama_d[]' type='text' value='{{ $tjurnalvouchds[$i]->nama }}'></td>
+                                            <td class="border border-5"><input style='width:120px;' readonly class='debitclass form-control' name='debit_d[]' id='debit_d{{ $counter }}' type='text' value='{{ number_format( $tjurnalvouchds[$i]->debit, 2, '.', ',') }}'></td>
+                                            <td class="border border-5"><input style='width:120px;' readonly class='creditclass form-control' name='credit_d[]' id='credit_d{{ $counter }}' type='text' value='{{ number_format( $tjurnalvouchds[$i]->credit, 2, '.', ',') }}'></td>
+                                            <td class="border border-5"><input style='width:120px;' readonly class='memoclass form-control' name='memo_d[]' type='text' value='{{ $tjurnalvouchds[$i]->memo }}'></td>
+                                            <td class="border border-5"><button title='Delete' class='delete btn btn-primary' value="{{ $counter }}"><i style='font-size:15pt;color:#ffff;' class='fa fa-trash'></i></button></td>
+                                            <td hidden><input style='width:120px;' readonly class='noteclass form-control' name='no_d[]' type='text' value='{{ $tjurnalvouchds[$i]->no_tjurnalvouchh }}'></td>
                                         </tr>
                                         @endfor
                                     </tbody>                            
@@ -221,7 +221,7 @@
                 //     return false;
                 // }
 
-                tablerow = "<tr><th style='readonly:true;'>" + counter + "</th><td><input type='text' style='width:100px;' form='thisform' class='kodeclass form-control' name='kode_d[]' value='" + kode + "'></td><td><input style='width:120px;' readonly form='thisform' class='namaclass form-control' name='nama_d[]' type='text' value='" + nama + "'></td><td><input style='width:120px;' readonly form='thisform' class='debitclass form-control' name='debit_d[]' type='text' value='" + debit + "'></td><td><input style='width:120px;' readonly form='thisform' class='creditclass form-control' name='credit_d[]' type='text' value='" + credit + "'></td><td><input style='width:120px;' readonly form='thisform' class='memoclass form-control' name='memo_d[]' type='text' value='" + memo + "'></td><td><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td><input style='width:120px;' readonly hidden form='thisform' class='novouchclass form-control' name='no_d[]' type='text' value='" + novouch + "'></td></tr>";
+                tablerow = "<tr><th style='readonly:true;' class='border border-5'>" + counter + "</th><td class='border border-5'><input type='text' style='width:100px;' form='thisform' class='kodeclass form-control' name='kode_d[]' value='" + kode + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='namaclass form-control' name='nama_d[]' type='text' value='" + nama + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='debitclass form-control' name='debit_d[]' type='text' value='" + debit + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='creditclass form-control' name='credit_d[]' type='text' value='" + credit + "'></td><td class='border border-5'><input style='width:120px;' readonly form='thisform' class='memoclass form-control' name='memo_d[]' type='text' value='" + memo + "'></td><td class='border border-5'><a title='Delete' class='delete'><i style='font-size:15pt;color:#6777ef;' class='fa fa-trash'></i></a></td><td hidden><input style='width:120px;' readonly form='thisform' class='novouchclass form-control' name='no_d[]' type='text' value='" + novouch + "'></td></tr>";
                 
                 $("#datatable tbody").append(tablerow);
                 // totalparse = parseFloat(total.replace(/,/g, ''));
