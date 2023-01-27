@@ -56,12 +56,12 @@
                                 <div class="form-group">
                                     <label class="d-block">Admin Privilage</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="create_acs" value="C" checked>
+                                        <input class="form-check-input" type="checkbox" name="create_acs" id="checkall" checked>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                          Create
+                                          Check All
                                         </label>
                                       </div>
-                                      <div class="form-check">
+                                      {{-- <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="read_acs" value="R" checked>
                                         <label class="form-check-label" for="flexCheckChecked">
                                           Read
@@ -78,7 +78,476 @@
                                         <label class="form-check-label" for="flexCheckChecked">
                                           Delete
                                         </label>
-                                      </div>
+                                      </div> --}}
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="border border-5">Feature</th>
+                                                    <th scope="col" class="border border-5">Create</th>
+                                                    <th scope="col" class="border border-5">Read</th>
+                                                    <th scope="col" class="border border-5">Update</th>
+                                                    <th scope="col" class="border border-5">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mitem'></td>
+                                                    <td class="border border-5">Master Item</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_mitem" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_mitem" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_mitem" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_mitem" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='muser'></td>
+                                                    <td class="border border-5">Master User</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_user" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_user" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_user" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_user" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='msatuan'></td>
+                                                    <td class="border border-5">Master Satuan</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_satuan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_satuan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_satuan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_satuan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mdtgrp'></td>
+                                                    <td class="border border-5">Master Data Group</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_group" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_group" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_group" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_group" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcoa'></td>
+                                                    <td class="border border-5">Master Chart Of Account</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_coa" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_coa" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_coa" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_coa" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mbank'></td>
+                                                    <td class="border border-5">Master Bank</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_bank" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_bank" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_bank" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_bank" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mmtuang'></td>
+                                                    <td class="border border-5">Master Mata Uang</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_mtuang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_mtuang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_mtuang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_mtuang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcust'></td>
+                                                    <td class="border border-5">Master Customer</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_cust" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_cust" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_cust" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_cust" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='msupp'></td>
+                                                    <td class="border border-5">Master Supplier</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_supp" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_supp" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_supp" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_supp" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mlokasi'></td>
+                                                    <td class="border border-5">Master Lokasi</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_lokasi" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_lokasi" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_lokasi" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_lokasi" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcabang'></td>
+                                                    <td class="border border-5">Master Nama Cabang</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_cabang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_cabang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_cabang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_cabang" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpembelianbrg'></td>
+                                                    <td class="border border-5">Trans Pembelian Barang</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_belibrg" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_belibrg" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_belibrg" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_belibrg" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpos'></td>
+                                                    <td class="border border-5">Trans Point Of Sales</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_pos" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_pos" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_pos" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_pos" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tops'></td>
+                                                    <td class="border border-5">Trans Pembayaran Operasional</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_bayarops" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_bayarops" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_bayarops" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_bayarops" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tjvouch'></td>
+                                                    <td class="border border-5">Trans Jurnal Voucher</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_jvouch" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_jvouch" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_jvouch" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_jvouch" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpenerimaan'></td>
+                                                    <td class="border border-5">Trans Penerimaan Barang</td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="create_penerimaan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="read_penerimaan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="update_penerimaan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                    <td class="border border-5 text-center pb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input checkbox" type="checkbox" name="delete_penerimaan" value="Y" checked>
+                                                            {{-- <label class="form-check-label" for="flexCheckDefault">Create</label> --}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,15 +565,15 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Branch</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Name</th>
+                                        <th scope="col" class="border border-5">Email</th>
+                                        <th scope="col" class="border border-5">Branch</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,4 +613,20 @@
         </div>
     </div>
 </section>
+@stop
+@section('botscripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#checkall').click(function(){
+            if($(".checkbox").is(":checked")){
+                console.log("Checkbox is checked.");
+                $('.checkbox').prop('checked', false)
+            }
+            else if($(".checkbox").is(":not(:checked)")){
+                console.log("Checkbox is unchecked.");
+                $('.checkbox').prop('checked', true)
+            }
+        });
+    });
+</script>    
 @endsection
