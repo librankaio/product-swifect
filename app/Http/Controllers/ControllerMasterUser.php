@@ -18,6 +18,7 @@ class ControllerMasterUser extends Controller
 
     public function post(Request $request){      
         // dd($request->all());
+        dd($request->read_mitem);
         $checkexist = User::select('id','username','email')->where('username','=', $request->username)->first();
         if($checkexist == null){
             $password = Hash::make($request->password);
@@ -38,12 +39,102 @@ class ControllerMasterUser extends Controller
                     'feature' => $request->features[$i],
                 ]);
             }
-
+            
             AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mitem')->update([
                 'save' => $request->create_mitem,
                 'open' => $request->read_mitem,
                 'updt' => $request->update_mitem,
                 'dlt' => $request->delete_mitem,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'muser')->update([
+                'save' => $request->create_user,
+                'open' => $request->read_user,
+                'updt' => $request->update_user,
+                'dlt' => $request->delete_user,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'msatuan')->update([
+                'save' => $request->create_satuan,
+                'open' => $request->read_satuan,
+                'updt' => $request->update_satuan,
+                'dlt' => $request->delete_satuan,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mdtgrp')->update([
+                'save' => $request->create_group,
+                'open' => $request->read_group,
+                'updt' => $request->update_group,
+                'dlt' => $request->delete_group,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mcoa')->update([
+                'save' => $request->create_coa,
+                'open' => $request->read_coa,
+                'updt' => $request->update_coa,
+                'dlt' => $request->delete_coa,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mbank')->update([
+                'save' => $request->create_bank,
+                'open' => $request->read_bank,
+                'updt' => $request->update_bank,
+                'dlt' => $request->delete_bank,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mmtuang')->update([
+                'save' => $request->create_mtuang,
+                'open' => $request->read_mtuang,
+                'updt' => $request->update_mtuang,
+                'dlt' => $request->delete_mtuang,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mcust')->update([
+                'save' => $request->create_cust,
+                'open' => $request->read_cust,
+                'updt' => $request->update_cust,
+                'dlt' => $request->delete_cust,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'msupp')->update([
+                'save' => $request->create_supp,
+                'open' => $request->read_supp,
+                'updt' => $request->update_supp,
+                'dlt' => $request->delete_supp,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mlokasi')->update([
+                'save' => $request->create_lokasi,
+                'open' => $request->read_lokasi,
+                'updt' => $request->update_lokasi,
+                'dlt' => $request->delete_lokasi,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'mcabang')->update([
+                'save' => $request->create_cabang,
+                'open' => $request->read_cabang,
+                'updt' => $request->update_cabang,
+                'dlt' => $request->delete_cabang,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tpembelianbrg')->update([
+                'save' => $request->create_belibrg,
+                'open' => $request->read_belibrg,
+                'updt' => $request->update_belibrg,
+                'dlt' => $request->delete_belibrg,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tpos')->update([
+                'save' => $request->create_pos,
+                'open' => $request->read_pos,
+                'updt' => $request->update_pos,
+                'dlt' => $request->delete_pos,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tops')->update([
+                'save' => $request->create_bayarops,
+                'open' => $request->read_bayarops,
+                'updt' => $request->update_bayarops,
+                'dlt' => $request->delete_bayarops,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tjvouch')->update([
+                'save' => $request->create_jvouch,
+                'open' => $request->read_jvouch,
+                'updt' => $request->update_jvouch,
+                'dlt' => $request->delete_jvouch,
+            ]);
+            AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tpenerimaan')->update([
+                'save' => $request->create_penerimaan,
+                'open' => $request->read_penerimaan,
+                'updt' => $request->update_penerimaan,
+                'dlt' => $request->delete_penerimaan,
             ]);
             return redirect()->back();
         }else{

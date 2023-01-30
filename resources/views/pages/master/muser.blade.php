@@ -98,7 +98,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mitem'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mitem'></td> --}}
                                                     <td class="border border-5">Master Item</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -126,7 +126,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='muser'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='muser'></td> --}}
                                                     <td class="border border-5">Master User</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -154,7 +154,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='msatuan'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='msatuan'></td> --}}
                                                     <td class="border border-5">Master Satuan</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -182,7 +182,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mdtgrp'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mdtgrp'></td> --}}
                                                     <td class="border border-5">Master Data Group</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -210,7 +210,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcoa'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcoa'></td> --}}
                                                     <td class="border border-5">Master Chart Of Account</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -238,7 +238,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mbank'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mbank'></td> --}}
                                                     <td class="border border-5">Master Bank</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -266,7 +266,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mmtuang'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mmtuang'></td> --}}
                                                     <td class="border border-5">Master Mata Uang</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -294,7 +294,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcust'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcust'></td> --}}
                                                     <td class="border border-5">Master Customer</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -322,7 +322,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='msupp'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='msupp'></td> --}}
                                                     <td class="border border-5">Master Supplier</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -350,7 +350,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mlokasi'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mlokasi'></td> --}}
                                                     <td class="border border-5">Master Lokasi</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -378,7 +378,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcabang'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='mcabang'></td> --}}
                                                     <td class="border border-5">Master Nama Cabang</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -406,7 +406,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpembelianbrg'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpembelianbrg'></td> --}}
                                                     <td class="border border-5">Trans Pembelian Barang</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -434,7 +434,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpos'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpos'></td> --}}
                                                     <td class="border border-5">Trans Point Of Sales</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -462,7 +462,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tops'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tops'></td> --}}
                                                     <td class="border border-5">Trans Pembayaran Operasional</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -490,7 +490,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tjvouch'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tjvouch'></td> --}}
                                                     <td class="border border-5">Trans Jurnal Voucher</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
@@ -518,7 +518,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpenerimaan'></td>
+                                                    {{-- <td><input style='width:120px;' readonly class='noteclass form-control' name='features[]' type='text' value='tpenerimaan'></td> --}}
                                                     <td class="border border-5">Trans Penerimaan Barang</td>
                                                     <td class="border border-5 text-center pb-3">
                                                         <div class="form-check">
