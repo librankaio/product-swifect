@@ -5,12 +5,15 @@
         <ul class="dropdown-menu">
             @php
                 $role = session('privilage') ;
+                $mitem_open = session('mitem_open') ;
             @endphp
-            {{-- @if($role == 'ADM')
-            <li><a class="nav-link" href="{{ route('muser') }}" style="pointer-events: none;">Master Data User</a></li>           
-            @elseif($role != 'ADM')     
-            @endif --}}
             <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>          
+            @if($mitem_open == 'Y')
+            {{-- <li><a class="nav-link" href="{{ route('muser') }}" style="pointer-events: none;">Master Data User</a></li>      --}}
+            <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>      
+            @elseif($role == '' || $mitem_open == null)     
+            <li><a class="nav-link" href="{{ route('mbrg') }}" style="pointer-events: none;">Master Data Item</a></li>
+            @endif
             <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>
             <li><a class="nav-link" href="{{ route('msatuan') }}">Master Satuan</a></li>
             <li><a class="nav-link" href="{{ route('mgrup') }}">Master Data Group</a></li>
