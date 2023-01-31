@@ -44,7 +44,11 @@
             <div class="breadcrumb-item"><a class="text-muted">Master Data Item</a></div>
         </div>
     </div>
-
+    @php
+        $mitem_save = session('mitem_save');
+        $mitem_updt = session('mitem_updt');
+        $mitem_dlt = session('mitem_dlt');
+    @endphp
     <div class="section-body">
         <form action="" method="POST" enctype="multipart/form-data">
             @csrf
@@ -123,8 +127,15 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
+                            @if($mitem_save == 'Y')
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mbrgpost') }}" id="confirm">Save</button>
+                                formaction="{{ route('mbrgpost') }}" id="confirm">Save</button>     
+                            @elseif($mitem_save == 'N' || $mitem_save == null)     
+                            <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mbrgpost') }}" id="confirm" disabled>Save</button>
+                            @endif
+                            {{-- <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mbrgpost') }}" id="confirm">Save</button> --}}
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>                    
                 </div>
@@ -187,19 +198,43 @@
                                         <td>{{ number_format($item->price2, 3, '.', ',') }}</td>
                                         <td>{{ $item->note }}</td>
                                         <td>{{ $item->code_mgrp }}</td>
+                                        @if($mitem_updt == 'Y')
                                         <td><a href="/masterdatabarang/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
+                                                Edit</i></a></td>      
+                                        @elseif($mitem_updt == null || $mitem_updt == 'N') 
+                                        <td><a href="/masterdatabarang/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
+                                        {{-- <td><a href="/masterdatabarang/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
-                                                    Edit</i></a></td>
+                                                    Edit</i></a></td> --}}
                                         <td>
                                             <form action="/masterdatabarang/delete/{{ $item->id }}"
                                                 id="del-{{ $item->id }}" method="POST">
                                                 @csrf
+                                                @if($mitem_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
+                                                        Delete</i></button>      
+                                                @elseif($mitem_dlt == null || $mitem_dlt == 'N') 
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
                                                         Delete</i></button>
+                                                @endif
+                                                {{-- <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})"><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button> --}}
                                             </form>
                                         </td>
                                     </tr>

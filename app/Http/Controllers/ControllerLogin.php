@@ -131,6 +131,7 @@ class ControllerLogin extends Controller
             $request->session()->put('mitem_open', $auth_mitem->open);
             $request->session()->put('mitem_updt', $auth_mitem->updt);
             $request->session()->put('mitem_dlt', $auth_mitem->dlt);
+            // dd(session()->all());
 
             return redirect()->intended('/home');
         }
