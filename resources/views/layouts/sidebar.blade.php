@@ -5,26 +5,56 @@
         <ul class="dropdown-menu">
             @php
                 $role = session('privilage') ;
-                $mitem_open = session('mitem_open') ;
+                $mitem_open = session('mitem_open');
+                $muser_open = session('muser_open');
+                $msatuan_open = session('msatuan_open');
+                $mdtgrp_open = session('mdtgrp_open');
+                $mcoa_open = session('mcoa_open');
+                $mbank_open = session('mbank_open');
+                $mmtuang_open = session('mmtuang_open');
+                $mcust_open = session('mcust_open');
+                $msupp_open = session('msupp_open');
+                $mlokasi_open = session('mlokasi_open');
+                $mcabang_open = session('mcabang_open');
+                $tpembelianbrg_open = session('tpembelianbrg_open');
+                $tpos_open = session('tpos_open');
+                $tops_open = session('tops_open');
+                $tjvouch_open = session('tjvouch_open');
+                $tpenerimaan_open = session('tpenerimaan_open');
             @endphp
+            @if($muser_open == 'Y')  
             <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>          
-            @if($mitem_open == 'Y')
-                <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>      
-            @elseif($mitem_open == null || $mitem_open == 'N')     
-                <li><a class="nav-link" href="{{ route('mbrg') }}" style="pointer-events: none;">Master Data Item</a></li>
             @endif
-            {{-- <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li> --}}
-            <li><a class="nav-link" href="{{ route('msatuan') }}">Master Satuan</a></li>
-            <li><a class="nav-link" href="{{ route('mgrup') }}">Master Data Group</a></li>
-            <li><a class="nav-link" href="{{ route('mchartacc') }}">Master Chart Of Account</a></li>
-            <li><a class="nav-link" href="{{ route('mbank') }}">Master Bank</a></li>
-            <li><a class="nav-link" href="{{ route('mmatauang') }}">Master Mata Uang</a></li>
-            {{-- <li><a class="nav-link" href="{{ route('mcabang') }}">Master Cabang</a></li> --}}
-            {{-- <li><a class="nav-link" href="{{ route('muser') }}">Master User</a></li> --}}
-            <li><a class="nav-link" href="{{ route('mcust') }}">Master Data Customer</a></li>
-            <li><a class="nav-link" href="{{ route('msupp') }}">Master Data Supplier</a></li>
-            <li><a class="nav-link" href="{{ route('mwhse') }}">Master Data Lokasi</a></li>
-            <li><a class="nav-link" href="{{ route('mnamacabang') }}">Master Data Nama Cabang</a></li>
+            @if($mitem_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>     
+            @endif
+            @if($msatuan_open == 'Y')
+                <li><a class="nav-link" href="{{ route('msatuan') }}">Master Satuan</a></li>   
+            @endif
+            @if($mdtgrp_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mgrup') }}">Master Data Group</a></li>  
+            @endif
+            @if($mcoa_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mchartacc') }}">Master Chart Of Account</a></li> 
+            @endif
+            @if($mbank_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mbank') }}">Master Bank</a></li>
+            @endif
+            @if($mmtuang_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mmatauang') }}">Master Mata Uang</a></li>
+            @endif
+            @if($mcust_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mcust') }}">Master Data Customer</a></li>
+            @endif
+            @if($msupp_open == 'Y')
+                <li><a class="nav-link" href="{{ route('msupp') }}">Master Data Supplier</a></li>
+            @endif
+            @if($mlokasi_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mwhse') }}">Master Data Lokasi</a></li>
+            @endif
+            @if($mcabang_open == 'Y')
+                <li><a class="nav-link" href="{{ route('mnamacabang') }}">Master Data Nama Cabang</a></li>
+            @endif
         </ul>
     </li>
     <li class="menu-header">Transaction</li>
@@ -32,19 +62,31 @@
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-exchange-alt"></i>
             <span>Transaction</span></a>
         <ul class="dropdown-menu">
-            <li><a class="nav-link" href="{{ route('transbelibrg') }}">Pembelian Barang</a></li>
-            <li><a class="nav-link" href="{{ route('tbelibrglist') }}">Pembelian Barang List</a></li>
+            @if($tpembelianbrg_open == 'Y')
+                <li><a class="nav-link" href="{{ route('transbelibrg') }}">Pembelian Barang</a></li>
+                <li><a class="nav-link" href="{{ route('tbelibrglist') }}">Pembelian Barang List</a></li>
+            @endif
+            @if($tpos_open == 'Y')
+                <li><a class="nav-link" href="{{ route('tpos') }}">Point of Sales</a></li>
+                <li><a class="nav-link" href="{{ route('tposlist') }}">Point of Sales List</a></li>
+            @endif
+            @if($tops_open == 'Y')
+                <li><a class="nav-link" href="{{ route('tbayarops') }}">Pembayaran Operasional</a></li>
+                <li><a class="nav-link" href="{{ route('tbayaropslist') }}">Pembayaran Ops. List</a></li>
+            @endif
+            @if($tjvouch_open == 'Y')
+                <li><a class="nav-link" href="{{ route('tjurnalvoucher') }}">Journal Voucher</a></li>
+                <li><a class="nav-link" href="{{ route('tjurnalvoucherlist') }}">Journal Voucher List</a></li>
+            @endif
+            @if($tpenerimaan_open == 'Y')
+                <li><a class="nav-link" href="{{ route('tpenerimaan') }}">Penerimaan Barang</a></li>
+                <li><a class="nav-link" href="{{ route('tpenerimaanlist') }}">Penerimaan Barang List</a></li>
+            @endif
+            {{-- @if($mcabang_open == 'Y')
+                <li><a class="nav-link" href="{{ route('tpembelian') }}">Pembelian</a></li>
+            @endif --}}
             {{-- <li><a class="nav-link" href="{{ route('tpengeluaranbrg') }}">Penjualan Barang</a></li>
             <li><a class="nav-link" href="{{ route('tpengeluaranbrglist') }}">Penjualan Barang List</a></li> --}}
-            <li><a class="nav-link" href="{{ route('tpos') }}">Point of Sales</a></li>
-            <li><a class="nav-link" href="{{ route('tposlist') }}">Point of Sales List</a></li>
-            <li><a class="nav-link" href="{{ route('tbayarops') }}">Pembayaran Operasional</a></li>
-            <li><a class="nav-link" href="{{ route('tbayaropslist') }}">Pembayaran Ops. List</a></li>
-            <li><a class="nav-link" href="{{ route('tjurnalvoucher') }}">Journal Voucher</a></li>
-            <li><a class="nav-link" href="{{ route('tjurnalvoucherlist') }}">Journal Voucher List</a></li>
-            <li><a class="nav-link" href="{{ route('tpenerimaan') }}">Penerimaan Barang</a></li>
-            <li><a class="nav-link" href="{{ route('tpenerimaanlist') }}">Penerimaan Barang List</a></li>
-            <li><a class="nav-link" href="{{ route('tpembelian') }}">Pembelian</a></li>
         </ul>
     </li>
     <li class="menu-header">Reports</li>

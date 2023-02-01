@@ -10,7 +10,11 @@
             </div>
         </div>
     </div>
-
+    @php
+        $mcust_save = session('mcust_save');
+        $mcust_updt = session('mcust_updt');
+        $mcust_dlt = session('mcust_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -58,8 +62,13 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit"
+                            @if($mcust_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mcustpost') }}" id="confirm">Save</button>
+                            @elseif($mcust_save == 'N' || $mcust_save == null)
+                                <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mcustpost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -97,19 +106,34 @@
                                         <td>{{ $item->address }}</td>
                                         <td>{{ $item->cp }}</td>
                                         <td>{{ $item->phone }}</td>
+                                        @if($mcust_updt == 'Y')
                                         <td><a href="/mastercust/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($mcust_updt == null || $mcust_updt == 'N')
+                                        <td><a href="/mastercust/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/mastercust/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf
+                                                @if($mcust_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($mcust_dlt == null || $mcust_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

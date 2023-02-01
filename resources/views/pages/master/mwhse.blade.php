@@ -8,9 +8,12 @@
             <div class="breadcrumb-item"><a class="text-muted">Master Lokasi</a></div>
         </div>
     </div>
-
+    @php
+        $mlokasi_save = session('mlokasi_save');
+        $mlokasi_updt = session('mlokasi_updt');
+        $mlokasi_dlt = session('mlokasi_dlt');
+    @endphp
     <div class="section-body">
-
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
@@ -40,7 +43,11 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('mwhsepost') }}" id="confirm">Save</button>
+                            @if($mlokasi_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('mwhsepost') }}" id="confirm">Save</button>
+                            @elseif($mlokasi_save == 'N' || $mlokasi_save == null)
+                                <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('mwhsepost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -70,13 +77,19 @@
                                         <th scope="row">{{ $counter }}</th>
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td><a href="/masterloct/{{ $item->id }}/edit" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
-                                                    Edit</i></a></td>
+                                        @if($mlokasi_updt == 'Y')
+                                        <td><a href="/masterloct/{{ $item->id }}/edit" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">Edit</i></a></td>
+                                        @elseif($mlokasi_updt == null || $mlokasi_updt == 'N')
+                                        <td><a href="/masterloct/{{ $item->id }}/edit" class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">Edit</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/masterloct/delete/{{ $item->id }}" id="del-{{ $item->id }}" method="POST">
                                                 @csrf
-                                                <button class="btn btn-icon icon-left btn-danger" id="del-{{ $item->id }}" type="submit" data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?" data-confirm-yes="submitDel({{ $item->id }})"><i class="fa fa-trash">
-                                                        Delete</i></button>
+                                                @if($mlokasi_dlt == 'Y')
+                                                <button class="btn btn-icon icon-left btn-danger" id="del-{{ $item->id }}" type="submit" data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?" data-confirm-yes="submitDel({{ $item->id }})"><i class="fa fa-trash">Delete</i></button>
+                                                @elseif($mlokasi_dlt == null || $mlokasi_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger" id="del-{{ $item->id }}" type="submit" data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?" data-confirm-yes="submitDel({{ $item->id }})" disabled><i class="fa fa-trash">Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

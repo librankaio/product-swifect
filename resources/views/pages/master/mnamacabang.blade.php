@@ -8,7 +8,11 @@
             <div class="breadcrumb-item"><a class="text-muted">Master Data Cabang</a></div>
         </div>
     </div>
-
+    @php
+        $mcabang_save = session('mcabang_save');
+        $mcabang_updt = session('mcabang_updt');
+        $mcabang_dlt = session('mcabang_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-3 col-lg-3">
@@ -37,8 +41,13 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit"
+                            @if($mcabang_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mnamacabangpost') }}" id="confirm">Save</button>
+                            @elseif($mcabang_save == 'N' || $mcabang_save == null)
+                                <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mnamacabangpost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -70,19 +79,32 @@
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->address }}</td>
+                                        @if($mcabang_updt == 'Y')
                                         <td><a href="/mnamacabang/{{ $item->id }}/edit"
-                                                class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
-                                                    Edit</i></a></td>
+                                                class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">Edit</i></a></td>
+                                        @elseif($mcabang_updt == null || $mcabang_updt == 'N')
+                                        <td><a href="/mnamacabang/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">Edit</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/mnamacabang/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf
+                                                @if($mcabang_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($mcabang_dlt == null || $mcabang_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

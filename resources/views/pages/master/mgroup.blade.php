@@ -8,7 +8,11 @@
             <div class="breadcrumb-item"><a class="text-muted">Master Group</a></div>
         </div>
     </div>
-
+    @php
+        $mdtgrp_save = session('mdtgrp_save');
+        $mdtgrp_updt = session('mdtgrp_updt');
+        $mdtgrp_dlt = session('mdtgrp_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -40,8 +44,13 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit"
+                            @if($msatuan_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mgruppost') }}" id="confirm">Save</button>
+                            @elseif($msatuan_save == 'N' || $msatuan_save == null)
+                                <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mgruppost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -71,19 +80,34 @@
                                         <th scope="row">{{ $counter }}</th>
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->name }}</td>
+                                        @if($msatuan_updt == 'Y')
                                         <td><a href="/mastergroup/{{ $item->id }}/edit"
-                                                class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
-                                                    Edit</i></a></td>
+                                            class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @elseif($msatuan_updt == null || $msatuan_updt == 'N')
+                                                <td><a href="/mastergroup/{{ $item->id }}/edit"
+                                                    class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                        Edit</i></a></td>   
+                                        @endif
                                         <td>
                                             <form action="/mastergroup/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
-                                                @csrf
+                                                @csrf          
+                                                @if($msatuan_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($msatuan_dlt == null || $msatuan_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

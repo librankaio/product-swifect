@@ -10,7 +10,11 @@
             </div>
         </div>
     </div>
-
+    @php
+        $msupp_save = session('msupp_save');
+        $msupp_updt = session('msupp_updt');
+        $msupp_dlt = session('msupp_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -58,8 +62,13 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit"
+                            @if($msupp_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('msupppost') }}" id="confirm">Save</button>
+                            @elseif($msupp_save == 'N' || $msupp_save == null)
+                                <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('msupppost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -97,19 +106,34 @@
                                         <td>{{ $item->address }}</td>
                                         <td>{{ $item->cp }}</td>
                                         <td>{{ $item->phone }}</td>
+                                        @if($msupp_updt == 'Y')
                                         <td><a href="/mastersupplier/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($msupp_updt == null || $msupp_updt == 'N')
+                                        <td><a href="/mastersupplier/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/mastersupplier/delete/{{ $item->id }}"
                                                 id="del-{{ $item->id }}" method="POST">
                                                 @csrf
+                                                @if($msupp_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($msupp_dlt == null || $msupp_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

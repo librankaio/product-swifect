@@ -8,7 +8,11 @@
             <div class="breadcrumb-item"><a class="text-muted">Master Bank</a></div>
         </div>
     </div>
-
+    @php
+        $mbank_save = session('mbank_save');
+        $mbank_updt = session('mbank_updt');
+        $mbank_dlt = session('mbank_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -43,9 +47,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit"
+                        <div class="card-footer text-right">                            
+                            @if($mbank_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mbankpost') }}" id="confirm">Save</button>
+                            @elseif($mbank_save == 'N' || $mbank_save == null)
+                                <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mbankpost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -77,19 +86,34 @@
                                         <td>{{ $item->code }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->note }}</td>
+                                        @if($mbank_updt == 'Y')
                                         <td><a href="/masterbank/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($mbank_updt == null || $mbank_updt == 'N')
+                                        <td><a href="/masterbank/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/masterbank/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf
+                                                @if($mbank_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($mbank_dlt == null || $mbank_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

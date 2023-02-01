@@ -8,7 +8,11 @@
             <div class="breadcrumb-item"><a class="text-muted">Master Chart Of Account</a></div>
         </div>
     </div>
-
+    @php
+        $mcoa_save = session('mcoa_save');
+        $mcoa_updt = session('mcoa_updt');
+        $mcoa_dlt = session('mcoa_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-3 col-lg-3">
@@ -40,9 +44,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" type="submit"
+                        <div class="card-footer text-right">                            
+                            @if($mcoa_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mchartaccpost') }}" id="confirm">Save</button>
+                            @elseif($mcoa_save == 'N' || $mcoa_save == null)
+                                <button class="btn btn-primary mr-1" type="submit"
+                                formaction="{{ route('mchartaccpost') }}" id="confirm" disabled>Save</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -76,19 +85,35 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->jenis }}</td>
                                         <td>{{ number_format( $item->saldo, 2, '.', ',')}}</td>
+                                        @if($mcoa_updt == 'Y')
                                         <td><a href="/mchartacc/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         <td>
+                                        @elseif($mcoa_updt == null || $mcoa_updt == 'N')
+                                        <td><a href="/mchartacc/{{ $item->id }}/edit"
+                                                class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                    Edit</i></a></td>
+                                        <td>
+                                        @endif
                                             <form action="/mchartacc/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf
+                                                @if($mcoa_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($mcoa_dlt == null || $mcoa_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>
