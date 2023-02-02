@@ -8,6 +8,9 @@
             <div class="breadcrumb-item"><a class="text-muted">Journal Voucher</a></div>
         </div>
     </div>
+    @php
+        $tjvouch_save = session('tjvouch_save');
+    @endphp
     <div class="section-body">
         <form action="" method="POST" id="thisform">
             @csrf
@@ -152,8 +155,12 @@
                                 </div>                                
                             </div>
                         </div>                
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tjurnalvoucher') }}">Submit</button>
+                        <div class="card-footer text-right">                            
+                            @if($tjvouch_save == 'Y')
+                                <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tjurnalvoucher') }}">Submit</button>
+                            @elseif($tjvouch_save == 'N' || $tjvouch_save == null)
+                                <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tjurnalvoucher') }}" disabled>Submit</button>
+                            @endif
                             <button class="btn btn-secondary" type="reset">Reset</button>
                         </div>
                     </div>

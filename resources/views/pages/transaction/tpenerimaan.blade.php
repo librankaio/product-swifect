@@ -8,6 +8,9 @@
             <div class="breadcrumb-item"><a class="text-muted">Penerimaan Barang</a></div>
         </div>
     </div>
+    @php
+        $tpenerimaan_save = session('tpenerimaan_save');
+    @endphp
     <div class="section-body">
         <form action="" method="POST" id="thisform">
             @csrf
@@ -205,7 +208,11 @@
                         </div>
                     </div>                
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tpenerimaanpost') }}">Submit</button>
+                        @if($tpenerimaan_save == 'Y')
+                            <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tpenerimaanpost') }}">Submit</button>
+                        @elseif($tpenerimaan_save == 'N' || $tpenerimaan_save == null)
+                            <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tpenerimaanpost') }}" disabled>Submit</button>
+                        @endif
                         <button class="btn btn-secondary" type="reset">Reset</button>
                     </div>
                 </div>

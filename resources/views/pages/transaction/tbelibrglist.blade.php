@@ -8,7 +8,10 @@
             <div class="breadcrumb-item"><a class="text-muted">Pembelian Barang List</a></div>
         </div>
     </div>
-
+    @php        
+        $tpembelianbrg_updt = session('tpembelianbrg_updt');
+        $tpembelianbrg_dlt = session('tpembelianbrg_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
@@ -69,21 +72,41 @@
                                         <td>{{ $tpembelianh->no }}</td>
                                         <td>{{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}</td>
                                         <td>{{ $tpembelianh->supplier }}</td>
-                                        <td><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
-                                                class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
-                                                    Edit</i></a></td>
-                                        <td><a href="/transbelibrg/{{ $tpembelianh->id }}/print"
-                                                class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
+                                        @if($tpembelianbrg_updt == 'Y')
+                                            <td><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
+                                                    class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
+                                                        Edit</i></a></td>
+                                        @elseif($tpembelianbrg_updt == null || $tpembelianbrg_updt == 'N')
+                                            <td><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
+                                                    class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                        Edit</i></a></td>
+                                        @endif
+                                        @if($tpembelianbrg_updt == 'Y')
+                                            <td><a href="/transbelibrg/{{ $tpembelianh->id }}/print"
+                                                    class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
+                                        @elseif($tpembelianbrg_updt == null || $tpembelianbrg_updt == 'N')
+                                            <td><a href="/transbelibrg/{{ $tpembelianh->id }}/print"
+                                                class="btn btn-icon icon-left btn-outline-primary" target="_blank" style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/transbelibrg/delete/{{ $tpembelianh->id }}"
                                                 id="del-{{ $tpembelianh->id }}" method="POST">
                                                 @csrf
+                                                @if($tpembelianbrg_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $tpembelianh->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $tpembelianh->name }} data?"
                                                     data-confirm-yes="submitDel({{ $tpembelianh->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($tpembelianbrg_dlt == null || $tpembelianbrg_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $tpembelianh->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $tpembelianh->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $tpembelianh->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

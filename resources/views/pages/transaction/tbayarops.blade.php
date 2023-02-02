@@ -8,6 +8,9 @@
             <div class="breadcrumb-item"><a class="text-muted">Pembayaran Operasional</a></div>
         </div>
     </div>
+    @php
+        $tops_save = session('tops_save');
+    @endphp
     <div class="section-body">
         <form action="" method="POST" id="thisform">
             @csrf
@@ -142,7 +145,11 @@
                         </div>
                     </div>                
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tbayaropspost') }}">Submit</button>
+                        @if($tops_save == 'Y')
+                            <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tbayaropspost') }}">Submit</button>
+                        @elseif($tops_save == 'N' || $tops_save == null)
+                            <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('tbayaropspost') }}" disabled>Submit</button>
+                        @endif
                         <button class="btn btn-secondary" type="reset">Reset</button>
                     </div>
                 </div>

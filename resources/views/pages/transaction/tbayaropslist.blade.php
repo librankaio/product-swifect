@@ -8,7 +8,10 @@
             <div class="breadcrumb-item"><a class="text-muted">Pembayaran Operasional List</a></div>
         </div>
     </div>
-
+    @php        
+        $tops_updt = session('tops_updt');
+        $tops_dlt = session('tops_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
@@ -69,21 +72,41 @@
                                         <td>{{ $tbayaropsh->no }}</td>
                                         <td>{{ date("d/m/Y", strtotime($tbayaropsh->tdt)) }}</td>
                                         <td>{{ $tbayaropsh->akun_pembayaran }}</td>
+                                        @if($tops_updt == 'Y')
                                         <td><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($tops_updt == null || $tops_updt == 'N')
+                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
+                                        @if($tops_updt == 'Y')
                                         <td><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
+                                        @elseif($tops_updt == null || $tops_updt == 'N')
+                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
+                                            class="btn btn-icon icon-left btn-outline-primary" target="_blank" style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/tbayarops/delete/{{ $tbayaropsh->id }}"
                                                 id="del-{{ $tbayaropsh->id }}" method="POST">
                                                 @csrf
+                                                @if($tops_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $tbayaropsh->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $tbayaropsh->name }} data?"
                                                     data-confirm-yes="submitDel({{ $tbayaropsh->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($tops_dlt == null || $tops_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $tbayaropsh->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $tbayaropsh->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $tbayaropsh->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

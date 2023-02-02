@@ -8,6 +8,9 @@
             <div class="breadcrumb-item"><a class="text-muted">Pembelian Barang</a></div>
         </div>
     </div>
+    @php
+        $tpembelianbrg_save = session('tpembelianbrg_save');
+    @endphp
     <div class="section-body">
         <form action="" method="POST" id="thisform">
             @csrf
@@ -191,8 +194,12 @@
                             </div>
                         </div>
                     </div>                
-                    <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('transbelibrgpost') }}">Submit</button>
+                    <div class="card-footer text-right">                        
+                            @if($tpembelianbrg_save == 'Y')
+                                <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('transbelibrgpost') }}">Submit</button>
+                            @elseif($tpembelianbrg_save == 'N' || $tpembelianbrg_save == null)
+                                <button class="btn btn-primary mr-1" id="confirm" type="submit" formaction="{{ route('transbelibrgpost') }}" disabled>Submit</button>
+                            @endif
                         <button class="btn btn-secondary" type="reset">Reset</button>
                     </div>
                 </div>

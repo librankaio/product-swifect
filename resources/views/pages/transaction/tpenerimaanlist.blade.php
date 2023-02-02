@@ -8,7 +8,10 @@
             <div class="breadcrumb-item"><a class="text-muted">Penerimaan Barang List</a></div>
         </div>
     </div>
-
+    @php        
+        $tpenerimaan_updt = session('tpenerimaan_updt');
+        $tpenerimaan_dlt = session('tpenerimaan_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
@@ -69,21 +72,41 @@
                                         <td>{{ $tpenerimaanh->no }}</td>
                                         <td>{{ date("d/m/Y", strtotime($tpenerimaanh->tdt)) }}</td>
                                         <td>{{ $tpenerimaanh->supplier }}</td>
+                                        @if($tpenerimaan_updt == 'Y')
                                         <td><a href="/tpenerimaan/{{ $tpenerimaanh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($tpenerimaan_updt == null || $tpenerimaan_updt == 'N')
+                                        <td><a href="/tpenerimaan/{{ $tpenerimaanh->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
+                                        @if($tpenerimaan_updt == 'Y')
                                         <td><a href="/tpenerimaan/{{ $tpenerimaanh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
+                                        @elseif($tpenerimaan_updt == null || $tpenerimaan_updt == 'N')
+                                        <td><a href="/tpenerimaan/{{ $tpenerimaanh->id }}/print"
+                                            class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print" style="pointer-events: none;"> Print</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/tpenerimaan/delete/{{ $tpenerimaanh->id }}"
                                                 id="del-{{ $tpenerimaanh->id }}" method="POST">
                                                 @csrf
+                                                @if($tpenerimaan_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $tpenerimaanh->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $tpenerimaanh->name }} data?"
                                                     data-confirm-yes="submitDel({{ $tpenerimaanh->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($tpenerimaan_dlt == null || $tpenerimaan_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $tpenerimaanh->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $tpenerimaanh->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $tpenerimaanh->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

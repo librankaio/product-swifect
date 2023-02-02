@@ -23,7 +23,7 @@
                 $tpenerimaan_open = session('tpenerimaan_open');
             @endphp
             @if($muser_open == 'Y')  
-            <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>          
+                <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>          
             @endif
             @if($mitem_open == 'Y')
                 <li><a class="nav-link" href="{{ route('mbrg') }}">Master Data Item</a></li>     

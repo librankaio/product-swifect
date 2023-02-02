@@ -8,7 +8,10 @@
             <div class="breadcrumb-item"><a class="text-muted">Journal Voucher List</a></div>
         </div>
     </div>
-
+    @php        
+        $tjvouch_updt = session('tjvouch_updt');
+        $tjvouch_dlt = session('tjvouch_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
@@ -75,21 +78,43 @@
                                         <td>{{ number_format( $tjurnalvouchh->total_debit, 2, '.', ',') }}</td>
                                         <td>{{ number_format( $tjurnalvouchh->total_credit, 2, '.', ',') }}</td>
                                         <td>{{ $tjurnalvouchh->mata_uang }}</td>
+                                        @if($tjvouch_updt == 'Y')
                                         <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($tjvouch_updt == null || $tjvouch_updt == 'N')
+                                        <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary"
+                                            style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
+                                        @if($tjvouch_updt == 'Y')
                                         <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
+                                        @elseif($tjvouch_updt == null || $tjvouch_updt == 'N')
+                                        <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/print"
+                                            class="btn btn-icon icon-left btn-outline-primary" target="_blank"
+                                            style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/tjurnalvoucher/delete/{{ $tjurnalvouchh->id }}"
                                                 id="del-{{ $tjurnalvouchh->id }}" method="POST">
                                                 @csrf
+                                                @if($tjvouch_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $tjurnalvouchh->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $tjurnalvouchh->name }} data?"
                                                     data-confirm-yes="submitDel({{ $tjurnalvouchh->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($tjvouch_dlt == null || $tjvouch_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $tjurnalvouchh->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $tjurnalvouchh->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $tjurnalvouchh->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

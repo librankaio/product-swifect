@@ -8,7 +8,10 @@
             <div class="breadcrumb-item"><a class="text-muted">TPOS LIST</a></div>
         </div>
     </div>
-
+    @php        
+        $tpos_updt = session('tpos_updt');
+        $tpos_dlt = session('tpos_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
@@ -69,21 +72,41 @@
                                         <td>{{ $tposh->no }}</td>
                                         <td>{{ date("d/m/Y", strtotime($tposh->tdt)) }}</td>
                                         <td>{{ $tposh->code_mcust }}</td>
+                                        @if($tpos_updt == 'Y')
                                         <td><a href="/transpos/{{ $tposh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
+                                        @elseif($tpos_updt == null || $tpos_updt == 'N')
+                                        <td><a href="/transpos/{{ $tposh->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
+                                        @if($tpos_updt == 'Y')
                                         <td><a href="/transpos/{{ $tposh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
+                                        @elseif($tpos_updt == null || $tpos_updt == 'N')
+                                        <td><a href="/transpos/{{ $tposh->id }}/print"
+                                            class="btn btn-icon icon-left btn-outline-primary" target="_blank" style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
+                                        @endif
                                         <td>
                                             <form action="/transpos/delete/{{ $tposh->id }}"
                                                 id="del-{{ $tposh->id }}" method="POST">
                                                 @csrf
+                                                @if($tpos_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $tposh->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $tposh->name }} data?"
                                                     data-confirm-yes="submitDel({{ $tposh->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($tpos_dlt == null || $tpos_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $tposh->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $tposh->name }} data?"
+                                                    data-confirm-yes="submitDel({{ $tposh->id }})" disabled><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>
