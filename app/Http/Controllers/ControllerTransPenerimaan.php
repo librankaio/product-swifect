@@ -163,11 +163,26 @@ class ControllerTransPenerimaan extends Controller
         ]);
     }
 
+    public function delete(Tpenerimaanh $tpenerimaanh){
+        // dd($tbayaropsh);
+        Tpenerimaanh::find($tpenerimaanh->id)->delete();
+        return redirect()->back();
+    }
+
     public function list(){
         $tpenerimaanhs = Tpenerimaanh::select('id','no','no_tpembelian','tdt','cabang','supplier','mata_uang','nolain','kurs','disc','tax','grdtotal','note')->whereNull('deleted_at')->get();
         $tpenerimaands = Tpenerimaand::select('id','idh','no_tpenerimaanh','code_mitem','name_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->get();
         return view('pages.transaction.tpenerimaanlist',[
             'tpenerimaanhs' => $tpenerimaanhs,
+            'tpenerimaands' => $tpenerimaands
+        ]);
+    }
+
+    public function print(Tpenerimaanh $tpenerimaanh){
+        // dd($tbayaropsh);
+        $tpenerimaands = Tpenerimaand::select('id','idh','no_tpenerimaanh','code_mitem','name_mitem','qty','code_muom','price','disc','tax','subtotal','note')->where('idh','=',$tpenerimaanh->id)->get();
+        return view('pages.print.tbayaropsprint',[
+            'tpenerimaanh' => $tpenerimaanh,
             'tpenerimaands' => $tpenerimaands
         ]);
     }

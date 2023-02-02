@@ -44,10 +44,10 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            @if($msatuan_save == 'Y')
+                            @if($mdtgrp_save == 'Y')
                                 <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mgruppost') }}" id="confirm">Save</button>
-                            @elseif($msatuan_save == 'N' || $msatuan_save == null)
+                            @elseif($mdtgrp_save == 'N' || $mdtgrp_save == null)
                                 <button class="btn btn-primary mr-1" type="submit"
                                 formaction="{{ route('mgruppost') }}" id="confirm" disabled>Save</button>
                             @endif
@@ -62,14 +62,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Kode</th>
+                                        <th scope="col" class="border border-5">Nama</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,30 +77,30 @@
                                     @foreach($datas as $data => $item)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $item->code }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        @if($msatuan_updt == 'Y')
-                                        <td><a href="/mastergroup/{{ $item->id }}/edit"
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $item->code }}</td>
+                                        <td class="border border-5">{{ $item->name }}</td>
+                                        @if($mdtgrp_updt == 'Y')
+                                        <td class="border border-5"><a href="/mastergroup/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                 Edit</i></a></td>
-                                        @elseif($msatuan_updt == null || $msatuan_updt == 'N')
-                                                <td><a href="/mastergroup/{{ $item->id }}/edit"
+                                        @elseif($mdtgrp_updt == null || $mdtgrp_updt == 'N')
+                                                <td class="border border-5"><a href="/mastergroup/{{ $item->id }}/edit"
                                                     class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                         Edit</i></a></td>   
                                         @endif
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/mastergroup/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf          
-                                                @if($msatuan_dlt == 'Y')
+                                                @if($mdtgrp_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
-                                                @elseif($msatuan_dlt == null || $msatuan_dlt == 'N')
+                                                @elseif($mdtgrp_dlt == null || $mdtgrp_dlt == 'N')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->name }} data?"

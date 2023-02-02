@@ -80,18 +80,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">NPWP</th>
-                                        <th scope="col">Alamat</th>
-                                        <th scope="col">Contact Person</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Kode</th>
+                                        <th scope="col" class="border border-5">Nama</th>
+                                        <th scope="col" class="border border-5">NPWP</th>
+                                        <th scope="col" class="border border-5">Alamat</th>
+                                        <th scope="col" class="border border-5">Contact Person</th>
+                                        <th scope="col" class="border border-5">Phone</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,23 +99,23 @@
                                     @foreach($datas as $data => $item)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $item->code }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->npwp }}</td>
-                                        <td>{{ $item->address }}</td>
-                                        <td>{{ $item->cp }}</td>
-                                        <td>{{ $item->phone }}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $item->code }}</td>
+                                        <td class="border border-5">{{ $item->name }}</td>
+                                        <td class="border border-5">{{ $item->npwp }}</td>
+                                        <td class="border border-5">{{ $item->address }}</td>
+                                        <td class="border border-5">{{ $item->cp }}</td>
+                                        <td class="border border-5">{{ $item->phone }}</td>
                                         @if($mcust_updt == 'Y')
-                                        <td><a href="/mastercust/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/mastercust/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         @elseif($mcust_updt == null || $mcust_updt == 'N')
-                                        <td><a href="/mastercust/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/mastercust/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                 Edit</i></a></td>
                                         @endif
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/mastercust/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf

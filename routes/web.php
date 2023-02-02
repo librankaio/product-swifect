@@ -191,6 +191,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tjurnalvoucherlist', [ControllerTransJurnalVouch::class, 'list'])->name('tjurnalvoucherlist');
     Route::get('/tjurnalvoucher/{tjurnalvouchh}/edit', [ControllerTransJurnalVouch::class, 'getedit'])->name('tjurnalvoucheredit');
     Route::post('/tjurnalvoucher/{tjurnalvouchh}', [ControllerTransJurnalVouch::class, 'update'])->name('tjurnalvoucherupdate');
+    Route::post('/tjurnalvoucher/delete/{tjurnalvouchh}', [ControllerTransJurnalVouch::class, 'delete'])->name('tjurnalvoucherdelete');
     Route::get('/tjurnalvoucher/{tjurnalvouchh}/print', [ControllerTransJurnalVouch::class, 'print'])->name('tjurnalvoucherprint');
     
     //TPenerimaan
@@ -203,6 +204,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tpenerimaanlist', [ControllerTransPenerimaan::class, 'list'])->name('tpenerimaanlist');
     Route::get('/tpenerimaan/{tpenerimaanh}/edit', [ControllerTransPenerimaan::class, 'getedit'])->name('tpenerimaanedit');
     Route::post('/tpenerimaan/{tpenerimaanh}', [ControllerTransPenerimaan::class, 'update'])->name('tpenerimaanupdate');
+    Route::post('/tpenerimaan/delete/{tpenerimaanh}', [ControllerTransPenerimaan::class, 'delete'])->name('tpenerimaandelete');
 
 
     //TPembelian

@@ -63,16 +63,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Code</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Jenis</th>
-                                        <th scope="col">Saldo</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Code</th>
+                                        <th scope="col" class="border border-5">Name</th>
+                                        <th scope="col" class="border border-5">Jenis</th>
+                                        <th scope="col" class="border border-5">Saldo</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,21 +80,21 @@
                                     @foreach($datas as $data => $item)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $item->code }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->jenis }}</td>
-                                        <td>{{ number_format( $item->saldo, 2, '.', ',')}}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $item->code }}</td>
+                                        <td class="border border-5">{{ $item->name }}</td>
+                                        <td class="border border-5">{{ $item->jenis }}</td>
+                                        <td class="border border-5">{{ number_format( $item->saldo, 2, '.', ',')}}</td>
                                         @if($mcoa_updt == 'Y')
-                                        <td><a href="/mchartacc/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/mchartacc/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         <td>
                                         @elseif($mcoa_updt == null || $mcoa_updt == 'N')
-                                        <td><a href="/mchartacc/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/mchartacc/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                     Edit</i></a></td>
-                                        <td>
+                                        <td class="border border-5">
                                         @endif
                                             <form action="/mchartacc/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">

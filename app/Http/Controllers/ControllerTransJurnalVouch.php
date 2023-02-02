@@ -153,6 +153,12 @@ class ControllerTransJurnalVouch extends Controller
         ]);
     }
 
+    public function delete(Tjurnalvouchh $tjurnalvouchh){
+        // dd($tbayaropsh);
+        Tjurnalvouchh::find($tjurnalvouchh->id)->delete();
+        return redirect()->back();
+    }
+
     public function print(Tjurnalvouchh $tjurnalvouchh){
         // dd($tjurnalvouchh);
         $tjurnalvouchds = Tjurnalvouchd::select('id','idh','no_tjurnalvouchh','kode','nama','debit','credit','memo')->whereNull('deleted_at')->where('idh','=',$tjurnalvouchh->id)->get();

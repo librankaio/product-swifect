@@ -66,15 +66,15 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Note</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Kode</th>
+                                        <th scope="col" class="border border-5">Nama</th>
+                                        <th scope="col" class="border border-5">Note</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,20 +82,20 @@
                                     @foreach($datas as $data => $item)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $item->code }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->note }}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $item->code }}</td>
+                                        <td class="border border-5">{{ $item->name }}</td>
+                                        <td class="border border-5">{{ $item->note }}</td>
                                         @if($mbank_updt == 'Y')
-                                        <td><a href="/masterbank/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/masterbank/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         @elseif($mbank_updt == null || $mbank_updt == 'N')
-                                        <td><a href="/masterbank/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/masterbank/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                 Edit</i></a></td>
                                         @endif
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/masterbank/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf

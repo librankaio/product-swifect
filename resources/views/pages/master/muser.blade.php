@@ -8,7 +8,11 @@
             <div class="breadcrumb-item"><a class="text-muted">Master User</a></div>
         </div>
     </div>
-
+    @php
+        $muser_save = session('muser_save');
+        $muser_updt = session('muser_updt');
+        $muser_dlt = session('muser_dlt');
+    @endphp
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
@@ -553,7 +557,11 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}">Save</button>
+                        @if($muser_save == 'Y')
+                                <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}">Save</button>
+                        @elseif($muser_save == 'N' || $muser_save == null)
+                                <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}" disabled>Save</button>
+                        @endif
                         <button class="btn btn-secondary" type="reset">Cancel</button>
                     </div>
                     </form>
@@ -583,23 +591,38 @@
                                     @foreach($datas as $key => $item)
                                     @php $no++; @endphp
                                     <tr>
-                                        <th scope="row">{{ $no }}</th>
-                                        <td>{{ $item->username }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>Otto</td>
-                                        <td><a href="/materdatauser/{{ $item->id }}/edit"
+                                        <th scope="row" class="border border-5">{{ $no }}</th>
+                                        <td class="border border-5">{{ $item->username }}</td>
+                                        <td class="border border-5">{{ $item->email }}</td>
+                                        <td class="border border-5">Otto</td>
+                                        @if($muser_updt == 'Y')
+                                        <td class="border border-5"><a href="/materdatauser/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                 Edit</i></a></td>
-                                        <td>
+                                        @elseif($muser_updt == null || $muser_updt == 'N')
+                                        <td class="border border-5"><a href="/materdatauser/{{ $item->id }}/edit"
+                                            class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
+                                                Edit</i></a></td>
+                                        @endif
+                                        <td class="border border-5">
                                             <form action="/materdatauser/delete/{{ $item->id }}" id="del-{{ $item->id }}"
                                                 method="POST">
                                                 @csrf
+                                                @if($muser_dlt == 'Y')
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->username }} data?"
                                                     data-confirm-yes="submitDel({{ $item->id }})"><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
+                                                @elseif($muser_dlt == null || $muser_dlt == 'N')
+                                                <button class="btn btn-icon icon-left btn-danger"
+                                                    id="del-{{ $item->id }}" type="submit"
+                                                    data-confirm="WARNING!|Do you want to delete {{ $item->username }} data?"
+                                                    data-confirm-yes="submitDel({{ $item->id }})"><i
+                                                        class="fa fa-trash">
+                                                        Delete</i></button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>                                    
