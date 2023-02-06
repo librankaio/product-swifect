@@ -190,11 +190,15 @@ class ControllerMasterUser extends Controller
                 'email' => request('email'),
             ]);
         }elseif(request('password') != null){
+            // dd(request()->all());
+            // $password = Hash::make(request('password'));
+            $password = bcrypt(request('password'));
+            // dd($password);
             User::where('id', '=', $user->id)->update([
                 'username' => request('username'),
                 'name' => request('username'),
                 'email' => request('email'),
-                'password' => request('password')
+                'password' => $password
             ]);
         }
         $user = User::select('id','username','email','name')->where('id','=', $user->id)->first();

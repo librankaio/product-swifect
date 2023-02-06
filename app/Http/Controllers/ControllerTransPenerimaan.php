@@ -172,18 +172,22 @@ class ControllerTransPenerimaan extends Controller
     public function list(){
         $tpenerimaanhs = Tpenerimaanh::select('id','no','no_tpembelian','tdt','cabang','supplier','mata_uang','nolain','kurs','disc','tax','grdtotal','note')->whereNull('deleted_at')->get();
         $tpenerimaands = Tpenerimaand::select('id','idh','no_tpenerimaanh','code_mitem','name_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->get();
+        // $msupps = Msupp::select('phone','code')->whereNull('deleted_at')->where('code', 'like', '%' . $tpenerimaanhs->code . '%')->first();
         return view('pages.transaction.tpenerimaanlist',[
             'tpenerimaanhs' => $tpenerimaanhs,
-            'tpenerimaands' => $tpenerimaands
+            'tpenerimaands' => $tpenerimaands,
+            // 'msupps' => $msupps,
         ]);
     }
 
     public function print(Tpenerimaanh $tpenerimaanh){
         // dd($tbayaropsh);
         $tpenerimaands = Tpenerimaand::select('id','idh','no_tpenerimaanh','code_mitem','name_mitem','qty','code_muom','price','disc','tax','subtotal','note')->where('idh','=',$tpenerimaanh->id)->get();
-        return view('pages.print.tbayaropsprint',[
+        // $msupps = Msupp::select('phone','code')->whereNull('deleted_at')->where('code', 'like', '%' . $tpenerimaanh->code . '%')->first();
+        return view('pages.print.tpenerimaanprint',[
             'tpenerimaanh' => $tpenerimaanh,
-            'tpenerimaands' => $tpenerimaands
+            'tpenerimaands' => $tpenerimaands,
+            // 'msupps' => $msupps,
         ]);
     }
 }

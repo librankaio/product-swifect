@@ -205,6 +205,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tpenerimaan/{tpenerimaanh}/edit', [ControllerTransPenerimaan::class, 'getedit'])->name('tpenerimaanedit');
     Route::post('/tpenerimaan/{tpenerimaanh}', [ControllerTransPenerimaan::class, 'update'])->name('tpenerimaanupdate');
     Route::post('/tpenerimaan/delete/{tpenerimaanh}', [ControllerTransPenerimaan::class, 'delete'])->name('tpenerimaandelete');
+    Route::get('/tpenerimaan/{tpenerimaanh}/print', [ControllerTransPenerimaan::class, 'print'])->name('tpenerimaanprint');
 
 
     //TPembelian

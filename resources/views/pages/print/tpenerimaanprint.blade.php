@@ -7,7 +7,7 @@
 <body class="idr" onload="window.print()">
 <div class="row">
   <div class="column" style="background-color:#aaa;">
-    <h2>Pembelian Barang</h2>
+    <h2>Penerimaan Barang</h2>
     <h5>NO TRANSAKSI : {{ $tpenerimaanh->no }}<br>
     TANGGAL : {{ date("d/m/Y", strtotime($tpenerimaanh->tdt)) }}<br>
     SUPPLIER : {{ $tpenerimaanh->supplier }} <br> 
@@ -16,7 +16,7 @@
     NOTE : {{ $tpenerimaanh->note }}</h5>
   </div>
   <div class="column" style="background-color:#bbb; text-align: right;">
-    <h2>Pembelian Barang</h2>
+    <h2>Penerimaan Barang</h2>
     <h5>NO TRANSAKSI : {{ $tpenerimaanh->no }}<br>
     TANGGAL : {{ date("d/m/Y", strtotime($tpenerimaanh->tdt)) }}<br>
     SUPPLIER : {{ $tpenerimaanh->supplier }} <br> 
@@ -32,7 +32,8 @@
             TANGGAL JATUH TEMPO: {{ date("d/m/Y", strtotime($tpenerimaanh->tdt)) }}</h5>
     </div>
     <div class="column">
-        <h5>PHONE : {{ $msupps->phone }}<br>
+        <h5>
+            {{-- PHONE : {{ $msupps->phone }}<br> --}}
             SUPPLIER : {{ $tpenerimaanh->supplier }}</h5>
     </div>
 </div>
