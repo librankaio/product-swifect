@@ -94,9 +94,9 @@
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-chart-bar"></i>
             <span>Reports</span></a>
         <ul class="dropdown-menu">
-            <li><a class="nav-link" href="">Laporan Penjualan</a></li>
-            <li><a class="nav-link" href="layout-transparent.html">Laporan Pembelian</a></li>
-            <li><a class="nav-link" href="layout-top-navigation.html">Laporan Stock</a></li>
+            <li><a class="nav-link" href="{{ route('rpenjualan') }}">Laporan Penjualan</a></li>
+            <li><a class="nav-link" href="{{ route('rpembelian') }}">Laporan Pembelian</a></li>
+            <li><a class="nav-link" href="{{ route('rstock') }}">Laporan Stock</a></li>
         </ul>
     </li>
     {{-- <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>

@@ -14,6 +14,9 @@ use App\Http\Controllers\ControllerMasterNamaCabang;
 use App\Http\Controllers\ControllerMasterSatuan;
 use App\Http\Controllers\ControllerMasterSupp;
 use App\Http\Controllers\ControllerMasterUser;
+use App\Http\Controllers\ControllerReportPembelian;
+use App\Http\Controllers\ControllerReportPenjualan;
+use App\Http\Controllers\ControllerReportStock;
 use App\Http\Controllers\ControllerTransBayarOps;
 use App\Http\Controllers\ControllerTransJurnalVouch;
 use App\Http\Controllers\ControllerTransPembelian;
@@ -207,7 +210,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/tpenerimaan/delete/{tpenerimaanh}', [ControllerTransPenerimaan::class, 'delete'])->name('tpenerimaandelete');
     Route::get('/tpenerimaan/{tpenerimaanh}/print', [ControllerTransPenerimaan::class, 'print'])->name('tpenerimaanprint');
 
-
+    //Report Penjualan
+    Route::get('/rpenjualan', [ControllerReportPenjualan::class, 'index'])->name('rpenjualan');
+    //Report Pembelian
+    Route::get('/rpembelian', [ControllerReportPembelian::class, 'index'])->name('rpembelian');
+    //Report Stock
+    Route::get('/rstock', [ControllerReportStock::class, 'index'])->name('rstock');
+    
     //TPembelian
     Route::get('/tpembelian', [ControllerTransPembelian::class, 'index'])->name('tpembelian');
 
