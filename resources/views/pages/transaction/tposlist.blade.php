@@ -51,16 +51,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">No Trans</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Code Customer</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Print</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">No Trans</th>
+                                        <th scope="col" class="border border-5">Tanggal</th>
+                                        <th scope="col" class="border border-5">Code Customer</th>
+                                        <th scope="col" class="border border-5">Grand Total</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Print</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,27 +69,28 @@
                                     @foreach($tposhs as $data => $tposh)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $tposh->no }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($tposh->tdt)) }}</td>
-                                        <td>{{ $tposh->code_mcust }}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $tposh->no }}</td>
+                                        <td class="border border-5">{{ date("d/m/Y", strtotime($tposh->tdt)) }}</td>
+                                        <td class="border border-5">{{ $tposh->code_mcust }}</td>
+                                        <td class="border border-5">{{ number_format($tposh->grdtotal, 2, '.', ',') }}</td>
                                         @if($tpos_updt == 'Y')
-                                        <td><a href="/transpos/{{ $tposh->id }}/edit"
+                                        <td class="border border-5"><a href="/transpos/{{ $tposh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         @elseif($tpos_updt == null || $tpos_updt == 'N')
-                                        <td><a href="/transpos/{{ $tposh->id }}/edit"
+                                        <td class="border border-5"><a href="/transpos/{{ $tposh->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                 Edit</i></a></td>
                                         @endif
                                         @if($tpos_updt == 'Y')
-                                        <td><a href="/transpos/{{ $tposh->id }}/print"
+                                        <td class="border border-5"><a href="/transpos/{{ $tposh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
                                         @elseif($tpos_updt == null || $tpos_updt == 'N')
-                                        <td><a href="/transpos/{{ $tposh->id }}/print"
+                                        <td class="border border-5"><a href="/transpos/{{ $tposh->id }}/print"
                                             class="btn btn-icon icon-left btn-outline-primary" target="_blank" style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
                                         @endif
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/transpos/delete/{{ $tposh->id }}"
                                                 id="del-{{ $tposh->id }}" method="POST">
                                                 @csrf

@@ -51,16 +51,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">No Trans</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Akun Pembayaran</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Print</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">No Trans</th>
+                                        <th scope="col" class="border border-5">Tanggal</th>
+                                        <th scope="col" class="border border-5">Akun Pembayaran</th>
+                                        <th scope="col" class="border border-5">Grand Total</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Print</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,27 +69,28 @@
                                     @foreach($tbayaropshs as $data => $tbayaropsh)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $tbayaropsh->no }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($tbayaropsh->tdt)) }}</td>
-                                        <td>{{ $tbayaropsh->akun_pembayaran }}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $tbayaropsh->no }}</td>
+                                        <td class="border border-5">{{ date("d/m/Y", strtotime($tbayaropsh->tdt)) }}</td>
+                                        <td class="border border-5">{{ $tbayaropsh->akun_pembayaran }}</td>
+                                        <td class="border border-5">{{ number_format($tbayaropsh->grdtotal, 2, '.', ',') }}</td>
                                         @if($tops_updt == 'Y')
-                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
+                                        <td class="border border-5"><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         @elseif($tops_updt == null || $tops_updt == 'N')
-                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
+                                        <td class="border border-5"><a href="/tbayarops/{{ $tbayaropsh->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                 Edit</i></a></td>
                                         @endif
                                         @if($tops_updt == 'Y')
-                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
+                                        <td class="border border-5"><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
                                         @elseif($tops_updt == null || $tops_updt == 'N')
-                                        <td><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
+                                        <td class="border border-5"><a href="/tbayarops/{{ $tbayaropsh->id }}/print"
                                             class="btn btn-icon icon-left btn-outline-primary" target="_blank" style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
                                         @endif
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/tbayarops/delete/{{ $tbayaropsh->id }}"
                                                 id="del-{{ $tbayaropsh->id }}" method="POST">
                                                 @csrf

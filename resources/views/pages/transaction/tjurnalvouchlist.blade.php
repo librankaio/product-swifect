@@ -51,19 +51,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">No Voucher</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Keterangan</th>
-                                        <th scope="col">Total Debit</th>
-                                        <th scope="col">Total Credit</th>
-                                        <th scope="col">Mata Uang</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Print</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">No Voucher</th>
+                                        <th scope="col" class="border border-5">Tanggal</th>
+                                        <th scope="col" class="border border-5">Keterangan</th>
+                                        <th scope="col" class="border border-5">Total Debit</th>
+                                        <th scope="col" class="border border-5">Total Credit</th>
+                                        <th scope="col" class="border border-5">Mata Uang</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Print</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,32 +71,32 @@
                                     @foreach($tjurnalvouchhs as $data => $tjurnalvouchh)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $tjurnalvouchh->no }}</td>
-                                        <td>{{ date("d/m/Y", strtotime($tjurnalvouchh->tdt)) }}</td>
-                                        <td>{{ $tjurnalvouchh->keterangan }}</td>
-                                        <td>{{ number_format( $tjurnalvouchh->total_debit, 2, '.', ',') }}</td>
-                                        <td>{{ number_format( $tjurnalvouchh->total_credit, 2, '.', ',') }}</td>
-                                        <td>{{ $tjurnalvouchh->mata_uang }}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $tjurnalvouchh->no }}</td>
+                                        <td class="border border-5">{{ date("d/m/Y", strtotime($tjurnalvouchh->tdt)) }}</td>
+                                        <td class="border border-5">{{ $tjurnalvouchh->keterangan }}</td>
+                                        <td class="border border-5">{{ number_format( $tjurnalvouchh->total_debit, 2, '.', ',') }}</td>
+                                        <td class="border border-5">{{ number_format( $tjurnalvouchh->total_credit, 2, '.', ',') }}</td>
+                                        <td class="border border-5">{{ $tjurnalvouchh->mata_uang }}</td>
                                         @if($tjvouch_updt == 'Y')
-                                        <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/edit"
+                                        <td class="border border-5"><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td>
                                         @elseif($tjvouch_updt == null || $tjvouch_updt == 'N')
-                                        <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/edit"
+                                        <td class="border border-5"><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary"
                                             style="pointer-events: none;"><i class="far fa-edit">
                                                 Edit</i></a></td>
                                         @endif
                                         @if($tjvouch_updt == 'Y')
-                                        <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/print"
+                                        <td class="border border-5"><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/print"
                                                 class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
                                         @elseif($tjvouch_updt == null || $tjvouch_updt == 'N')
-                                        <td><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/print"
+                                        <td class="border border-5"><a href="/tjurnalvoucher/{{ $tjurnalvouchh->id }}/print"
                                             class="btn btn-icon icon-left btn-outline-primary" target="_blank"
                                             style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
                                         @endif
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/tjurnalvoucher/delete/{{ $tjurnalvouchh->id }}"
                                                 id="del-{{ $tjurnalvouchh->id }}" method="POST">
                                                 @csrf
