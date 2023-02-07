@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuthUser;
+use App\Models\Mwhse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,9 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class ControllerMasterUser extends Controller
 {
     public function index(){
-        $datas = User::select('id','username','email')->get();
+        $datas = User::select('id','username','email','branch')->get();
+        $branhcs = Mwhse::whereNull('deleted_at')->get();
         return view('pages.master.muser',[
-            'datas' => $datas
+            'datas' => $datas,
+            'branhcs' => $branhcs
         ]);
     }
 
@@ -27,6 +30,7 @@ class ControllerMasterUser extends Controller
                 'username' => $request->username,
                 'name' => $request->username,
                 'email' => $request->email,
+                'branch' => $request->branch,
                 'password' => $request->password,
             ]);
             $user = User::select('id','username','email','name')->where('username','=', $request->username)->first();
@@ -159,6 +163,7 @@ class ControllerMasterUser extends Controller
         $auth_tops = AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tops')->first();
         $auth_tjvouch = AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tjvouch')->first();
         $auth_tpenerimaan = AuthUser::where('id_user', '=', $user->id)->where('feature', '=', 'tpenerimaan')->first();
+        $branhcs = Mwhse::whereNull('deleted_at')->get();
         // dd($auth_mitems);
         return view('pages.master.museredit',[
             'user' => $user,
@@ -178,6 +183,7 @@ class ControllerMasterUser extends Controller
             'auth_tops' => $auth_tops,
             'auth_tjvouch' => $auth_tjvouch,
             'auth_tpenerimaan' => $auth_tpenerimaan,
+            'branhcs' => $branhcs,
         ]);
     }
 
@@ -188,6 +194,7 @@ class ControllerMasterUser extends Controller
                 'username' => request('username'),
                 'name' => request('username'),
                 'email' => request('email'),
+                'branch' => request('branch'),
             ]);
         }elseif(request('password') != null){
             // dd(request()->all());
@@ -198,7 +205,8 @@ class ControllerMasterUser extends Controller
                 'username' => request('username'),
                 'name' => request('username'),
                 'email' => request('email'),
-                'password' => $password
+                'password' => $password,
+                'branch' => request('branch'),
             ]);
         }
         $user = User::select('id','username','email','name')->where('id','=', $user->id)->first();

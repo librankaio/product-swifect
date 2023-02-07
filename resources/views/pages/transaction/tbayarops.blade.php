@@ -284,13 +284,13 @@
 
         $(document).on("click","#confirm",function(e){
         // Validate ifnull
-        no = $("#no").val();
-        code_cust = $("#code_cust").prop('selectedIndex');
-        if (no == ""){
-            alert("No Tidak boleh kosong!");
+        jenis = $("#jenis").prop('selectedIndex');
+        akun_bayar = $("#akun_bayar").prop('selectedIndex');
+        if (jenis == 0){
+            alert("Jenis boleh kosong!");
             return false;
-        }else if (code_cust == 0){
-            alert("Please select Code Cust");
+        }else if (akun_bayar == 0){
+            alert("Please select Akun Bayar!");
             return false;
         }
         });

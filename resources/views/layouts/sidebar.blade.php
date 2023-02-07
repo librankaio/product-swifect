@@ -22,7 +22,7 @@
                 $tjvouch_open = session('tjvouch_open');
                 $tpenerimaan_open = session('tpenerimaan_open');
             @endphp
-            @if($muser_open == 'Y')  
+            @if($muser_open == 'Y' || $role == 'ADM')  
                 <li><a class="nav-link" href="{{ route('muser') }}">Master Data User</a></li>          
             @endif
             @if($mitem_open == 'Y')

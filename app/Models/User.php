@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'branch',
         'create_acs',
         'read_acs',
         'update_acs',

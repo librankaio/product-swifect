@@ -9,6 +9,7 @@
         </div>
     </div>
     @php
+        $role = session('privilage') ;
         $muser_save = session('muser_save');
         $muser_updt = session('muser_updt');
         $muser_dlt = session('muser_dlt');
@@ -32,8 +33,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" name="email">
+                                    {{-- <label>Email</label> --}}
+                                    <input type="email" class="form-control" name="email" hidden>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +50,9 @@
                                     <label>Branch</label>
                                     <select class="form-control" name="branch">
                                         <option disabled selected>--Select Branch--</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
+                                        @foreach($branhcs as $data => $branch)
+                                        <option>{{ $branch->name }}</option>                                            
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -557,7 +559,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        @if($muser_save == 'Y')
+                        @if($muser_save == 'Y' || $role == 'ADM')
                                 <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}">Save</button>
                         @elseif($muser_save == 'N' || $muser_save == null)
                                 <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}" disabled>Save</button>
@@ -594,7 +596,7 @@
                                         <th scope="row" class="border border-5">{{ $no }}</th>
                                         <td class="border border-5">{{ $item->username }}</td>
                                         <td class="border border-5">{{ $item->email }}</td>
-                                        <td class="border border-5">Otto</td>
+                                        <td class="border border-5">{{ $item->branch }}</td>
                                         @if($muser_updt == 'Y')
                                         <td class="border border-5"><a href="/materdatauser/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
@@ -619,7 +621,7 @@
                                                 <button class="btn btn-icon icon-left btn-danger"
                                                     id="del-{{ $item->id }}" type="submit"
                                                     data-confirm="WARNING!|Do you want to delete {{ $item->username }} data?"
-                                                    data-confirm-yes="submitDel({{ $item->id }})"><i
+                                                    data-confirm-yes="submitDel({{ $item->id }})" disabled><i
                                                         class="fa fa-trash">
                                                         Delete</i></button>
                                                 @endif

@@ -402,15 +402,12 @@
         // Validate ifnull
         no = $("#no").val();
         balance = $("#balance").val();
-        code_cust = $("#code_cust").prop('selectedIndex');
+        cabang = $("#cabang").prop('selectedIndex');
         if (no == ""){
             alert("No Tidak boleh kosong!");
             return false;
-        }else if (code_cust == 0){
-            alert("Please select Code Cust");
-            return false;
-        }else if (balance != 0){
-            alert("Balance harus 0!");
+        }else if (cabang == 0){
+            alert("Silahkan pilih cabang");
             return false;
         }
         });

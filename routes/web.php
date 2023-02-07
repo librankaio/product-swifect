@@ -219,6 +219,6 @@ Route::group(['middleware' => ['auth']], function () {
     
     //TPembelian
     Route::get('/tpembelian', [ControllerTransPembelian::class, 'index'])->name('tpembelian');
-
+    
     // Route::get('/transbelibrg', [ControllerTransPembelianBrg::class, 'index'])->name('tbelibrg');
 });

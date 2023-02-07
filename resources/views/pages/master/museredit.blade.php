@@ -28,8 +28,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" name="email" value="{{ $user->email }}">
+                                    {{-- <label>Email</label> --}}
+                                    <input type="email" class="form-control" name="email" value="{{ $user->email }}" hidden>
                                 </div>
                             </div>
                         </div>
@@ -44,9 +44,10 @@
                                 <div class="form-group">
                                     <label>Branch</label>
                                     <select class="form-control" name="branch">
-                                        <option selected>{{ $user->username }}</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
+                                        <option selected>{{ $user->branch }}</option>
+                                        @foreach($branhcs as $data => $branch)
+                                        <option>{{ $branch->name }}</option>                                            
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
