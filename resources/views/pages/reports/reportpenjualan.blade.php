@@ -38,8 +38,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Customer</label>
-                                        <select class="form-control select2" name="cabang" id="cabang">
+                                        <select class="form-control select2" name="customer" id="customer">
                                             <option disabled selected>--Select Customer--</option>
+                                            @foreach($customers as $data => $customer)
+                                            <option>{{ $customer->code." - ".$customer->name }}</option>                                                
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -47,7 +50,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit"
-                                formaction="{{ route('mbrgpost') }}">Search</button>
+                                formaction="{{ route('rpenjualanpost') }}">Search</button>
                             <button class="btn btn-secondary" type="reset">Cancel</button>
                         </div>
                     </form>
@@ -73,54 +76,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @php $counter = 0 @endphp
-                                    @foreach($tpembelianhs as $data => $tpembelianh)
+                                    @isset($results)                                    
+                                    @php 
+                                    $counter = 0;
+                                    $grdtotal = 0;
+                                    @endphp
+                                    @foreach($results as $data => $result)
                                     @php $counter++ @endphp
                                     <tr>
                                         <th scope="row" class="border border-5">{{ $counter }}</th>
-                                        <td class="border border-5">{{ $tpembelianh->no }}</td>
-                                        <td class="border border-5">{{ date("d/m/Y", strtotime($tpembelianh->tdt)) }}</td>
-                                        <td class="border border-5">{{ $tpembelianh->supplier }}</td>
-                                        <td class="border border-5">{{ number_format($tpembelianh->grdtotal, 2, '.', ',') }}</td>
-                                        @if($tpembelianbrg_updt == 'Y')
-                                            <td class="border border-5"><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
-                                                    class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
-                                                        Edit</i></a></td>
-                                        @elseif($tpembelianbrg_updt == null || $tpembelianbrg_updt == 'N')
-                                            <td class="border border-5"><a href="/transbelibrg/{{ $tpembelianh->id }}/edit"
-                                                    class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
-                                                        Edit</i></a></td>
-                                        @endif
-                                        @if($tpembelianbrg_updt == 'Y')
-                                            <td class="border border-5"><a href="/transbelibrg/{{ $tpembelianh->id }}/print"
-                                                    class="btn btn-icon icon-left btn-outline-primary" target="_blank"><i class="fa fa-print"> Print</i></a></td>
-                                        @elseif($tpembelianbrg_updt == null || $tpembelianbrg_updt == 'N')
-                                            <td class="border border-5"><a href="/transbelibrg/{{ $tpembelianh->id }}/print"
-                                                class="btn btn-icon icon-left btn-outline-primary" target="_blank" style="pointer-events: none;"><i class="fa fa-print"> Print</i></a></td>
-                                        @endif
-                                        <td class="border border-5">
-                                            <form action="/transbelibrg/delete/{{ $tpembelianh->id }}"
-                                                id="del-{{ $tpembelianh->id }}" method="POST">
-                                                @csrf
-                                                @if($tpembelianbrg_dlt == 'Y')
-                                                <button class="btn btn-icon icon-left btn-danger"
-                                                    id="del-{{ $tpembelianh->id }}" type="submit"
-                                                    data-confirm="WARNING!|Do you want to delete {{ $tpembelianh->name }} data?"
-                                                    data-confirm-yes="submitDel({{ $tpembelianh->id }})"><i
-                                                        class="fa fa-trash">
-                                                        Delete</i></button>
-                                                @elseif($tpembelianbrg_dlt == null || $tpembelianbrg_dlt == 'N')
-                                                <button class="btn btn-icon icon-left btn-danger"
-                                                    id="del-{{ $tpembelianh->id }}" type="submit"
-                                                    data-confirm="WARNING!|Do you want to delete {{ $tpembelianh->name }} data?"
-                                                    data-confirm-yes="submitDel({{ $tpembelianh->id }})" disabled><i
-                                                        class="fa fa-trash">
-                                                        Delete</i></button>
-                                                @endif
-                                            </form>
-                                        </td>
+                                        <td class="border border-5">{{ $result->no }}</td>
+                                        <td class="border border-5">{{ date("d/m/Y", strtotime($result->tdt)) }}</td>
+                                        <td class="border border-5">{{ $result->code_mcust }}</td>
+                                        <td class="border border-5">{{ number_format($result->subtotal, 2, '.', ',') }}</td>
+                                        <td class="border border-5">{{ number_format($result->disc, 2, '.', ',') }}</td>
+                                        <td class="border border-5">{{ number_format($result->tax, 2, '.', ',') }}</td>
+                                        <td class="border border-5">{{ number_format($result->grdtotal, 2, '.', ',') }}</td>
                                     </tr>
-                                    @endforeach --}}
+                                    @if($grdtotal == 0)
+                                    @php $grdtotal = $result->grdtotal @endphp
+                                    @elseif($grdtotal >= 0){
+                                    @php $grdtotal = $grdtotal + $result->grdtotal @endphp
+                                    }
+                                    @endif
+                                    @endforeach
+                                    @endisset
                                 </tbody>
                             </table>
                         </div>
@@ -129,7 +109,7 @@
                         <div class="d-flex flex-row-reverse bd-highlight">
                             <div class="form-group">
                                 <label>Grand Total</label>
-                                <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" readonly>
+                                <input type="text" class="form-control" name="price_total" form="thisform" id="price_total" value="{{ number_format($grdtotal, 2, '.', ',') }}" readonly>
                             </div>
                         </div>
                     </div>

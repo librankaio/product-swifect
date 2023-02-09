@@ -55,6 +55,9 @@ Route::get('/advform', function () {
 Route::get('/modal', function () {
     return view('pages.modal'); 
 });
+Route::get('/sweetalert', function () {
+    return view('sweetalert'); 
+});
 //LOGIN
 Route::get('/', [ControllerLogin::class, 'index'])->name('login');
 Route::post('/', [ControllerLogin::class, 'postLogin'])->name('postlogin');
@@ -212,8 +215,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Report Penjualan
     Route::get('/rpenjualan', [ControllerReportPenjualan::class, 'index'])->name('rpenjualan');
+    Route::post('/rpenjualanpost', [ControllerReportPenjualan::class, 'post'])->name('rpenjualanpost');
+
     //Report Pembelian
     Route::get('/rpembelian', [ControllerReportPembelian::class, 'index'])->name('rpembelian');
+    Route::post('/rpembelianpost', [ControllerReportPembelian::class, 'post'])->name('rpembelianpost');
+
     //Report Stock
     Route::get('/rstock', [ControllerReportStock::class, 'index'])->name('rstock');
     

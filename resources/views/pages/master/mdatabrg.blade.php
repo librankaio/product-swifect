@@ -168,20 +168,20 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-sm" id="datatable">
+                            <table class="table table-bordered" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Lokasi</th>
-                                        <th scope="col">Satuan</th>
-                                        <th scope="col">Harga Beli</th>
-                                        <th scope="col">Harga Jual</th>
-                                        <th scope="col">Note</th>
-                                        <th scope="col">Item Group</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col" class="border border-5">No</th>
+                                        <th scope="col" class="border border-5">Kode</th>
+                                        <th scope="col" class="border border-5">Nama</th>
+                                        <th scope="col" class="border border-5">Lokasi</th>
+                                        <th scope="col" class="border border-5">Satuan</th>
+                                        <th scope="col" class="border border-5">Harga Beli</th>
+                                        <th scope="col" class="border border-5">Harga Jual</th>
+                                        <th scope="col" class="border border-5">Note</th>
+                                        <th scope="col" class="border border-5">Item Group</th>
+                                        <th scope="col" class="border border-5">Edit</th>
+                                        <th scope="col" class="border border-5">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -189,28 +189,28 @@
                                     @foreach($datas as $data => $item)
                                     @php $counter++ @endphp
                                     <tr>
-                                        <th scope="row">{{ $counter }}</th>
-                                        <td>{{ $item->code }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->code_mwhse }}</td>
-                                        <td>{{ $item->code_muom }}</td>
-                                        <td>{{ number_format($item->price, 3, '.', ',') }}</td>
-                                        <td>{{ number_format($item->price2, 3, '.', ',') }}</td>
-                                        <td>{{ $item->note }}</td>
-                                        <td>{{ $item->code_mgrp }}</td>
+                                        <th scope="row" class="border border-5">{{ $counter }}</th>
+                                        <td class="border border-5">{{ $item->code }}</td>
+                                        <td class="border border-5">{{ $item->name }}</td>
+                                        <td class="border border-5">{{ $item->code_mwhse }}</td>
+                                        <td class="border border-5">{{ $item->code_muom }}</td>
+                                        <td class="border border-5">{{ number_format($item->price, 3, '.', ',') }}</td>
+                                        <td class="border border-5">{{ number_format($item->price2, 3, '.', ',') }}</td>
+                                        <td class="border border-5">{{ $item->note }}</td>
+                                        <td class="border border-5">{{ $item->code_mgrp }}</td>
                                         @if($mitem_updt == 'Y')
-                                        <td><a href="/masterdatabarang/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/masterdatabarang/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                 Edit</i></a></td>      
                                         @elseif($mitem_updt == null || $mitem_updt == 'N') 
-                                        <td><a href="/masterdatabarang/{{ $item->id }}/edit"
+                                        <td class="border border-5"><a href="/masterdatabarang/{{ $item->id }}/edit"
                                             class="btn btn-icon icon-left btn-primary" style="pointer-events: none;"><i class="far fa-edit">
                                                 Edit</i></a></td>
                                         @endif
                                         {{-- <td><a href="/masterdatabarang/{{ $item->id }}/edit"
                                                 class="btn btn-icon icon-left btn-primary"><i class="far fa-edit">
                                                     Edit</i></a></td> --}}
-                                        <td>
+                                        <td class="border border-5">
                                             <form action="/masterdatabarang/delete/{{ $item->id }}"
                                                 id="del-{{ $item->id }}" method="POST">
                                                 @csrf
@@ -269,26 +269,26 @@
     }
 
     $(document).on("click","#confirm",function(e){
-        // Validate ifnull
+        // Validate ifnull        
         kode = $("#kode").val();
         nama = $("#nama").val();
         satuan = $("#satuan").prop('selectedIndex');
         lokasi = $("#lokasi").prop('selectedIndex');
         itemgrp = $("#itemgrp").prop('selectedIndex');
         if (kode == ""){
-            alert("Kode Tidak boleh kosong!");
+            swal('WARNING', 'Kode Tidak boleh kosong!', 'warning');
             return false;
         }else if (nama == '' || nama == null){
-            alert("Nama Tidak boleh kosong!");
+            swal('WARNING', 'Nama Tidak boleh kosong!', 'warning');
             return false;
         }else if (lokasi == 0){
-            alert("Please select Lokasi");
+            swal('WARNING', 'Please select Lokasi!', 'warning');
             return false;
         }else if (satuan == 0){
-            alert("Please select Satuan");
+            swal('WARNING', 'Please select Satuan!', 'warning');
             return false;
         }else if (itemgrp == 0){
-            alert("Please select Item Group");
+            swal('WARNING', 'Please select Item Group!', 'warning');
             return false;
         }
     });

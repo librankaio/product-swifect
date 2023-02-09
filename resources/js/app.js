@@ -2,8 +2,11 @@ require("./bootstrap");
 require("jquery");
 window.jQuery = window.$ = require("jquery");
 require("select2");
-// require("prismjs");
+require("sweetalert");
 require("datatables.net-bs4")
+
+
+// require("prismjs");
 // window.jQuery = window.$ = require("js-big-decimal")
 // require("js-big-decimal")
 
