@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" class="form-control" name="name" id="name">
+                                        <input type="text" class="form-control" name="name" id="nama">
                                     </div>
                                     <div class="form-group">
                                         <label>alamat</label>
@@ -133,10 +133,10 @@
         kode = $("#kode").val();
         nama = $("#nama").val();
         if (kode == ""){
-            alert("Kode Tidak boleh kosong!");
+            swal('WARNING', 'Kode Tidak boleh kosong!', 'warning');
             return false;
         }else if (nama == 0){
-            alert("Nama Tidak boleh kosong!");
+            swal('WARNING', 'Nama Tidak boleh kosong!', 'warning');
             return false;
         }
     });

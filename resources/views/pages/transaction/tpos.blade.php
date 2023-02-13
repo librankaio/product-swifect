@@ -479,10 +479,10 @@
         no = $("#no").val();
         code_cust = $("#code_cust").prop('selectedIndex');
         if (no == ""){
-            alert("No Tidak boleh kosong!");
+            swal('WARNING', 'No Tidak boleh kosong!', 'warning');
             return false;
         }else if (code_cust == 0){
-            alert("Please select Code Cust");
+            swal('WARNING', 'Please select Code Cust', 'warning');
             return false;
         }
         });

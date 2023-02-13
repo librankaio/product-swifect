@@ -287,10 +287,10 @@
         jenis = $("#jenis").prop('selectedIndex');
         akun_bayar = $("#akun_bayar").prop('selectedIndex');
         if (jenis == 0){
-            alert("Jenis boleh kosong!");
+            swal('WARNING', 'Jenis boleh kosong!', 'warning');
             return false;
         }else if (akun_bayar == 0){
-            alert("Please select Akun Bayar!");
+            swal('WARNING', 'Please select Akun Bayar!', 'warning');
             return false;
         }
         });

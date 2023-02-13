@@ -28,7 +28,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username">
+                                    <input type="text" class="form-control" name="username" id="username">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -42,13 +42,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="password" class="form-control" name="password" id="password">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Branch</label>
-                                    <select class="form-control" name="branch">
+                                    <select class="form-control" name="branch" id="branch">
                                         <option disabled selected>--Select Branch--</option>
                                         @foreach($branhcs as $data => $branch)
                                         <option>{{ $branch->name }}</option>                                            
@@ -560,7 +560,7 @@
                     </div>
                     <div class="card-footer text-right">
                         @if($muser_save == 'Y' || $role == 'ADM')
-                                <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}">Save</button>
+                                <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}" id="confirm">Save</button>
                         @elseif($muser_save == 'N' || $muser_save == null)
                                 <button class="btn btn-primary mr-1" type="submit" formaction="{{ route('muserpost') }}" disabled>Save</button>
                         @endif
@@ -652,6 +652,23 @@
                 $('.checkbox').prop('checked', true)
             }
         });
+    });
+
+    $(document).on("click","#confirm",function(e){
+        // Validate ifnull        
+        username = $("#username").val();
+        password = $("#password").val();
+        branch = $("#branch").prop('selectedIndex');
+        if (username == ""){
+            swal('WARNING', 'Username Tidak boleh kosong!', 'warning');
+            return false;
+        }else if (password == '' || password == null){
+            swal('WARNING', 'password Tidak boleh kosong!', 'warning');
+            return false;
+        }else if (branch == 0){
+            swal('WARNING', 'Please select Branch!', 'warning');
+            return false;
+        }
     });
 </script>    
 @endsection

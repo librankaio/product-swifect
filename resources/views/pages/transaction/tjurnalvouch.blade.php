@@ -404,10 +404,10 @@
         balance = $("#balance").val();
         cabang = $("#cabang").prop('selectedIndex');
         if (no == ""){
-            alert("No Tidak boleh kosong!");
+            swal('WARNING', 'No Tidak boleh kosong!', 'warning');
             return false;
         }else if (cabang == 0){
-            alert("Silahkan pilih cabang");
+            swal('WARNING', 'Silahkan pilih cabang', 'warning');
             return false;
         }
         });

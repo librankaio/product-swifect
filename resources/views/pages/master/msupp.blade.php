@@ -168,10 +168,10 @@
         kode = $("#kode").val();
         nama = $("#nama").val();
         if (kode == ""){
-            alert("Kode Tidak boleh kosong!");
+            swal('WARNING', 'Kode Tidak boleh kosong!', 'warning');
             return false;
         }else if (nama == 0){
-            alert("Nama Tidak boleh kosong!");
+            swal('WARNING', 'Nama Tidak boleh kosong!', 'warning');
             return false;
         }
     });
