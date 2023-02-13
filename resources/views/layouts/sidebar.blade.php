@@ -4,7 +4,7 @@
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-cubes"></i><span>Master Data</span></a>
         <ul class="dropdown-menu">
             @php
-                $role = session('privilage') ;
+                $role = session('privilage');
                 $mitem_open = session('mitem_open');
                 $muser_open = session('muser_open');
                 $msatuan_open = session('msatuan_open');

@@ -76,10 +76,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $grdtotal = 0;
+                                    @endphp
                                     @isset($results)                                    
                                     @php 
                                     $counter = 0;
-                                    $grdtotal = 0;
                                     @endphp
                                     @foreach($results as $data => $result)
                                     @php $counter++ @endphp
