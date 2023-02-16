@@ -96,6 +96,7 @@ class ControllerTransPos extends Controller
         $cabangs = Mnamacabang::select('id','code','name','address')->whereNull('deleted_at')->get();
         $items = Mitem::select('id','code','name','code_muom','price','code_mgrp','code_mwhse','note')->whereNull('deleted_at')->get();
         $tposhds = Tposhd::select('id','idh','no_tposh','name_mitem','code_mitem','qty','code_muom','price','disc','tax','subtotal','note')->whereNull('deleted_at')->where('idh','=',$tposh->id)->get();
+        // dd($tposhds);
         return view('pages.transaction.tposedit',[
             'tposh' => $tposh,
             'tposhds' => $tposhds,

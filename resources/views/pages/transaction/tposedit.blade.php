@@ -170,7 +170,7 @@
                                         <th class="id-header border border-5" style='readonly:true;' headers="{{ $counter }}">{{ $counter }}</th>
                                         {{-- <td><input style='width:120px;' readonly class='kodeclass' name='id_d[]' type='text' value='{{ $tposhds[$i]->id }}'></td> --}}
                                         <td class="border border-5"><input style='width:120px;' readonly class='kodeclass form-control' name='kode_d[]' type='text' value='{{ $tposhds[$i]->code_mitem }}'></td>
-                                        <td class="border border-5"><input style='width:120px;' readonly class='quantityclass form-control' name='quantity[]' type='text' value='{{ number_format( $tposhds[$i]->qty) }}'></td>
+                                        <td class="border border-5"><input style='width:120px;' readonly class='quantityclass form-control' name='quantity[]' type='text' value='{{ number_format($tposhds[$i]->qty, 0, '.', '') }}'></td>
                                         <td class="border border-5"><input style='width:120px;' readonly form='thisform' class='namaitemclass form-control' name='nama_item_d[]' type='text' value='{{ $tposhds[$i]->name_mitem }}'></td>
                                         <td class="border border-5"><input style='width:120px;' readonly class='satuanclass form-control' name='satuan_d[]' type='text' value='{{ $tposhds[$i]->code_muom }}'></td>
                                         <td class="border border-5"><input style='width:120px;' readonly class='hargaclass form-control' name='harga_d[]' type='text' value='{{ number_format( $tposhds[$i]->price, 2, '.', ',') }}'></td>
@@ -191,7 +191,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Subtotal</label>
-                                    <input type="text" class="form-control" name="subtotal" id="subtotal_h" form="thisform" value="{{ number_format($tposh->subtotal, 2, '.', ',') }}" readonly>
+                                    <input type="text" class="form-control" name="subtotal_h" id="subtotal_h" form="thisform" value="{{ number_format($tposh->subtotal, 2, '.', ',') }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3">
